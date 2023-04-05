@@ -1,9 +1,9 @@
 import torch
-from torch.utils.data import Subset
+from torch.utils.data import Dataset
 import torchvision
 import os
 import numpy as np
-from sklearn.model_selection import train_test_split
+from typing import Optional, Callable, Any
 
 
 class TwoCropsTransform:
@@ -102,12 +102,23 @@ def dataloader_pretraining_gray(dataset_name, no_classes=105, batch_size=128):
 
     train_path = os.path.join(imagefolder, 'train')
     print(f'Loading data from {imagefolder} as imagefolder')
-    dataset = torchvision.datasets.ImageFolder(
+    dataset = RandomLabelImageFolder(
         train_path,
-        transform=transform)
+        transform=transform,
+        no_classes=no_classes)
     
-    dataset.targets = np.random.randint(0, no_classes, size=len(dataset.targets))
+    # dataset.targets = np.random.randint(0, no_classes, size=len(dataset.targets))
     
     train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=2, shuffle=True, pin_memory=True)
     return train_loader
+
+class RandomLabelImageFolder(torchvision.datasets.ImageFolder):
+    def __init__(self, root, transform, no_classes):
+        super().__init__(root=root, transform=transform)
+        self.no_classes = no_classes
+
+    def __getitem__(self, index):
+        sample, target = super(torchvision.datasets.ImageFolder, self).__getitem__(index)
+        target = torch.randint(self.no_classes, (1, ))[0]
+        return sample, target
 

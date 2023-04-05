@@ -1,0 +1,587 @@
+2023-04-05 23:36:01,757 INFO    StreamThr :15464 [internal.py:wandb_internal():87] W&B internal server running at pid: 15464, started at: 2023-04-05 23:36:01.756373
+2023-04-05 23:36:01,759 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status
+2023-04-05 23:36:01,762 INFO    WriterThread:15464 [datastore.py:open_for_write():85] open: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\run-gco1id4w.wandb
+2023-04-05 23:36:01,763 DEBUG   SenderThread:15464 [sender.py:send():336] send: header
+2023-04-05 23:36:01,817 DEBUG   SenderThread:15464 [sender.py:send():336] send: run
+2023-04-05 23:36:02,398 INFO    SenderThread:15464 [dir_watcher.py:__init__():216] watching files in: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files
+2023-04-05 23:36:02,398 INFO    SenderThread:15464 [sender.py:_start_run_threads():1067] run started: gco1id4w with start time 1680730561.760344
+2023-04-05 23:36:02,398 DEBUG   SenderThread:15464 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 23:36:02,399 INFO    SenderThread:15464 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-05 23:36:02,409 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: check_version
+2023-04-05 23:36:02,409 DEBUG   SenderThread:15464 [sender.py:send_request():363] send_request: check_version
+2023-04-05 23:36:02,640 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: run_start
+2023-04-05 23:36:02,654 DEBUG   HandlerThread:15464 [system_info.py:__init__():31] System info init
+2023-04-05 23:36:02,654 DEBUG   HandlerThread:15464 [system_info.py:__init__():46] System info init done
+2023-04-05 23:36:02,654 INFO    HandlerThread:15464 [system_monitor.py:start():151] Starting system monitor
+2023-04-05 23:36:02,654 INFO    SystemMonitor:15464 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-05 23:36:02,654 INFO    HandlerThread:15464 [system_monitor.py:probe():172] Collecting system info
+2023-04-05 23:36:02,655 INFO    SystemMonitor:15464 [interfaces.py:start():168] Started cpu
+2023-04-05 23:36:02,659 INFO    SystemMonitor:15464 [interfaces.py:start():168] Started disk
+2023-04-05 23:36:02,659 INFO    SystemMonitor:15464 [interfaces.py:start():168] Started gpu
+2023-04-05 23:36:02,660 INFO    SystemMonitor:15464 [interfaces.py:start():168] Started memory
+2023-04-05 23:36:02,674 DEBUG   HandlerThread:15464 [system_info.py:probe():195] Probing system
+2023-04-05 23:36:02,674 INFO    SystemMonitor:15464 [interfaces.py:start():168] Started network
+2023-04-05 23:36:02,676 DEBUG   HandlerThread:15464 [system_info.py:_probe_git():180] Probing git
+2023-04-05 23:36:02,781 DEBUG   HandlerThread:15464 [system_info.py:_probe_git():188] Probing git done
+2023-04-05 23:36:02,781 DEBUG   HandlerThread:15464 [system_info.py:probe():241] Probing system done
+2023-04-05 23:36:02,781 DEBUG   HandlerThread:15464 [system_monitor.py:probe():181] {'os': 'Windows-10-10.0.19044-SP0', 'python': '3.9.10', 'heartbeatAt': '2023-04-05T21:36:02.674715', 'startedAt': '2023-04-05T21:36:01.744349', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '<python with no main file>', 'git': {'remote': 'https://github.com/jsobolew/mgr.git', 'commit': '0c610d47a7d4729407b671dcc89d6743f2b98a24'}, 'email': 'qba.sobolewski@gmail.com', 'root': 'C:/Users/QbaSo/Desktop/praca magisterska', 'host': 'DESKTOP-IPD5IVK', 'username': 'QbaSo', 'executable': 'C:\\Users\\QbaSo\\AppData\\Local\\Programs\\Python\\Python39\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3501.0, 'min': 0.0, 'max': 3501.0}, 'cpu_freq_per_core': [{'current': 3501.0, 'min': 0.0, 'max': 3501.0}], 'disk': {'total': 930.8897171020508, 'used': 677.8409690856934}, 'gpu': 'NVIDIA GeForce RTX 3060 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060 Ti', 'memory_total': 8589934592}], 'memory': {'total': 23.950672149658203}}
+2023-04-05 23:36:02,781 INFO    HandlerThread:15464 [system_monitor.py:probe():182] Finished collecting system info
+2023-04-05 23:36:02,781 INFO    HandlerThread:15464 [system_monitor.py:probe():185] Publishing system info
+2023-04-05 23:36:02,782 DEBUG   HandlerThread:15464 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-05 23:36:02,783 DEBUG   HandlerThread:15464 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-05 23:36:02,784 INFO    HandlerThread:15464 [system_monitor.py:probe():187] Finished publishing system info
+2023-04-05 23:36:02,786 DEBUG   SenderThread:15464 [sender.py:send():336] send: files
+2023-04-05 23:36:02,786 INFO    SenderThread:15464 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-04-05 23:36:02,810 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-05 23:36:02,811 DEBUG   SenderThread:15464 [sender.py:send_request():363] send_request: stop_status
+2023-04-05 23:36:03,072 DEBUG   SenderThread:15464 [sender.py:send():336] send: telemetry
+2023-04-05 23:36:03,407 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\output.log
+2023-04-05 23:36:03,407 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\wandb-metadata.json
+2023-04-05 23:36:03,407 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\wandb-summary.json
+2023-04-05 23:36:03,407 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\requirements.txt
+2023-04-05 23:36:03,569 INFO    wandb-upload_0:15464 [upload_job.py:push():138] Uploaded file C:\Users\QbaSo\AppData\Local\Temp\tmpe_ar_2_7wandb\vhe119e8-wandb-metadata.json
+2023-04-05 23:36:04,088 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:04,665 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:04,669 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:04,673 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:04,676 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:05,422 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\output.log
+2023-04-05 23:36:06,684 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:06,688 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:06,692 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:06,695 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:07,119 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:08,704 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:08,711 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:08,745 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:08,750 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:09,134 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:09,743 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:09,744 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:10,716 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:10,720 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:10,762 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:10,766 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:12,174 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:12,723 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:12,727 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:12,787 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:12,790 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:14,204 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:14,748 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:14,751 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:14,799 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:14,802 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:14,823 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:16,766 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:16,770 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:16,815 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:16,819 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:17,217 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:18,776 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:18,780 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:18,828 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:18,834 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:19,246 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:19,870 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:20,796 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:20,800 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:20,843 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:20,846 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:22,262 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:22,807 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:22,810 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:22,853 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:22,856 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:24,298 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:24,828 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:24,832 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:24,876 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:24,880 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:24,908 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:25,505 INFO    Thread-17 :15464 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233553-69pauohg\files\config.yaml
+2023-04-05 23:36:26,840 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:26,844 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:26,902 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:26,905 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:27,302 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:28,851 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:28,856 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:28,921 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:28,927 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:29,814 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:29,938 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:30,860 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:30,864 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:30,939 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:30,943 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:32,343 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:32,664 INFO    Thread-32 :15464 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233601-gco1id4w\files\config.yaml
+2023-04-05 23:36:32,885 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:32,889 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:32,967 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:32,971 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:34,870 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:34,906 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:34,911 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:34,993 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:34,993 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:34,998 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:36,925 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:36,928 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:37,003 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:37,017 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:37,701 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:38,939 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:38,944 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:39,042 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:39,046 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:39,951 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:40,013 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:40,960 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:40,963 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:41,071 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:41,077 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:42,756 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:42,983 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:42,986 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:43,087 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:43,091 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:44,992 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:44,995 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:45,004 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:45,036 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:45,101 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:45,104 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:47,015 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:47,018 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:47,113 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:47,116 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:47,812 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:49,036 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:49,040 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:49,129 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:49,132 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:50,062 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:50,094 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:51,057 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:51,060 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:51,152 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:51,155 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:52,838 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:53,077 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:53,081 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:53,172 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:53,176 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:54,534 DEBUG   SystemMonitor:15464 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-05 23:36:54,535 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:36:55,085 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:55,090 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:55,114 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:36:55,194 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:55,198 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:55,540 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:57,100 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:57,106 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:57,208 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:57,211 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:57,876 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:36:59,115 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:59,118 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:59,222 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:36:59,225 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:00,171 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:00,592 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:01,124 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:01,127 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:01,233 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:01,236 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:02,689 DEBUG   SystemMonitor:15464 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-05 23:37:02,690 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:37:03,143 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:03,147 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:03,252 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:03,255 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:03,699 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:05,160 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:05,163 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:05,220 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:05,270 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:05,273 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:05,641 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:07,171 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:07,174 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:07,281 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:07,285 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:08,739 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:09,204 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:09,254 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:09,330 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:09,367 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:10,288 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:10,698 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:11,270 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:11,279 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:11,377 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:11,408 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:13,289 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:13,295 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:13,486 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:13,536 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:13,804 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:15,343 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:15,343 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:15,395 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:15,546 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:15,556 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:15,778 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:17,413 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:17,421 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:17,592 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:17,595 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:18,877 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:19,432 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:19,435 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:19,603 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:19,606 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:20,416 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:20,823 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:21,444 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:21,447 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:21,616 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:21,619 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:23,454 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:23,457 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:23,624 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:23,627 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:23,906 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:24,538 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:37:25,467 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:25,470 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:25,473 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:25,646 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:25,651 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:26,564 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:27,486 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:27,490 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:27,659 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:27,668 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:28,987 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:29,505 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:29,508 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:29,676 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:29,679 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:30,497 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:31,526 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:31,529 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:31,614 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:31,697 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:31,700 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:32,704 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:37:33,546 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:33,549 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:33,718 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:33,722 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:34,725 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:35,548 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:35,567 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:35,570 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:35,737 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:35,740 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:36,667 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:37,573 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:37,576 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:37,747 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:37,750 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:39,587 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:39,590 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:39,759 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:39,762 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:39,786 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:40,596 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:41,610 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:41,615 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:41,732 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:41,783 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:41,787 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:43,626 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:43,629 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:43,797 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:43,800 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:44,853 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:45,646 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:45,646 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:45,650 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:45,815 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:45,819 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:46,807 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:47,666 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:47,670 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:47,823 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:47,826 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:49,674 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:49,677 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:49,844 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:49,847 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:49,904 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:50,699 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:51,685 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:51,687 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:51,855 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:51,858 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:51,867 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:53,706 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:53,709 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:53,863 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:53,866 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:54,543 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:37:54,959 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:55,720 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:55,723 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:55,747 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:37:55,875 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:55,879 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:57,550 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:37:57,730 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:57,736 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:57,904 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:57,909 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:59,751 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:59,754 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:59,922 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:37:59,925 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:00,012 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:00,791 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:01,758 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:01,762 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:01,930 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:01,933 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:02,612 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:02,706 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:38:03,772 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:03,775 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:03,945 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:03,949 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:05,737 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:05,786 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:05,789 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:05,829 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:05,957 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:05,960 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:07,640 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:07,798 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:07,801 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:07,969 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:07,972 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:09,809 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:09,812 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:09,980 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:09,983 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:10,786 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:10,832 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:11,826 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:11,829 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:11,998 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:12,001 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:12,695 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:13,834 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:13,837 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:14,009 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:14,013 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:15,844 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:15,844 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:15,849 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:15,936 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:16,018 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:16,021 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:17,759 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:17,858 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:17,861 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:18,030 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:18,034 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:19,871 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:19,874 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:20,044 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:20,047 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:20,911 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:21,004 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:21,880 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:21,883 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:22,066 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:22,069 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:22,813 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:23,890 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:23,894 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:24,076 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:24,079 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:24,553 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:38:25,903 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:25,906 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:25,963 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:26,059 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:26,093 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:26,096 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:27,915 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:27,949 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:28,105 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:28,109 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:28,600 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:29,952 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:29,955 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:30,124 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:30,127 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:31,000 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:31,096 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:31,969 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:31,972 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:32,141 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:32,144 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:32,714 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:38:33,652 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:33,980 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:33,983 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:34,153 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:34,156 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:36,002 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:36,005 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:36,155 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:36,173 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:36,176 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:36,760 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:38,020 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:38,023 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:38,194 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:38,198 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:38,702 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:40,032 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:40,035 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:40,204 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:40,207 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:41,194 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:41,799 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:42,053 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:42,056 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:42,224 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:42,227 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:43,760 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:44,073 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:44,077 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:44,244 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:44,247 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:46,093 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:46,096 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:46,246 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:46,264 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:46,267 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:46,853 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:48,103 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:48,106 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:48,275 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:48,278 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:48,818 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:50,111 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:50,114 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:50,296 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:50,299 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:51,282 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:51,912 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:52,117 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:52,121 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:52,318 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:52,321 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:53,863 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:54,131 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:54,134 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:54,333 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:54,336 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:54,566 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:38:56,140 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:56,143 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:56,326 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:38:56,344 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:56,347 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:56,964 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:38:58,155 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:58,158 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:58,360 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:58,364 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:38:59,620 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:00,171 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:00,175 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:00,373 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:00,376 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:01,358 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:02,013 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:02,194 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:02,201 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:02,394 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:02,402 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:02,727 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:39:04,206 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:04,209 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:04,414 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:04,418 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:04,672 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:06,252 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:06,285 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:06,422 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:06,426 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:06,426 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:07,765 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:08,295 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:08,299 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:08,437 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:08,442 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:09,763 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:10,313 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:10,316 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:10,456 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:10,460 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:11,441 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:12,335 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:12,339 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:12,473 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:12,476 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:12,829 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:14,343 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:14,347 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:14,484 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:14,488 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:14,827 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:16,358 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:16,361 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:16,497 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:16,500 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:16,500 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:17,883 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:18,367 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:18,371 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:18,507 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:18,510 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:19,899 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:20,385 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:20,388 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:20,526 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:20,530 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:21,548 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:22,393 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:22,398 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:22,535 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:22,539 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:22,959 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:24,409 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:24,413 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:24,551 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:24,554 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:24,581 DEBUG   SenderThread:15464 [sender.py:send():336] send: stats
+2023-04-05 23:39:25,588 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:26,427 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:26,430 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:26,570 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:26,573 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:26,582 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 23:39:27,998 DEBUG   HandlerThread:15464 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 23:39:28,443 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:28,457 ERROR   cpu       :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:28,598 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)
+2023-04-05 23:39:28,608 ERROR   memory    :15464 [interfaces.py:monitor():129] Failed to sample metric: process no longer exists (pid=18672)

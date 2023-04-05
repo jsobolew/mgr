@@ -1,0 +1,49 @@
+{
+    "os": "Windows-10-10.0.19044-SP0",
+    "python": "3.9.10",
+    "heartbeatAt": "2023-04-05T21:14:38.198749",
+    "startedAt": "2023-04-05T21:14:37.306053",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/jsobolew/mgr.git",
+        "commit": "0c610d47a7d4729407b671dcc89d6743f2b98a24"
+    },
+    "email": "qba.sobolewski@gmail.com",
+    "root": "C:/Users/QbaSo/Desktop/praca magisterska",
+    "host": "DESKTOP-IPD5IVK",
+    "username": "QbaSo",
+    "executable": "C:\\Users\\QbaSo\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3501.0,
+            "min": 0.0,
+            "max": 3501.0
+        }
+    ],
+    "disk": {
+        "total": 930.8897171020508,
+        "used": 677.5739479064941
+    },
+    "gpu": "NVIDIA GeForce RTX 3060 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060 Ti",
+            "memory_total": 8589934592
+        }
+    ],
+    "memory": {
+        "total": 23.950672149658203
+    }
+}

@@ -1,0 +1,26 @@
+2023-04-05 23:31:29,410 INFO    MainThread:17580 [wandb_setup.py:_flush():68] Configure stats pid to 17580
+2023-04-05 23:31:29,410 INFO    MainThread:17580 [wandb_setup.py:_flush():68] Loading settings from C:\Users\QbaSo\.config\wandb\settings
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_setup.py:_flush():68] Loading settings from C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\settings
+2023-04-05 23:31:29,411 WARNING MainThread:17580 [wandb_setup.py:_flush():68] Unknown environment variable: WANDB_SERVICE
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_init.py:_log_setup():492] Logging user logs to C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233129-21r874mq\logs\debug.log
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_init.py:_log_setup():493] Logging internal logs to C:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230405_233129-21r874mq\logs\debug-internal.log
+2023-04-05 23:31:29,411 INFO    MainThread:17580 [wandb_init.py:init():532] calling init triggers
+2023-04-05 23:31:29,412 INFO    MainThread:17580 [wandb_init.py:init():538] wandb.init called with sweep_config: {}
+config: {'setup': 'task IL', 'learning_rate': 0.1, 'architecture': 'CNN', 'dataset': 'MNIST', 'epochs': 1}
+2023-04-05 23:31:29,412 INFO    MainThread:17580 [wandb_init.py:init():588] starting backend
+2023-04-05 23:31:29,412 INFO    MainThread:17580 [wandb_init.py:init():592] setting up manager
+2023-04-05 23:31:29,415 INFO    MainThread:17580 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=spawn, using: spawn
+2023-04-05 23:31:29,422 INFO    MainThread:17580 [wandb_init.py:init():599] backend started and connected
+2023-04-05 23:31:29,424 INFO    MainThread:17580 [wandb_init.py:init():687] updated telemetry
+2023-04-05 23:31:29,485 INFO    MainThread:17580 [wandb_init.py:init():727] communicating run to backend with 60.0 second timeout
+2023-04-05 23:31:31,729 INFO    MainThread:17580 [wandb_run.py:_on_init():2134] communicating current version
+2023-04-05 23:31:32,209 INFO    MainThread:17580 [wandb_run.py:_on_init():2143] got version response upgrade_message: "wandb version 0.14.1 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-04-05 23:31:32,209 INFO    MainThread:17580 [wandb_init.py:init():775] starting run threads in backend
+2023-04-05 23:31:32,370 INFO    MainThread:17580 [wandb_run.py:_console_start():2114] atexit reg
+2023-04-05 23:31:32,370 INFO    MainThread:17580 [wandb_run.py:_redirect():1969] redirect: SettingsConsole.WRAP_RAW
+2023-04-05 23:31:32,371 INFO    MainThread:17580 [wandb_run.py:_redirect():2034] Wrapping output streams.
+2023-04-05 23:31:32,371 INFO    MainThread:17580 [wandb_run.py:_redirect():2059] Redirects installed.
+2023-04-05 23:31:32,371 INFO    MainThread:17580 [wandb_init.py:init():817] run started, returning control to user process
