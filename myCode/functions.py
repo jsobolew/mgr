@@ -47,7 +47,7 @@ def test(model, test_loader, print_accuracy=True):
             100. * correct / len(test_loader.dataset)))
     return 100. * correct / len(test_loader.dataset)
 
-def train(model, optimizer, train_loader, val_loader = [], epoch=1, log_interval = 100):
+def train(model, optimizer, train_loader, val_loader = [], epoch = 1, log_interval = 100):
     train_losses = []
     val_losses = []
     exemplers = []

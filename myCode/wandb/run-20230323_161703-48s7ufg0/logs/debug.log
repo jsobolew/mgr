@@ -1,0 +1,57 @@
+2023-03-23 16:17:03,135 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Configure stats pid to 13036
+2023-03-23 16:17:03,135 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from C:\Users\QbaSo\.config\wandb\settings
+2023-03-23 16:17:03,135 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\settings
+2023-03-23 16:17:03,135 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-03-23 16:17:03,136 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-03-23 16:17:03,138 INFO    MainThread:13036 [wandb_init.py:_log_setup():492] Logging user logs to c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230323_161703-48s7ufg0\logs\debug.log
+2023-03-23 16:17:03,138 INFO    MainThread:13036 [wandb_init.py:_log_setup():493] Logging internal logs to c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230323_161703-48s7ufg0\logs\debug-internal.log
+2023-03-23 16:17:03,139 INFO    MainThread:13036 [wandb_init.py:init():532] calling init triggers
+2023-03-23 16:17:03,139 INFO    MainThread:13036 [wandb_init.py:init():538] wandb.init called with sweep_config: {}
+config: {'setup': 'task IL', 'learning_rate': 0.1, 'architecture': 'CNN', 'dataset': 'MNIST', 'epochs': 1}
+2023-03-23 16:17:03,139 INFO    MainThread:13036 [wandb_init.py:init():554] re-initializing run, found existing run on stack: q9uriclj
+2023-03-23 16:17:03,142 INFO    MainThread:13036 [wandb_run.py:_finish():1854] finishing run qba/rehersal small net MNIST/q9uriclj
+2023-03-23 16:17:03,143 INFO    MainThread:13036 [jupyter.py:save_history():449] not saving jupyter history
+2023-03-23 16:17:03,144 INFO    MainThread:13036 [jupyter.py:save_ipynb():379] not saving jupyter notebook
+2023-03-23 16:17:03,144 INFO    MainThread:13036 [wandb_init.py:_jupyter_teardown():420] cleaning up jupyter logic
+2023-03-23 16:17:03,144 INFO    MainThread:13036 [wandb_run.py:_atexit_cleanup():2083] got exitcode: 0
+2023-03-23 16:17:03,145 INFO    MainThread:13036 [wandb_run.py:_restore():2066] restore
+2023-03-23 16:17:03,145 INFO    MainThread:13036 [wandb_run.py:_restore():2072] restore done
+2023-03-23 16:17:10,210 INFO    MainThread:13036 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2023-03-23 16:17:10,211 INFO    MainThread:13036 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2023-03-23 16:17:10,224 INFO    MainThread:13036 [wandb_run.py:_footer_sync_info():3398] logging synced files
+2023-03-23 16:17:10,230 INFO    MainThread:13036 [wandb_init.py:init():588] starting backend
+2023-03-23 16:17:10,230 INFO    MainThread:13036 [wandb_init.py:init():592] setting up manager
+2023-03-23 16:17:10,235 INFO    MainThread:13036 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=spawn, using: spawn
+2023-03-23 16:17:10,238 INFO    MainThread:13036 [wandb_init.py:init():599] backend started and connected
+2023-03-23 16:17:10,294 INFO    MainThread:13036 [wandb_run.py:_label_probe_notebook():1203] probe notebook
+2023-03-23 16:17:10,294 INFO    MainThread:13036 [wandb_run.py:_label_probe_notebook():1213] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2023-03-23 16:17:10,294 INFO    MainThread:13036 [wandb_init.py:init():687] updated telemetry
+2023-03-23 16:17:10,349 INFO    MainThread:13036 [wandb_init.py:init():727] communicating run to backend with 60.0 second timeout
+2023-03-23 16:17:11,804 INFO    MainThread:13036 [wandb_run.py:_on_init():2134] communicating current version
+2023-03-23 16:17:12,113 INFO    MainThread:13036 [wandb_run.py:_on_init():2143] got version response upgrade_message: "wandb version 0.14.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-03-23 16:17:12,113 INFO    MainThread:13036 [wandb_init.py:init():775] starting run threads in backend
+2023-03-23 16:17:12,297 INFO    MainThread:13036 [wandb_run.py:_console_start():2114] atexit reg
+2023-03-23 16:17:12,297 INFO    MainThread:13036 [wandb_run.py:_redirect():1969] redirect: SettingsConsole.WRAP_RAW
+2023-03-23 16:17:12,297 INFO    MainThread:13036 [wandb_run.py:_redirect():2034] Wrapping output streams.
+2023-03-23 16:17:12,297 INFO    MainThread:13036 [wandb_run.py:_redirect():2059] Redirects installed.
+2023-03-23 16:17:12,298 INFO    MainThread:13036 [wandb_init.py:init():817] run started, returning control to user process
+2023-03-23 16:35:16,528 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Configure stats pid to 13036
+2023-03-23 16:35:16,528 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from C:\Users\QbaSo\.config\wandb\settings
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\settings
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True'}
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_init.py:_log_setup():492] Logging user logs to c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230323_163516-mt642aye\logs\debug.log
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_init.py:_log_setup():493] Logging internal logs to c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230323_163516-mt642aye\logs\debug-internal.log
+2023-03-23 16:35:16,529 INFO    MainThread:13036 [wandb_init.py:_jupyter_setup():438] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x000001FA82A96DC0>
+2023-03-23 16:35:16,531 INFO    MainThread:13036 [wandb_init.py:init():532] calling init triggers
+2023-03-23 16:35:16,531 INFO    MainThread:13036 [wandb_init.py:init():538] wandb.init called with sweep_config: {}
+config: {'setup': 'task IL', 'learning_rate': 0.1, 'architecture': 'CNN', 'dataset': 'MNIST', 'epochs': 1}
+2023-03-23 16:35:16,531 INFO    MainThread:13036 [wandb_init.py:init():554] re-initializing run, found existing run on stack: 48s7ufg0
+2023-03-23 16:35:16,533 INFO    MainThread:13036 [wandb_run.py:_finish():1854] finishing run qba/rehersal small net MNIST/48s7ufg0
+2023-03-23 16:35:16,533 INFO    MainThread:13036 [wandb_run.py:_atexit_cleanup():2083] got exitcode: 0
+2023-03-23 16:35:16,534 INFO    MainThread:13036 [wandb_run.py:_restore():2066] restore
+2023-03-23 16:35:16,534 INFO    MainThread:13036 [wandb_run.py:_restore():2072] restore done
+2023-03-23 16:35:22,604 INFO    MainThread:13036 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2023-03-23 16:35:22,606 INFO    MainThread:13036 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2023-03-23 16:35:22,627 INFO    MainThread:13036 [wandb_run.py:_footer_sync_info():3398] logging synced files

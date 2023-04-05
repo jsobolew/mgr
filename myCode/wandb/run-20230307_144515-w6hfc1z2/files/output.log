@@ -1,0 +1,12 @@
+-------------------------------------------------- training only last layer --------------------------------------------------
+Epoch 1 [0 / 50000]       loss: 2.3275530338287354
+Epoch 1 [6400 / 50000]       loss: 2.2532541751861572
+Epoch 1 [12800 / 50000]       loss: 2.2184410095214844
+Epoch 1 [19200 / 50000]       loss: 2.153203248977661
+Epoch 1 [25600 / 50000]       loss: 2.111609935760498
+Epoch 1 [32000 / 50000]       loss: 2.095865249633789
+Epoch 1 [38400 / 50000]       loss: 2.0329833030700684
+Epoch 1 [44800 / 50000]       loss: 2.1037282943725586
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Test set: Avg. loss: 1.9767, Accuracy: 5296/10000 (53%)
