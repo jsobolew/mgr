@@ -5,7 +5,6 @@ from dataloaders.mnist import MNIST_for_classes_TaskIL
 from dataloaders.noise import dataloader_pretraining_gray
 import numpy as np
 import torch.optim as optim
-import matplotlib.pyplot as plt
 import wandb
 import torch.nn.functional as F
 
@@ -87,5 +86,3 @@ if __name__ == "__main__":
     optimizer = optim.SGD(model.parameters(), lr=0.1)
 
     train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, epoch=1)
-
-    plt.plot(exemplers, train_losses)
