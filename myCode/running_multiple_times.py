@@ -1,4 +1,4 @@
-from samllNetCL_TaskIL_Noise_Rehersal import main
+from samllNetCL_TaskIL import main
 
 for i in range(4):
     main()
