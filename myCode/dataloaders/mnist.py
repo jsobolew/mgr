@@ -3,21 +3,21 @@ import torchvision
 import numpy as np
 
 def MNIST(batch_size_train = 64, batch_size_test = 1000):
-    MNIST_train = torchvision.datasets.MNIST('/files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST('files/', train=True, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
                                     (0.1307,), (0.3081,))
                                 ]))
 
-    MNIST_val = torchvision.datasets.MNIST('/files/', train=True, download=True,
+    MNIST_val = torchvision.datasets.MNIST('files/', train=True, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
                                     (0.1307,), (0.3081,))
                                 ]))
 
-    MNIST_test = torchvision.datasets.MNIST('/files/', train=False, download=True,
+    MNIST_test = torchvision.datasets.MNIST('files/', train=False, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -69,7 +69,7 @@ def MNIST_for_classes(class_1, class_2, batch_size_train=128):
     return train_loader
 
 def MNIST_for_classes_TaskIL(class_1, class_2, batch_size_train=128):
-    MNIST_train = torchvision.datasets.MNIST('/files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST('files/', train=True, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(

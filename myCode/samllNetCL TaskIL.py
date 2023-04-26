@@ -65,12 +65,12 @@ if __name__ == "__main__":
 
     tasks = [task1 ,task2, task3, task4, task5]
 
-    rehersal_loader = dataloader_pretraining_gray("dead_leaves-mixed", no_classes=2)
+    rehersal_loader = dataloader_pretraining_gray("dead_leaves-squares", no_classes=2)
 
 
     wandb.init(
         # set the wandb project where this run will be logged
-        project="rehersal small net MNIST",
+        project="no rehersal small net MNIST Task IL",
         
         # track hyperparameters and run metadata
         config={

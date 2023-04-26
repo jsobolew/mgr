@@ -1,0 +1,5 @@
+[default]
+entity = qba
+project = rehersal small net MNIST
+base_url = https://api.wandb.ai
+
