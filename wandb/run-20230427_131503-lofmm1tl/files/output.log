@@ -1,0 +1,16 @@
+
+Train [0 / 11800]       loss: 0.6843208074569702
+/home/jsobolewski/.local/lib/python3.8/site-packages/torch/nn/_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Traceback (most recent call last):
+  File "/home/jsobolewski/mgr/myCode/samllNetCL_TaskIL.py", line 97, in <module>
+    main(1)
+  File "/home/jsobolewski/mgr/myCode/samllNetCL_TaskIL.py", line 94, in main
+    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_interval = 10)
+  File "/home/jsobolewski/mgr/myCode/samllNetCL_TaskIL.py", line 28, in train_validation_all_classes
+    curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
+  File "/home/jsobolewski/mgr/myCode/samllNetCL_TaskIL.py", line 46, in test
+    test_loss += F.cross_entropy(output, target, size_average=False).item()
+  File "/home/jsobolewski/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 3026, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument target in method wrapper_nll_loss_forward)
