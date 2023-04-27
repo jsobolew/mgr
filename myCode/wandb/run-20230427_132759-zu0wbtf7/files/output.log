@@ -1,0 +1,29 @@
+
+Train [0 / 12593]       loss: 0.6663349270820618
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Train [0 / 12691]       loss: 0.7057808637619019
+6.13.0
+Train [0 / 11370]       loss: 0.7049499154090881
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\datasets\mnist.py:65: UserWarning: train_labels has been renamed targets
+  warnings.warn("train_labels has been renamed targets")
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\datasets\mnist.py:65: UserWarning: train_labels has been renamed targets
+  warnings.warn("train_labels has been renamed targets")
+c:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Train [0 / 12593]       loss: 0.7276673913002014
+Train [0 / 11344]       loss: 0.7777116298675537
+Train [1280 / 11344]       loss: 0.7612075209617615
+Train [2560 / 11344]       loss: 0.7605428099632263
+Train [3840 / 11344]       loss: 0.7573462724685669
+Train [0 / 11379]       loss: 0.7130669951438904
+Train [1280 / 11379]       loss: 0.5814456939697266
+Train [2560 / 11379]       loss: 0.15896332263946533
+Train [3840 / 11379]       loss: 0.15838977694511414
+Train [5120 / 11379]       loss: 0.10361383855342865
+Train [6400 / 11379]       loss: 0.10558898746967316
+Train [7680 / 11379]       loss: 0.06071097031235695

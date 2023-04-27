@@ -1,0 +1,45 @@
+2023-04-27 13:27:59,570 INFO    StreamThr :19180 [internal.py:wandb_internal():87] W&B internal server running at pid: 19180, started at: 2023-04-27 13:27:59.569829
+2023-04-27 13:27:59,571 DEBUG   HandlerThread:19180 [handler.py:handle_request():144] handle_request: status
+2023-04-27 13:27:59,601 INFO    WriterThread:19180 [datastore.py:open_for_write():85] open: c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230427_132759-zu0wbtf7\run-zu0wbtf7.wandb
+2023-04-27 13:27:59,603 DEBUG   SenderThread:19180 [sender.py:send():336] send: header
+2023-04-27 13:27:59,660 DEBUG   SenderThread:19180 [sender.py:send():336] send: run
+2023-04-27 13:28:00,268 INFO    SenderThread:19180 [dir_watcher.py:__init__():216] watching files in: c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230427_132759-zu0wbtf7\files
+2023-04-27 13:28:00,268 INFO    SenderThread:19180 [sender.py:_start_run_threads():1067] run started: zu0wbtf7 with start time 1682594879.57683
+2023-04-27 13:28:00,268 DEBUG   SenderThread:19180 [sender.py:send_request():363] send_request: summary_record
+2023-04-27 13:28:00,269 INFO    SenderThread:19180 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-27 13:28:00,275 DEBUG   HandlerThread:19180 [handler.py:handle_request():144] handle_request: check_version
+2023-04-27 13:28:00,275 DEBUG   SenderThread:19180 [sender.py:send_request():363] send_request: check_version
+2023-04-27 13:28:00,505 DEBUG   HandlerThread:19180 [handler.py:handle_request():144] handle_request: run_start
+2023-04-27 13:28:00,534 DEBUG   HandlerThread:19180 [system_info.py:__init__():31] System info init
+2023-04-27 13:28:00,535 DEBUG   HandlerThread:19180 [system_info.py:__init__():46] System info init done
+2023-04-27 13:28:00,535 INFO    HandlerThread:19180 [system_monitor.py:start():151] Starting system monitor
+2023-04-27 13:28:00,535 INFO    SystemMonitor:19180 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-27 13:28:00,535 INFO    HandlerThread:19180 [system_monitor.py:probe():172] Collecting system info
+2023-04-27 13:28:00,538 INFO    SystemMonitor:19180 [interfaces.py:start():168] Started cpu
+2023-04-27 13:28:00,539 INFO    SystemMonitor:19180 [interfaces.py:start():168] Started disk
+2023-04-27 13:28:00,539 INFO    SystemMonitor:19180 [interfaces.py:start():168] Started gpu
+2023-04-27 13:28:00,539 INFO    SystemMonitor:19180 [interfaces.py:start():168] Started memory
+2023-04-27 13:28:00,554 INFO    SystemMonitor:19180 [interfaces.py:start():168] Started network
+2023-04-27 13:28:00,564 DEBUG   HandlerThread:19180 [system_info.py:probe():195] Probing system
+2023-04-27 13:28:00,566 DEBUG   HandlerThread:19180 [system_info.py:_probe_git():180] Probing git
+2023-04-27 13:28:00,739 DEBUG   HandlerThread:19180 [system_info.py:_probe_git():188] Probing git done
+2023-04-27 13:28:00,739 DEBUG   HandlerThread:19180 [system_info.py:probe():241] Probing system done
+2023-04-27 13:28:00,739 DEBUG   HandlerThread:19180 [system_monitor.py:probe():181] {'os': 'Windows-10-10.0.19044-SP0', 'python': '3.9.10', 'heartbeatAt': '2023-04-27T11:28:00.565781', 'startedAt': '2023-04-27T11:27:59.553828', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': '<python with no main file>', 'git': {'remote': 'https://github.com/jsobolew/mgr.git', 'commit': 'cd839cafa343bda3d2a7e826efd66fb2a3cd4a89'}, 'email': 'qba.sobolewski@gmail.com', 'root': 'C:/Users/QbaSo/Desktop/praca magisterska', 'host': 'DESKTOP-IPD5IVK', 'username': 'QbaSo', 'executable': 'c:\\Users\\QbaSo\\AppData\\Local\\Programs\\Python\\Python39\\python.exe', 'cpu_count': 4, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3501.0, 'min': 0.0, 'max': 3501.0}, 'cpu_freq_per_core': [{'current': 3501.0, 'min': 0.0, 'max': 3501.0}], 'disk': {'total': 930.8897171020508, 'used': 691.1089553833008}, 'gpu': 'NVIDIA GeForce RTX 3060 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3060 Ti', 'memory_total': 8589934592}], 'memory': {'total': 23.950672149658203}}
+2023-04-27 13:28:00,739 INFO    HandlerThread:19180 [system_monitor.py:probe():182] Finished collecting system info
+2023-04-27 13:28:00,740 INFO    HandlerThread:19180 [system_monitor.py:probe():185] Publishing system info
+2023-04-27 13:28:00,740 DEBUG   HandlerThread:19180 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-27 13:28:00,741 DEBUG   HandlerThread:19180 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-27 13:28:00,741 INFO    HandlerThread:19180 [system_monitor.py:probe():187] Finished publishing system info
+2023-04-27 13:28:00,762 DEBUG   SenderThread:19180 [sender.py:send():336] send: files
+2023-04-27 13:28:00,763 INFO    SenderThread:19180 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-04-27 13:28:00,829 DEBUG   HandlerThread:19180 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-27 13:28:00,829 DEBUG   SenderThread:19180 [sender.py:send_request():363] send_request: stop_status
+2023-04-27 13:28:00,888 DEBUG   HandlerThread:19180 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-27 13:28:01,104 DEBUG   SenderThread:19180 [sender.py:send():336] send: telemetry
+2023-04-27 13:28:01,104 DEBUG   SenderThread:19180 [sender.py:send():336] send: history
+2023-04-27 13:28:01,104 DEBUG   SenderThread:19180 [sender.py:send_request():363] send_request: summary_record
+2023-04-27 13:28:01,105 INFO    SenderThread:19180 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-27 13:28:01,272 INFO    Thread-17 :19180 [dir_watcher.py:_on_file_created():275] file/dir created: c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230427_132759-zu0wbtf7\files\wandb-metadata.json
+2023-04-27 13:28:01,272 INFO    Thread-17 :19180 [dir_watcher.py:_on_file_created():275] file/dir created: c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230427_132759-zu0wbtf7\files\wandb-summary.json
+2023-04-27 13:28:01,272 INFO    Thread-17 :19180 [dir_watcher.py:_on_file_created():275] file/dir created: c:\Users\QbaSo\Desktop\praca magisterska\myCode\wandb\run-20230427_132759-zu0wbtf7\files\requirements.txt
+2023-04-27 13:28:01,747 INFO    wandb-upload_0:19180 [upload_job.py:push():138] Uploaded file C:\Users\QbaSo\AppData\Local\Temp\tmppypqridkwandb\i3mofvrb-wandb-metadata.json

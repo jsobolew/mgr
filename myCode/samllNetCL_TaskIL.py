@@ -13,14 +13,17 @@ def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_i
     tasks_acc = [[], [], [], [], []]
     exemplers = []
 
-    model.train()
     for taskNo in range(len(tasks)):
         for batch_idx, (data, target) in enumerate(tasks[taskNo]):
+            model.train()
 
             # training on task
-            optimizer.zero_grad()
             output = model(taskNo, data.to(device))
             loss = F.cross_entropy(output, target.to(device))
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
             if batch_idx % log_interval == 0:
                 print(f"Train [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
@@ -33,7 +36,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_i
             wandb.log({"loss": loss.item()})
             exemplars = tasks[taskNo].batch_size * batch_idx
             exemplers.append(exemplars)
-            wandb.log({"exemplers": exemplers*2})
+            wandb.log({"exemplers": exemplers})
     return train_losses, tasks_acc, exemplers
 
 def test(model, test_loader, taskNo, device, print_accuracy=True):
@@ -44,8 +47,8 @@ def test(model, test_loader, taskNo, device, print_accuracy=True):
         for data, target in test_loader:
             output = model(taskNo, data.to(device))
             test_loss += F.cross_entropy(output, target.to(device), size_average=False).item()
-            pred = output.data.max(1, keepdim=True)[1]
-            correct += pred.eq(target.data.view_as(pred)).sum().cpu()
+            pred = output.data.max(1, keepdim=True)[1].cpu()
+            correct += pred.eq(target.data.view_as(pred)).sum()
     test_loss /= len(test_loader.dataset)
     if print_accuracy:
         print('\nTest set: Avg. loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
@@ -54,7 +57,7 @@ def test(model, test_loader, taskNo, device, print_accuracy=True):
     return 100. * correct / len(test_loader.dataset)
 
 
-def main(run=1):
+def main():
     if torch.cuda.is_available():
         device = 'cuda'
     else:
@@ -86,12 +89,10 @@ def main(run=1):
         }
     )
 
-    wandb.log({"run":run})
-
     model = NetTaskIL(10).to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.1)
 
     train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_interval = 10)
 
 if __name__ == "__main__":
-    main(1)
+    main()
