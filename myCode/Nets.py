@@ -84,7 +84,7 @@ class L2Norm(nn.Module):
         return x / x.norm(p=2, dim=1, keepdim=True)
 
 
-class SmallAlexNet(nn.Module, CLNet):
+class SmallAlexNet(nn.Module):
     def __init__(self, in_channel=3, feat_dim=128):
         super(SmallAlexNet, self).__init__()
 

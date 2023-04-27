@@ -54,7 +54,7 @@ def test(model, test_loader, print_accuracy=True):
     return 100. * correct / len(test_loader.dataset)
 
 
-def main(run):
+def main(run=1):
     if torch.cuda.is_available():
         device = 'cuda'
     else:

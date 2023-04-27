@@ -1,0 +1,149 @@
+{
+    "os": "Linux-5.15.0-58-generic-x86_64-with-glibc2.17",
+    "python": "3.8.16",
+    "heartbeatAt": "2023-04-27T11:11:11.819579",
+    "startedAt": "2023-04-27T11:11:11.178973",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/jsobolewski/mgr/myCode/samllNetCL_TaskIL.py",
+    "codePath": "myCode/samllNetCL_TaskIL.py",
+    "git": {
+        "remote": "https://github.com/jsobolew/mgr.git",
+        "commit": "f26178cd3eab8924bada22ad6aed727dc31e2131"
+    },
+    "email": "qba.sobolewski@gmail.com",
+    "root": "/home/jsobolewski/mgr",
+    "host": "titan8",
+    "username": "jsobolewski",
+    "executable": "/home/jsobolewski/anaconda3/envs/my_env/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 20,
+    "cpu_freq": {
+        "current": 3.5361,
+        "min": 1200.0,
+        "max": 4420.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4.177,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 2.868,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4.177,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4500.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3.5,
+            "min": 1200.0,
+            "max": 4400.0
+        }
+    ],
+    "disk": {
+        "total": 466.90038299560547,
+        "used": 140.23348236083984
+    },
+    "gpu": "NVIDIA TITAN RTX",
+    "gpu_count": 2,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA TITAN RTX",
+            "memory_total": 25769803776
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 125.49616622924805
+    }
+}
