@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 95, in <module>
+    main()
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 92, in main
+    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, epoch=1, log_interval = 10)
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 28, in train_validation_all_classes
+    curr_task_acc = test(model, tasks[i], i, print_accuracy=False)
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 45, in test
+    output = model(taskNo, data)
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\modules\module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+TypeError: forward() takes 2 positional arguments but 3 were given
+Train [0 / 12188]       loss: 2.090416431427002

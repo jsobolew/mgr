@@ -1,0 +1,35 @@
+C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\nn\_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Train [0 / 12593]       loss: 2.321927785873413
+Train [1280 / 12593]       loss: 2.3300111293792725
+Train [2560 / 12593]       loss: 2.315095901489258
+Train [3840 / 12593]       loss: 2.302455425262451
+Train [5120 / 12593]       loss: 2.324069023132324
+Traceback (most recent call last):
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 95, in <module>
+    main()
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 92, in main
+    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, epoch=1, log_interval = 10)
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 28, in train_validation_all_classes
+    curr_task_acc = test(model, tasks[i], print_accuracy=False)
+  File "c:\Users\QbaSo\Desktop\praca magisterska\myCode\samllNetCL_ClassIL.py", line 44, in test
+    for data, target in test_loader:
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\utils\data\dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\utils\data\dataloader.py", line 671, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\utils\data\_utils\fetch.py", line 58, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\utils\data\_utils\fetch.py", line 58, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\datasets\mnist.py", line 145, in __getitem__
+    img = self.transform(img)
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\transforms\transforms.py", line 95, in __call__
+    img = t(img)
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\transforms\transforms.py", line 135, in __call__
+    return F.to_tensor(pic)
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\torchvision\transforms\functional.py", line 163, in to_tensor
+    img = torch.from_numpy(np.array(pic, mode_to_nptype.get(pic.mode, np.uint8), copy=True))
+  File "C:\Users\QbaSo\AppData\Local\Programs\Python\Python39\lib\site-packages\PIL\Image.py", line 721, in __array__
+    return np.array(self._ArrayData(new), dtype)
+KeyboardInterrupt

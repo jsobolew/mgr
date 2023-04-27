@@ -1,4 +1,4 @@
-from samllNetCL_TaskIL import main
+from samllNetCL_ClassIL import main
 
-for i in range(4):
-    main()
+for i in range(5):
+    main(i)
