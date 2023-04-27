@@ -20,7 +20,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_i
             # training on task
             optimizer.zero_grad()
             output = model(taskNo, data.to(device))
-            loss = F.cross_entropy(output, target)
+            loss = F.cross_entropy(output, target.to(device))
 
             if batch_idx % log_interval == 0:
                 print(f"Train [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
@@ -29,7 +29,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_i
                     tasks_acc[i].append(curr_task_acc)
                     wandb.log({f"acc_task_{i}": curr_task_acc})
 
-            train_losses.append(loss.item())
+            train_losses.append(loss.cpu().item())
             wandb.log({"loss": loss.item()})
             exemplars = tasks[taskNo].batch_size * batch_idx
             exemplers.append(exemplars)
@@ -43,9 +43,9 @@ def test(model, test_loader, taskNo, device, print_accuracy=True):
     with torch.no_grad():
         for data, target in test_loader:
             output = model(taskNo, data.to(device))
-            test_loss += F.cross_entropy(output, target, size_average=False).item()
+            test_loss += F.cross_entropy(output, target.to(device), size_average=False).item()
             pred = output.data.max(1, keepdim=True)[1]
-            correct += pred.eq(target.data.view_as(pred)).sum()
+            correct += pred.eq(target.data.view_as(pred)).sum().cpu()
     test_loss /= len(test_loader.dataset)
     if print_accuracy:
         print('\nTest set: Avg. loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
