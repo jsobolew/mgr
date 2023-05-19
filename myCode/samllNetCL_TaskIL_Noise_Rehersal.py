@@ -34,10 +34,13 @@ def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loade
 
             if batch_idx % log_interval == 0:
                 print(f"Train [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
+                acc_tasks = {}
                 for i in range(len(tasks)):
                     curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
                     tasks_acc[i].append(curr_task_acc)
-                    wandb.log({f"acc_task_{i}": curr_task_acc})
+                    acc_tasks.update({f"acc_task_{i}": curr_task_acc})
+                wandb.log(acc_tasks)
+                print(acc_tasks)
 
             train_losses.append(loss.cpu().item())
             wandb.log({"loss": loss.item()})
