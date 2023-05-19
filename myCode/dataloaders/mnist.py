@@ -75,8 +75,9 @@ def MNIST_for_classes_TaskIL(class_1, class_2, batch_size_train=128):
                                     torchvision.transforms.Normalize(
                                     (0.1307,), (0.3081,))
                                 ]),)
-    MNIST_train.data = MNIST_train.data[torch.logical_or(MNIST_train.train_labels == class_1, MNIST_train.train_labels == class_2)]
-    MNIST_train.targets = MNIST_train.targets[torch.logical_or(MNIST_train.train_labels == class_1, MNIST_train.train_labels == class_2)]
+    # 11263 is a minimal length a 2 class dataset can have
+    MNIST_train.data = MNIST_train.data[torch.logical_or(MNIST_train.train_labels == class_1, MNIST_train.train_labels == class_2)][:11263]
+    MNIST_train.targets = MNIST_train.targets[torch.logical_or(MNIST_train.train_labels == class_1, MNIST_train.train_labels == class_2)][:11263]
     MNIST_train.targets[MNIST_train.targets == class_1] = 0
     MNIST_train.targets[MNIST_train.targets == class_2] = 1
     train_loader = torch.utils.data.DataLoader(MNIST_train, batch_size=batch_size_train, shuffle=True)
