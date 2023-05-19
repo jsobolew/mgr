@@ -8,39 +8,51 @@ import torch.optim as optim
 import wandb
 import torch.nn.functional as F
 
-def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_interval = 1000):
+def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=1, log_interval = 1000):
     train_losses = []
     tasks_acc = [[], [], [], [], []]
     exemplers = []
 
+    rehersal_iterator = iter(rehersal_loader)
+
+    model.train()
     for taskNo in range(len(tasks)):
-        for e in epoch:
-            for batch_idx, (data, target) in enumerate(tasks[taskNo]):
-                model.train()
+        for batch_idx, (data, target) in enumerate(tasks[taskNo]):
 
-                # training on task
-                output = model(taskNo, data.to(device))
-                loss = F.cross_entropy(output, target.to(device))
+            # training on task
+            output = model(taskNo, data.to(device))
+            loss = F.cross_entropy(output, target.to(device))
 
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
+            # for param in model.fc2.parameters():
+            #     param.requires_grad = False
 
-                if batch_idx % log_interval == 0:
-                    print(f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
-                    acc_tasks = {}
-                    for i in range(len(tasks)):
-                        curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
-                        tasks_acc[i].append(curr_task_acc)
-                        acc_tasks.update({f"acc_task_{i}": curr_task_acc})
-                    wandb.log(acc_tasks)
-                    print(acc_tasks)
+            # noise rehersal
+            rehersal_data = next(rehersal_iterator)
+            output = model(taskNo, rehersal_data[0].to(device))
+            loss += F.cross_entropy(output, rehersal_data[1].to(device))
 
-                train_losses.append(loss.cpu().item())
-                wandb.log({"loss": loss.item()})
-                exemplars = tasks[taskNo].batch_size * batch_idx
-                exemplers.append(exemplars)
-                wandb.log({"exemplers": exemplers})
+            # for param in model.fc2.parameters():
+            #     param.requires_grad = False
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            if batch_idx % log_interval == 0:
+                print(f"Train [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
+                acc_tasks = {}
+                for i in range(len(tasks)):
+                    curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
+                    tasks_acc[i].append(curr_task_acc)
+                    acc_tasks.update({f"acc_task_{i}": curr_task_acc})
+                wandb.log(acc_tasks)
+                print(acc_tasks)
+
+            train_losses.append(loss.cpu().item())
+            wandb.log({"loss": loss.item()})
+            exemplars = tasks[taskNo].batch_size * batch_idx
+            exemplers.append(exemplars)
+            wandb.log({"exemplers": exemplers*2})
     return train_losses, tasks_acc, exemplers
 
 def test(model, test_loader, taskNo, device, print_accuracy=True):
@@ -79,9 +91,12 @@ def main():
 
     tasks = [task1 ,task2, task3, task4, task5]
 
+    rehersal_loader = dataloader_pretraining_gray("dead_leaves-squares", no_classes=2)
+
+
     wandb.init(
         # set the wandb project where this run will be logged
-        project="no rehersal small net MNIST Task IL",
+        project="rehersal small net MNIST Task IL",
         
         # track hyperparameters and run metadata
         config={
@@ -89,14 +104,14 @@ def main():
         "learning_rate": 0.1,
         "architecture": "NetTaskIL",
         "dataset": "MNIST",
-        "epochs": 5,
+        "epochs": 1,
         }
     )
 
     model = NetTaskIL(10).to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.1)
 
-    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, epoch=5, log_interval = 10)
+    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=1, log_interval = 10)
 
 if __name__ == "__main__":
     main()
