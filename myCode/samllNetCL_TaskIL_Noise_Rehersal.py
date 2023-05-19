@@ -17,7 +17,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loade
 
     model.train()
     for taskNo in range(len(tasks)):
-        for e in epoch:
+        for e in range(epoch):
             for batch_idx, (data, target) in enumerate(tasks[taskNo]):
 
                 # training on task
