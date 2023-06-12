@@ -1,32 +1,26 @@
 import torch
-from Nets import NetTaskIL
+from Nets import SmallAlexNet
 from taskIL import train_validation_all_classes
-from dataloaders.mnist import MNIST_for_classes_TaskIL
+from dataloaders.cifar10 import cifar10_for_classes_TaskIL
 from dataloaders.noise import dataloader_pretraining_gray
 import numpy as np
 import torch.optim as optim
 import wandb
 import torch.nn.functional as F
 
-def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=1, log_interval = 1000):
+def train_validation_all_classes(model, optimizer, tasks, device, epoch=1, log_interval = 1000):
     train_losses = []
     tasks_acc = [[], [], [], [], []]
     exemplers = []
 
-    model.train()
     for taskNo in range(len(tasks)):
-        rehersal_iterator = iter(rehersal_loader)
         for e in range(epoch):
             for batch_idx, (data, target) in enumerate(tasks[taskNo]):
+                model.train()
 
                 # training on task
                 output = model(taskNo, data.to(device))
                 loss = F.cross_entropy(output, target.to(device))
-
-                # noise rehersal
-                rehersal_data = next(rehersal_iterator)
-                output = model(taskNo, rehersal_data[0].to(device))
-                loss += F.cross_entropy(output, rehersal_data[1].to(device))
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -46,7 +40,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loade
                 wandb.log({"loss": loss.item()})
                 exemplars = tasks[taskNo].batch_size * batch_idx
                 exemplers.append(exemplars)
-                wandb.log({"exemplers": exemplers*2})
+                wandb.log({"exemplers": exemplers})
     return train_losses, tasks_acc, exemplers
 
 def test(model, test_loader, taskNo, device, print_accuracy=True):
@@ -77,35 +71,33 @@ def main():
     np.random.shuffle(classes)
     classes = list(classes)
 
-    task1 = MNIST_for_classes_TaskIL(classes.pop(), classes.pop())
-    task2 = MNIST_for_classes_TaskIL(classes.pop(), classes.pop())
-    task3 = MNIST_for_classes_TaskIL(classes.pop(), classes.pop())
-    task4 = MNIST_for_classes_TaskIL(classes.pop(), classes.pop())
-    task5 = MNIST_for_classes_TaskIL(classes.pop(), classes.pop())
+    task1 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task2 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task3 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task4 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task5 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
 
     tasks = [task1 ,task2, task3, task4, task5]
 
-    rehersal_loader = dataloader_pretraining_gray("dead_leaves-squares", no_classes=2)
-
-
     wandb.init(
         # set the wandb project where this run will be logged
-        project="rehersal small net MNIST Task IL",
+        project="no rehersal Alexnet MNIST Task IL",
         
         # track hyperparameters and run metadata
         config={
         "setup": "task IL",
         "learning_rate": 0.1,
-        "architecture": "NetTaskIL",
+        "architecture": "SmallAlexNet",
         "dataset": "MNIST",
         "epochs": 5,
-        }
+        },
+        mode="disabled"
     )
 
-    model = NetTaskIL(10).to(device)
+    model = SmallAlexNet().to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.1)
 
-    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=5, log_interval = 10)
+    train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, epoch=5, log_interval = 10)
 
 if __name__ == "__main__":
     main()
