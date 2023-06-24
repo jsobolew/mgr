@@ -180,3 +180,35 @@ class SmallAlexNet(nn.Module):
                 x = x.mean(dim=-1)
 
         return x
+    
+
+class SmallAlexNetTaslIL(SmallAlexNet):
+
+    def __init__(self, in_channel=3, feat_dim=128):
+        super(SmallAlexNetTaslIL, self).__init__()
+
+        ModuleDict = nn.ModuleDict()
+        for task in range(feat_dim//2):
+            ModuleDict[str(task)] = nn.Linear(4096, feat_dim)
+
+        self.blocks[-1] = nn.Sequential(
+            ModuleDict,
+            L2Norm(),
+        )
+
+
+    def forward(self, x, TaskNo, *, layer_index=-1, average=True):
+        if layer_index < 0:
+            layer_index += len(self.blocks)
+        for layer in self.blocks[:(layer_index)]:
+            x = layer(x)
+        x = self.blocks[-1][str(TaskNo)](x)
+
+        # NEW: spatial averaging
+        if average:
+            if x.ndim == 4:
+                x = x.mean(dim=-1)
+            if x.ndim == 3:
+                x = x.mean(dim=-1)
+
+        return x

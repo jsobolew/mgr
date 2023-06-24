@@ -1,5 +1,5 @@
 import torch
-from Nets import SmallAlexNet
+from Nets import SmallAlexNetTaslIL
 from taskIL import train_validation_all_classes
 from dataloaders.cifar10 import cifar10_for_classes_TaskIL
 from dataloaders.noise import dataloader_pretraining_gray
@@ -94,7 +94,7 @@ def main():
         mode="disabled"
     )
 
-    model = SmallAlexNet().to(device)
+    model = SmallAlexNetTaslIL(feat_dim=10).to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.1)
 
     train_losses, tasks_losses, exemplers = train_validation_all_classes(model, optimizer, tasks, device, epoch=5, log_interval = 10)
