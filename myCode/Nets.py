@@ -131,7 +131,7 @@ class SmallAlexNet(nn.Module):
         # fc6
         blocks.append(nn.Sequential(
             nn.Flatten(),
-            nn.Linear(192 * 7 * 7, 4096, bias=False),  # 256 * 6 * 6 if 224 * 224
+            nn.Linear(192 * 3 * 3, 4096, bias=False),  # 256 * 6 * 6 if 224 * 224 # org 192 * 7 * 7 // 3*3 is to small?
             nn.BatchNorm1d(4096),
             nn.ReLU(inplace=True),
         ))
@@ -197,12 +197,12 @@ class SmallAlexNetTaslIL(SmallAlexNet):
         )
 
 
-    def forward(self, x, TaskNo, *, layer_index=-1, average=True):
+    def forward(self, TaskNo, x, *, layer_index=-1, average=True):
         if layer_index < 0:
             layer_index += len(self.blocks)
         for layer in self.blocks[:(layer_index)]:
             x = layer(x)
-        x = self.blocks[-1][str(TaskNo)](x)
+        x = self.blocks[-1][0][str(TaskNo)](x)
 
         # NEW: spatial averaging
         if average:

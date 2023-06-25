@@ -13,9 +13,9 @@ def cifar10_for_classes_TaskIL(class_1, class_2, batch_size_train=128):
     dataset.data = np.concatenate(
         (dataset.data[np.array(dataset.targets) == class_1], dataset.data[np.array(dataset.targets) == class_2])
     )
-    dataset.targets = np.concatenate(
+    dataset.targets = torch.tensor(np.concatenate(
         (np.array(dataset.targets)[np.array(dataset.targets) == class_1], np.array(dataset.targets)[np.array(dataset.targets) == class_2])
-    )
+    )).to(torch.int64)
 
     dataset.targets[np.array(dataset.targets) == class_1] = 0
     dataset.targets[np.array(dataset.targets) == class_2] = 1
