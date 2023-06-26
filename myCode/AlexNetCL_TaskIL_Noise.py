@@ -85,7 +85,7 @@ def main():
 
     tasks = [task1 ,task2, task3, task4, task5]
 
-    rehersal_loader = dataloader_pretraining("dead_leaves-squares", no_classes=2)
+    rehersal_loader = dataloader_pretraining("dead_leaves-squares", no_classes=2, batch_size=8)
 
     wandb.init(
         # set the wandb project where this run will be logged
