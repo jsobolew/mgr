@@ -17,7 +17,7 @@ class TwoCropsTransform:
         k = self.base_transform(x)
         return [q, k]
 
-def dataset_prep(dataset_name):
+def dataset_prep(dataset_name, no_classes, im_size = 64):
     imagefolder = f"data/{dataset_name}/"
     resize_image = True
 
@@ -28,10 +28,10 @@ def dataset_prep(dataset_name):
         )
 
     transform_array += [
-        torchvision.transforms.RandomResizedCrop(64, scale=(0.08, 1)),
-        torchvision.transforms.RandomHorizontalFlip(),
-        torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.4),
-        torchvision.transforms.RandomGrayscale(p=0.2),
+        torchvision.transforms.RandomResizedCrop(im_size, scale=(0.08, 1)),
+        # torchvision.transforms.RandomHorizontalFlip(),
+        # torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.4),
+        # torchvision.transforms.RandomGrayscale(p=0.2),
         torchvision.transforms.ToTensor(),
         torchvision.transforms.Normalize(
             (0.44087801806139126, 0.42790631331699347, 0.3867879370752931),
@@ -43,9 +43,14 @@ def dataset_prep(dataset_name):
 
     train_path = os.path.join(imagefolder, 'train')
     print(f'Loading data from {imagefolder} as imagefolder')
-    dataset = torchvision.datasets.ImageFolder(
+    # dataset = torchvision.datasets.ImageFolder(
+    #     train_path,
+    #     transform=transform)
+    
+    dataset = RandomLabelImageFolder(
         train_path,
-        transform=transform)
+        transform=transform,
+        no_classes=no_classes)
 
     return dataset
 
@@ -76,8 +81,8 @@ def dataset_prep_gray_scale(dataset_name):
         transform=transform)
     return dataset
 
-def dataloader_pretraining(dataset_name, batch_size=128):
-    dataset = dataset_prep(dataset_name)
+def dataloader_pretraining(dataset_name, no_classes, batch_size=128):
+    dataset = dataset_prep(dataset_name, no_classes, im_size=32)
     train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=2, shuffle=True, pin_memory=True)
     return train_loader
 
@@ -106,8 +111,6 @@ def dataloader_pretraining_gray(dataset_name, no_classes=105, batch_size=128):
         train_path,
         transform=transform,
         no_classes=no_classes)
-    
-    # dataset.targets = np.random.randint(0, no_classes, size=len(dataset.targets))
     
     train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=2, shuffle=True, pin_memory=True)
     return train_loader
