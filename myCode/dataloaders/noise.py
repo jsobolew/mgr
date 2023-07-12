@@ -18,7 +18,7 @@ class TwoCropsTransform:
         return [q, k]
 
 def dataset_prep(dataset_name, no_classes, im_size = 64):
-    imagefolder = f"data/{dataset_name}/"
+    imagefolder = f"C:/Users/QbaSo/Desktop/praca magisterska/myCode/data/{dataset_name}/"
     resize_image = True
 
     transform_array = []
@@ -57,7 +57,7 @@ def dataset_prep(dataset_name, no_classes, im_size = 64):
     return dataset
 
 def dataset_prep_gray_scale(dataset_name):
-    imagefolder = f"data/{dataset_name}/"
+    imagefolder = f"C:/Users/QbaSo/Desktop/praca magisterska/myCode/data/{dataset_name}/"
     resize_image = True
 
     transform_array = []
