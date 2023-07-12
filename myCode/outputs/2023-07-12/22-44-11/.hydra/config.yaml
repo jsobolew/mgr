@@ -1,0 +1,8 @@
+experiments:
+  project: rehersal Alexnet MNIST Task IL
+  config:
+    setup: task IL
+    learning_rate: 0.1
+    architecture: SmallAlexNet
+    dataset: CIFAR10
+    epochs: 5

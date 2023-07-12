@@ -6,8 +6,11 @@ def cifar10_for_classes_TaskIL(class_1, class_2, batch_size_train=128):
     dataset = torchvision.datasets.CIFAR10('files/', train=True, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
+                                    # torchvision.transforms.Normalize(
+                                    # (0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
                                     torchvision.transforms.Normalize(
-                                    (0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+                                    (0.4924, 0.4739, 0.4198),
+                                    (0.1891, 0.1865, 0.1885))
                                 ]),)
 
     dataset.data = np.concatenate(

@@ -99,7 +99,7 @@ def main():
         "dataset": "MNIST",
         "epochs": 5,
         },
-        mode="disabled"
+        # mode="disabled"
     )
 
     model = SmallAlexNetTaslIL(feat_dim=10).to(device)

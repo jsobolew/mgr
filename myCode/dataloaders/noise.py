@@ -34,11 +34,13 @@ def dataset_prep(dataset_name, no_classes, im_size = 64):
         # torchvision.transforms.RandomGrayscale(p=0.2),
         torchvision.transforms.ToTensor(),
         torchvision.transforms.Normalize(
-            (0.44087801806139126, 0.42790631331699347, 0.3867879370752931),
-            (0.26826768628079806, 0.2610450402318512, 0.26866836876860795),
+            (0.4988, 0.4980, 0.4980),
+            (0.2074, 0.2097, 0.2056),
         ),
     ]
 
+    #     (0.44087801806139126, 0.42790631331699347, 0.3867879370752931),
+    #     (0.26826768628079806, 0.2610450402318512, 0.26866836876860795),
     transform = torchvision.transforms.Compose(transform_array)
 
     train_path = os.path.join(imagefolder, 'train')

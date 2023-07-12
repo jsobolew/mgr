@@ -1,52 +1,55 @@
 import torch
 import torch.nn.functional as F
+import wandb
 
-def train_validation_all_classes(model, optimizer, tasks, rehersal_loader, wandb, epoch=1, log_interval = 1000):
-    train_losses = []
+def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=1, log_interval = 1000, wandb=wandb.init(mode='disabled')):
+
     tasks_acc = [[], [], [], [], []]
     exemplers = []
 
-    rehersal_iterator = iter(rehersal_loader)
-
-    model.train()
     for taskNo in range(len(tasks)):
-        for batch_idx, (data, target) in enumerate(tasks[taskNo]):
+        rehersal_iterator = iter(rehersal_loader)
+        for e in range(epoch):
+            for batch_idx, (data, target) in enumerate(tasks[taskNo]):
+                model.train()
 
-            # training on task
-            optimizer.zero_grad()
-            output = model(taskNo, data)
-            loss = F.cross_entropy(output, target)
+                # training on task
+                output = model(taskNo, data.to(device))
+                loss = F.cross_entropy(output, target.to(device))
 
-            # noise rehersal
-            rehersal_data = next(rehersal_iterator)
-            output = model(taskNo, rehersal_data[0])
-            loss += F.cross_entropy(output, rehersal_data[1])
-            loss.backward()
-            optimizer.step()
+                # noise rehersal
+                rehersal_data = next(rehersal_iterator)
+                output = model(taskNo, rehersal_data[0].to(device))
+                loss += F.cross_entropy(output, rehersal_data[1].to(device))
 
-            if batch_idx % log_interval == 0:
-                print(f"Train [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
-                for i in range(len(tasks)):
-                    curr_task_acc = test(model, tasks[i], i, print_accuracy=False)
-                    tasks_acc[i].append(curr_task_acc)
-                    wandb.log({f"acc_task_{i}": curr_task_acc})
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
 
-            train_losses.append(loss.item())
-            wandb.log({"loss": loss.item()})
-            exemplars = tasks[taskNo].batch_size * batch_idx
-            exemplers.append(exemplars)
-            wandb.log({"exemplers": exemplers*2})
-    return train_losses, tasks_acc, exemplers
+                if batch_idx % log_interval == 0:
+                    print(f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
+                    acc_tasks = {}
+                    for i in range(len(tasks)):
+                        curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
+                        tasks_acc[i].append(curr_task_acc)
+                        acc_tasks.update({f"acc_task_{i}": curr_task_acc})
+                    wandb.log(acc_tasks)
+                    print(acc_tasks)
 
-def test(model, test_loader, taskNo, print_accuracy=True):
+                wandb.log({"loss": loss.item()})
+                exemplars = tasks[taskNo].batch_size * batch_idx
+                exemplers.append(exemplars)
+                wandb.log({"exemplers": exemplers})
+
+def test(model, test_loader, taskNo, device, print_accuracy=True):
     model.eval()
     test_loss = 0
     correct = 0
     with torch.no_grad():
         for data, target in test_loader:
-            output = model(taskNo, data)
-            test_loss += F.cross_entropy(output, target, size_average=False).item()
-            pred = output.data.max(1, keepdim=True)[1]
+            output = model(taskNo, data.to(device))
+            test_loss += F.cross_entropy(output, target.to(device), size_average=False).item()
+            pred = output.data.max(1, keepdim=True)[1].cpu()
             correct += pred.eq(target.data.view_as(pred)).sum()
     test_loss /= len(test_loader.dataset)
     if print_accuracy:
