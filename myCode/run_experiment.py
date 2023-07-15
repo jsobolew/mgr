@@ -1,5 +1,5 @@
 import hydra
-from omegaconf import DictConfig, OmegaConf
+# from omegaconf import DictConfig, OmegaConf
 import torch
 from Nets import SmallAlexNetTaslIL
 from taskIL import train_validation_all_classes
@@ -18,7 +18,7 @@ model_dict = {
 
 
 @hydra.main(version_base=None, config_path="configs/experiments", config_name="AlexNetTaskILNoise")
-def main(cfg : DictConfig) -> None:
+def main(cfg ) -> None:
     device = get_device()
 
     # ------
@@ -49,7 +49,7 @@ def main(cfg : DictConfig) -> None:
         "dataset": cfg['dataset'],
         "epochs": cfg['epochs'],
         },
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]

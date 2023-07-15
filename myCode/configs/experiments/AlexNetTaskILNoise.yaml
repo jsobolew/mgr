@@ -1,6 +1,6 @@
 project: rehersal Alexnet MNIST Task IL
 setup: task IL
-learning_rate: 0.1
+learning_rate: 0.01
 architecture: SmallAlexNetTaslIL
 dataset: CIFAR10
 rehersal_dataset: "dead_leaves-squares"
