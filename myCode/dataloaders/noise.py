@@ -4,7 +4,11 @@ import torchvision
 import os
 import numpy as np
 from typing import Optional, Callable, Any
+from dotenv import load_dotenv
 
+load_dotenv()
+
+DATA_PATH = os.getenv('DATA_PATH')
 
 class TwoCropsTransform:
     """Take two random crops of one image as the query and key."""
@@ -18,7 +22,7 @@ class TwoCropsTransform:
         return [q, k]
 
 def dataset_prep(dataset_name, no_classes, im_size = 64):
-    imagefolder = f"C:/Users/QbaSo/Desktop/praca magisterska/myCode/data/{dataset_name}/"
+    imagefolder = f"{DATA_PATH}{dataset_name}/"
     resize_image = True
 
     transform_array = []
@@ -57,7 +61,7 @@ def dataset_prep(dataset_name, no_classes, im_size = 64):
     return dataset
 
 def dataset_prep_gray_scale(dataset_name):
-    imagefolder = f"C:/Users/QbaSo/Desktop/praca magisterska/myCode/data/{dataset_name}/"
+    imagefolder = f"{DATA_PATH}{dataset_name}/"
     resize_image = True
 
     transform_array = []
@@ -89,7 +93,7 @@ def dataloader_pretraining(dataset_name, no_classes, batch_size=128):
     return train_loader
 
 def dataloader_pretraining_gray(dataset_name, no_classes=105, batch_size=128):
-    imagefolder = f"data/{dataset_name}/"
+    imagefolder = f"{DATA_PATH}{dataset_name}/"
     resize_image = True
 
     transform_array = []
