@@ -4,3 +4,4 @@
 *.zip
 *.jpg
 files/
+.env
