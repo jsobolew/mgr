@@ -31,8 +31,8 @@ def main(cfg) -> None:
     tasks = [task1, task2, task3, task4, task5]
     # ------
 
-    if cfg['rehersal_dataset']:
-        rehersal_loader = dataloader_pretraining(cfg['rehersal_dataset'], no_classes=2)
+    if cfg['rehearsal_dataset']:
+        rehersal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2)
     else:
         rehersal_loader = None
 
@@ -56,7 +56,7 @@ def main(cfg) -> None:
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
-    train_validation_all_classes(model, optimizer, tasks, device, rehearsal_dataset, epoch=cfg['epochs'], log_interval=10)
+    train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=cfg['epochs'], log_interval=10)
 
 
 if __name__ == "__main__":
