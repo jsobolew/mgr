@@ -1,0 +1,7 @@
+project: no rehersal Alexnet MNIST Task IL
+setup: task IL
+learning_rate: 0.01
+architecture: SmallAlexNetTaslIL
+dataset: CIFAR10
+rehersal_dataset: 
+epochs: 5

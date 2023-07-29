@@ -2,13 +2,14 @@ import torch
 import torch.nn.functional as F
 import wandb
 
-def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=1, log_interval = 1000):
+def train_validation_all_classes(model, optimizer, tasks, device, rehesrsal_loader=None, epoch=1, log_interval = 1000):
 
     tasks_acc = [[], [], [], [], []]
     exemplers = []
 
     for taskNo in range(len(tasks)):
-        rehersal_iterator = iter(rehersal_loader)
+        if rehesrsal_loader:
+            rehearsal_iter = iter(rehesrsal_loader)
         for e in range(epoch):
             for batch_idx, (data, target) in enumerate(tasks[taskNo]):
                 model.train()
@@ -17,10 +18,11 @@ def train_validation_all_classes(model, optimizer, tasks, device, rehersal_loade
                 output = model(taskNo, data.to(device))
                 loss = F.cross_entropy(output, target.to(device))
 
-                # noise rehersal
-                rehersal_data = next(rehersal_iterator)
-                output = model(taskNo, rehersal_data[0].to(device))
-                loss += F.cross_entropy(output, rehersal_data[1].to(device))
+                if rehesrsal_loader:
+                    # noise rehersal
+                    rehersal_data = next(rehearsal_iter)
+                    output = model(taskNo, rehersal_data[0].to(device))
+                    loss += F.cross_entropy(output, rehersal_data[1].to(device))
 
                 optimizer.zero_grad()
                 loss.backward()

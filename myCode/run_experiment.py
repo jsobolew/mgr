@@ -31,7 +31,10 @@ def main(cfg) -> None:
     tasks = [task1, task2, task3, task4, task5]
     # ------
 
-    rehearsal_dataset = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2)
+    if cfg['rehersal_dataset']:
+        rehersal_loader = dataloader_pretraining(cfg['rehersal_dataset'], no_classes=2)
+    else:
+        rehersal_loader = None
 
     wandb.init(
         # set the wandb project where this run will be logged
