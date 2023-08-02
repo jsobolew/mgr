@@ -1,4 +1,5 @@
 import hydra
+from omegaconf import OmegaConf
 from Nets import SmallAlexNetTaslIL
 from taskIL import train_validation_all_classes
 from dataloaders.cifar10 import cifar10_for_classes_TaskIL
@@ -16,6 +17,9 @@ model_dict = {
 @hydra.main(version_base=None, config_path="configs/experiments", config_name="AlexNetTaskILNoise")
 def main(cfg) -> None:
     device = get_device()
+
+    print("Running experiment with settings:\n")
+    print(OmegaConf.to_yaml(cfg))
 
     # ------
     classes = np.arange(10)

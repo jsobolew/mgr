@@ -13,6 +13,8 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 # eval "$(conda shell.bash hook)"
 conda activate myenv #first you need to create conda env with all requirements (see: https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf)
 
-command=$1
-echo "Slurm scheduling: ${command}"
-$command
+# command=$1
+# echo "Slurm scheduling: ${command}"
+# $command
+
+/home/jsobolewski/anaconda3/envs/myenv/bin/python run_experiment.py rehearsal_dataset=dead_leaves-mixed
