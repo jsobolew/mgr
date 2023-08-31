@@ -1,0 +1,7 @@
+project: rehersal Alexnet MNIST Task IL
+setup: task IL
+learning_rate: 0.01
+architecture: SmallAlexNetTasklIL
+dataset: CIFAR10
+rehearsal_dataset: dead_leaves-textures
+epochs: 5
