@@ -51,6 +51,7 @@ def main(cfg) -> None:
             "architecture": cfg['architecture'],
             "dataset": cfg['dataset'],
             "epochs": cfg['epochs'],
+            "rehearsal_dataset": cfg['rehearsal_dataset'],
         },
         # mode="disabled"
     )
