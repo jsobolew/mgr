@@ -3,5 +3,5 @@ setup: task IL
 learning_rate: 0.01
 architecture: SmallAlexNetTasklIL
 dataset: CIFAR10
-rehearsal_dataset: "dead_leaves-squares"
+rehearsal_dataset: dead_leaves-oriented
 epochs: 5
