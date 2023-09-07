@@ -23,6 +23,7 @@ def main(cfg) -> None:
 
     # ------
     classes = np.arange(10)
+    classes_test = list(classes.copy())
     np.random.shuffle(classes)
     classes = list(classes)
 
@@ -33,6 +34,14 @@ def main(cfg) -> None:
     task5 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
 
     tasks = [task1, task2, task3, task4, task5]
+
+    task1_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task2_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task3_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task4_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task5_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+
+    tasks_test = [task1_test, task2_test, task3_test, task4_test, task5_test]
     # ------
 
     if cfg['rehearsal_dataset']:
@@ -61,7 +70,7 @@ def main(cfg) -> None:
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
-    train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, epoch=cfg['epochs'], log_interval=10)
+    train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, tasks_test=tasks_test, epoch=cfg['epochs'], log_interval=10)
 
 
 if __name__ == "__main__":

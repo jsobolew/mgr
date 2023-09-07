@@ -2,10 +2,12 @@ import torch
 import torch.nn.functional as F
 import wandb
 
-def train_validation_all_classes(model, optimizer, tasks, device, rehesrsal_loader=None, epoch=1, log_interval = 1000):
+def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehesrsal_loader=None, epoch=1, log_interval = 1000):
 
     tasks_acc = [[], [], [], [], []]
     exemplers = []
+    if tasks_test == None:
+        tasks_test = tasks
 
     for taskNo in range(len(tasks)):
         if rehesrsal_loader:
