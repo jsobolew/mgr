@@ -70,7 +70,7 @@ def main(cfg) -> None:
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
-    train_validation_all_classes(model, optimizer, tasks, device, rehersal_loader, tasks_test=tasks_test, epoch=cfg['epochs'], log_interval=10)
+    train_validation_all_classes(model, optimizer, tasks, device, tasks_test=tasks_test, rehesrsal_loader=rehersal_loader, epoch=cfg['epochs'], log_interval=10)
 
 
 if __name__ == "__main__":

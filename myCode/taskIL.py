@@ -31,13 +31,21 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 optimizer.step()
 
                 if batch_idx % log_interval == 0:
-                    print(f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
                     acc_tasks = {}
+                    acc_test_tasks = {}
                     for i in range(len(tasks)):
                         curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
                         tasks_acc[i].append(curr_task_acc)
                         acc_tasks.update({f"acc_task_{i}": curr_task_acc})
+
+                        curr_test_task_acc = test(model, tasks_test[i], i, device, print_accuracy=False)
+                        tasks_acc[i].append(curr_test_task_acc)
+                        acc_test_tasks.update({f"acc_test_task_{i}": curr_test_task_acc})
+
                     wandb.log(acc_tasks)
+                    wandb.log(acc_test_tasks)
+                    print(
+                        f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
                     print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
