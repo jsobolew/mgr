@@ -62,7 +62,7 @@ def main(cfg) -> None:
             "epochs": cfg['epochs'],
             "rehearsal_dataset": cfg['rehearsal_dataset'],
         },
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]
