@@ -32,7 +32,7 @@ class Net(nn.Module):
         x = F.dropout(x, training=self.training)
         x = self.fc2(x)
         return x
-    
+
 class NetTaskIL(nn.Module):
     def __init__(self, classes):
         super(NetTaskIL, self).__init__()
@@ -180,16 +180,16 @@ class SmallAlexNet(nn.Module):
                 x = x.mean(dim=-1)
 
         return x
-    
+
 
 class SmallAlexNetTaslIL(SmallAlexNet):
 
-    def __init__(self, in_channel=3, feat_dim=128):
+    def __init__(self, in_channel=3, feat_dim=128, classes_per_task=2):
         super(SmallAlexNetTaslIL, self).__init__()
 
         ModuleDict = nn.ModuleDict()
         for task in range(feat_dim//2):
-            ModuleDict[str(task)] = nn.Linear(4096, feat_dim)
+            ModuleDict[str(task)] = nn.Linear(4096, classes_per_task)
 
         self.blocks[-1] = nn.Sequential(
             ModuleDict,

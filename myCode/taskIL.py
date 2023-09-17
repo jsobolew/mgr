@@ -2,11 +2,11 @@ import torch
 import torch.nn.functional as F
 import wandb
 
-def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehesrsal_loader=None, epoch=1, log_interval = 1000):
 
+def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehesrsal_loader=None, epoch=1,
+                                 log_interval=1000):
     tasks_acc = [[], [], [], [], []]
-    exemplers = []
-    if tasks_test == None:
+    if tasks_test is None:
         tasks_test = tasks
 
     for taskNo in range(len(tasks)):
@@ -21,10 +21,10 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 loss = F.cross_entropy(output, target.to(device))
 
                 if rehesrsal_loader:
-                    # noise rehersal
-                    rehersal_data = next(rehearsal_iter)
-                    output = model(taskNo, rehersal_data[0].to(device))
-                    loss += F.cross_entropy(output, rehersal_data[1].to(device))
+                    # noise rehearsal
+                    rehearsal_data = next(rehearsal_iter)
+                    output = model(taskNo, rehearsal_data[0].to(device))
+                    loss += F.cross_entropy(output, rehearsal_data[1].to(device))
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -49,17 +49,15 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
-                exemplars = tasks[taskNo].batch_size * batch_idx
-                exemplers.append(exemplars)
-                wandb.log({"exemplers": exemplers})
 
-def test(model, test_loader, taskNo, device, print_accuracy=True):
+
+def test(model, test_loader, task_no, device, print_accuracy=True):
     model.eval()
     test_loss = 0
     correct = 0
     with torch.no_grad():
         for data, target in test_loader:
-            output = model(taskNo, data.to(device))
+            output = model(task_no, data.to(device))
             test_loss += F.cross_entropy(output, target.to(device), size_average=False).item()
             pred = output.data.max(1, keepdim=True)[1].cpu()
             correct += pred.eq(target.data.view_as(pred)).sum()

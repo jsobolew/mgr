@@ -44,10 +44,11 @@ def main(cfg) -> None:
     tasks_test = [task1_test, task2_test, task3_test, task4_test, task5_test]
     # ------
 
+
     if cfg['rehearsal_dataset']:
-        rehersal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2)
+        rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2)
     else:
-        rehersal_loader = None
+        rehearsal_loader = None
 
     wandb.init(
         # set the wandb project where this run will be logged
@@ -62,7 +63,7 @@ def main(cfg) -> None:
             "epochs": cfg['epochs'],
             "rehearsal_dataset": cfg['rehearsal_dataset'],
         },
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]
@@ -70,7 +71,7 @@ def main(cfg) -> None:
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
-    train_validation_all_classes(model, optimizer, tasks, device, tasks_test=tasks_test, rehesrsal_loader=rehersal_loader, epoch=cfg['epochs'], log_interval=10)
+    train_validation_all_classes(model, optimizer, tasks, device, tasks_test=tasks_test, rehesrsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10)
 
 
 if __name__ == "__main__":
