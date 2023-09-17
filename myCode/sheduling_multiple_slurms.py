@@ -26,7 +26,7 @@ if __name__ == "__main__":
     'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
     'stylegan-random']
 
-    repetitions = 4
+    repetitions = 5
 
     for rehearsal_dataset in rehearsal_datasets:
         for _ in range(repetitions):
