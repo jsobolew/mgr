@@ -23,8 +23,8 @@ def main(cfg) -> None:
 
     # ------
     classes = np.arange(10)
-    classes_test = list(classes.copy())
     np.random.shuffle(classes)
+    classes_test = list(classes.copy())
     classes = list(classes)
 
     task1 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
@@ -63,7 +63,7 @@ def main(cfg) -> None:
             "epochs": cfg['epochs'],
             "rehearsal_dataset": cfg['rehearsal_dataset'],
         },
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]
