@@ -23,7 +23,7 @@ class TaskList:
 class TaskIL:
     def __init__(self, global_classes, dataset):
         self.global_classes = global_classes
-        self.dataloader = cifar10_for_classes_TaskIL(self.global_classes, dataset)
+        self.dataloader = dataset_for_classes_TaskIL(self.global_classes, dataset)
 
 
 

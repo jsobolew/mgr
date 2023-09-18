@@ -21,10 +21,12 @@ python run_experiment.py rehearsal_dataset={rehearsal_dataset}
 
 if __name__ == "__main__":
 
-    rehearsal_datasets = ['dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
-    'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
-    'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
-    'stylegan-random']
+    # rehearsal_datasets = ['dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
+    # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
+    # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
+    # 'stylegan-random']
+    # rehearsal_datasets = None
+    rehearsal_datasets = [None, 'stat-wmm']
 
     repetitions = 5
 

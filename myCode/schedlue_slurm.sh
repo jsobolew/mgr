@@ -16,4 +16,4 @@ conda activate myenv #first you need to create conda env with all requirements (
 # command=$1
 # echo "Slurm scheduling: ${command}"
 # python $command
-python run_experiment.py rehearsal_dataset=stylegan-random
+python run_experiment.py rehearsal_dataset=
