@@ -27,26 +27,25 @@ def main(cfg) -> None:
     classes_test = list(classes.copy())
     classes = list(classes)
 
-    task1 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop(), batch_size_train=32)
-    task2 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop(), batch_size_train=32)
-    task3 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop(), batch_size_train=32)
-    task4 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop(), batch_size_train=32)
-    task5 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop(), batch_size_train=32)
+    task1 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task2 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task3 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task4 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
+    task5 = cifar10_for_classes_TaskIL(classes.pop(), classes.pop())
 
     tasks = [task1, task2, task3, task4, task5]
 
-    task1_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False, batch_size_train=32)
-    task2_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False, batch_size_train=32)
-    task3_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False, batch_size_train=32)
-    task4_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False, batch_size_train=32)
-    task5_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False, batch_size_train=32)
+    task1_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task2_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task3_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task4_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
+    task5_test = cifar10_for_classes_TaskIL(classes_test.pop(), classes_test.pop(), train=False)
 
     tasks_test = [task1_test, task2_test, task3_test, task4_test, task5_test]
     # ------
 
-
     if cfg['rehearsal_dataset']:
-        rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2)
+        rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=2, batch_size=cfg['batch_size_rehearsal'])
     else:
         rehearsal_loader = None
 
@@ -55,14 +54,7 @@ def main(cfg) -> None:
         project=cfg['project'],
 
         # track hyperparameters and run metadata
-        config={
-            "setup": cfg['setup'],
-            "learning_rate": cfg['learning_rate'],
-            "architecture": cfg['architecture'],
-            "dataset": cfg['dataset'],
-            "epochs": cfg['epochs'],
-            "rehearsal_dataset": cfg['rehearsal_dataset'],
-        },
+        config=OmegaConf.to_container(cfg, resolve=True),
         # mode="disabled"
     )
 
