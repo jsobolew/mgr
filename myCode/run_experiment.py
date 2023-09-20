@@ -50,10 +50,7 @@ def main(cfg) -> None:
         rehearsal_loader = None
 
     wandb.init(
-        # set the wandb project where this run will be logged
         project=cfg['project'],
-
-        # track hyperparameters and run metadata
         config=OmegaConf.to_container(cfg, resolve=True),
         # mode="disabled"
     )
@@ -63,6 +60,13 @@ def main(cfg) -> None:
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
+    # pretraining
+    print("Running pretraining")
+    train_validation_all_classes(model, optimizer, [rehearsal_loader], device, tasks_test=tasks_test,
+                                 epoch=cfg['epochs'], log_interval=10)
+
+    # CL
+    print("Running CL")
     train_validation_all_classes(model, optimizer, tasks, device, tasks_test=tasks_test, rehesrsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10)
 
 

@@ -1,0 +1,8 @@
+project: rehersal Alexnet MNIST Task IL tr-t split v2
+setup: task IL
+learning_rate: 0.01
+architecture: SmallAlexNetTasklIL
+dataset: CIFAR10
+rehearsal_dataset: stylegan-random
+epochs: 5
+batch_size_rehearsal: 32
