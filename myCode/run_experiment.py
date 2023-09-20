@@ -61,9 +61,10 @@ def main(cfg) -> None:
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
     # pretraining
-    print("Running pretraining")
-    train_validation_all_classes(model, optimizer, [rehearsal_loader], device, tasks_test=tasks_test,
-                                 epoch=cfg['epochs'], log_interval=10)
+    if cfg['pretraining']:
+        print("Running pretraining")
+        train_validation_all_classes(model, optimizer, [rehearsal_loader], device, tasks_test=tasks_test,
+                                    epoch=cfg['epochs'], log_interval=10)
 
     # CL
     print("Running CL")

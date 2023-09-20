@@ -16,7 +16,7 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 eval "$(conda shell.bash hook)"
 conda activate myenv #first you need to create conda env with all requirements (see: https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf)
 
-python run_experiment.py rehearsal_dataset={rehearsal_dataset}
+python run_experiment.py rehearsal_dataset={rehearsal_dataset} pretraining=True
 """
 
 if __name__ == "__main__":
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
     # 'stylegan-random']
     # rehearsal_datasets = None
-    rehearsal_datasets = [None, 'stat-wmm']
+    rehearsal_datasets = ['stat-wmm']
 
     repetitions = 5
 
