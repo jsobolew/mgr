@@ -5,5 +5,5 @@ architecture: SmallAlexNetTasklIL
 dataset: CIFAR10
 rehearsal_dataset: "dead_leaves-squares"
 epochs: 5
-batch_size_rehearsal: 128
-pretraining: false
+batch_size_rehearsal: 32
+pretraining: true
