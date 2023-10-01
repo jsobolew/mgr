@@ -5,7 +5,6 @@ import wandb
 
 def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehesrsal_loader=None, epoch=1,
                                  log_interval=1000):
-    # tasks_acc = [[], [], [], [], []]
     if tasks_test is None:
         tasks_test = tasks
 
@@ -35,11 +34,9 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     acc_test_tasks = {}
                     for i in range(len(tasks)):
                         curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
-                        # tasks_acc[i].append(curr_task_acc)
                         acc_tasks.update({f"acc_task_{i}": curr_task_acc})
 
                         curr_test_task_acc = test(model, tasks_test[i], i, device, print_accuracy=False)
-                        # tasks_acc[i].append(curr_test_task_acc)
                         acc_test_tasks.update({f"acc_test_task_{i}": curr_test_task_acc})
 
                     wandb.log(acc_tasks)

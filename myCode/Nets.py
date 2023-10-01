@@ -1,6 +1,10 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torchvision
+from torchvision.models import ResNet
+from torchvision.models.resnet import BasicBlock
+
 
 class CLNet:
     def return_pretrained_model(self, no_classes):
@@ -85,7 +89,7 @@ class L2Norm(nn.Module):
 
 
 class SmallAlexNet(nn.Module):
-    def __init__(self, in_channel=3, feat_dim=128):
+    def __init__(self, in_channel=3, out_dim=128):
         super(SmallAlexNet, self).__init__()
 
         blocks = []
@@ -145,7 +149,7 @@ class SmallAlexNet(nn.Module):
 
         # fc8
         blocks.append(nn.Sequential(
-            nn.Linear(4096, feat_dim),
+            nn.Linear(4096, out_dim),
             L2Norm(),
         ))
 
@@ -184,11 +188,11 @@ class SmallAlexNet(nn.Module):
 
 class SmallAlexNetTaslIL(SmallAlexNet):
 
-    def __init__(self, in_channel=3, feat_dim=128, classes_per_task=2):
+    def __init__(self, in_channel=3, out_dim=128, classes_per_task=2):
         super(SmallAlexNetTaslIL, self).__init__()
 
         ModuleDict = nn.ModuleDict()
-        for task in range(feat_dim//2):
+        for task in range(out_dim//2):
             ModuleDict[str(task)] = nn.Linear(4096, classes_per_task)
 
         self.blocks[-1] = nn.Sequential(
@@ -212,3 +216,40 @@ class SmallAlexNetTaslIL(SmallAlexNet):
                 x = x.mean(dim=-1)
 
         return x
+
+
+class ResNet18IL(ResNet):
+    def __init__(self, out_dim):
+        super(ResNet18IL, self).__init__(BasicBlock, [2, 2, 2, 2])
+        module_dict = nn.ModuleDict()
+        for task in range(out_dim//2):
+            module_dict[str(task)] = nn.Linear(512, 2)
+        self.fc = module_dict
+
+    def forward(self, task_no, x):
+        # default forward, with change to fc
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
+        x = self.fc[str(task_no)](x)
+
+        return x
+
+
+# def resnet18IL(out_dim):
+#     model = torchvision.models.resnet18()
+#
+#     module_dict = nn.ModuleDict()
+#     for task in range(out_dim//2):
+#         module_dict[str(task)] = nn.Linear(512, 2)
+#     model.fc = module_dict
+#     return model

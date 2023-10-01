@@ -1,7 +1,7 @@
 import torch
 
 
-def extract_mean_and_std(dataloader) -> torch.Tensor:
+def extract_mean_and_std(dataloader) -> [torch.Tensor, torch.Tensor]:
     mu, var = torch.tensor([]), torch.tensor([])
 
     for sample, _ in dataloader:
@@ -11,6 +11,7 @@ def extract_mean_and_std(dataloader) -> torch.Tensor:
     mean_mu = torch.mean(mu, 0)
     mean_var = torch.mean(var, 0)
     return mean_mu, mean_var
+
 
 def get_device() -> str:
     if torch.cuda.is_available():

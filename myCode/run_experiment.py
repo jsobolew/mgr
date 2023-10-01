@@ -1,6 +1,6 @@
 import hydra
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL
+from Nets import SmallAlexNetTaslIL, ResNet18IL
 from taskIL import train_validation_all_classes
 from dataloaders.cifar10 import cifar10_for_classes_TaskIL
 from dataloaders.noise import dataloader_pretraining
@@ -10,11 +10,15 @@ import wandb
 from utils import get_device
 
 model_dict = {
-    "SmallAlexNetTasklIL": SmallAlexNetTaslIL
+    "SmallAlexNetTasklIL": SmallAlexNetTaslIL,
+    "ResNet18": ResNet18IL,
 }
 
+# config_name = "AlexNetTaskILNoise"
+config_name = "ResNetTaskILNoise"
 
-@hydra.main(version_base=None, config_path="configs/experiments", config_name="AlexNetTaskILNoise")
+
+@hydra.main(version_base=None, config_path="configs/experiments", config_name=config_name)
 def main(cfg) -> None:
     device = get_device()
 
@@ -52,11 +56,11 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=OmegaConf.to_container(cfg, resolve=True),
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]
-    model = model_reference(feat_dim=10).to(device)
+    model = model_reference(out_dim=10).to(device)
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
