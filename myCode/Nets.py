@@ -243,13 +243,3 @@ class ResNet18IL(ResNet):
         x = self.fc[str(task_no)](x)
 
         return x
-
-
-# def resnet18IL(out_dim):
-#     model = torchvision.models.resnet18()
-#
-#     module_dict = nn.ModuleDict()
-#     for task in range(out_dim//2):
-#         module_dict[str(task)] = nn.Linear(512, 2)
-#     model.fc = module_dict
-#     return model

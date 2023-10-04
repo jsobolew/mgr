@@ -5,3 +5,4 @@ architecture: SmallAlexNetTaslIL
 dataset: CIFAR10
 rehearsal_dataset: "dead_leaves-squares"
 epochs: 5
+batch_size: 128

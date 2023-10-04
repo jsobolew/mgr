@@ -131,3 +131,6 @@ class RandomLabelImageFolder(torchvision.datasets.ImageFolder):
         target = torch.randint(self.no_classes, (1, ))[0]
         return sample, target
 
+class NoiseDataloader(torch.utils.data.DataLoader):
+    def __init__(self, k):
+        super().__init__()

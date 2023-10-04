@@ -6,6 +6,7 @@ dataset: CIFAR10
 rehearsal_dataset: stat-spectrum_color_wmm
 epochs: 5
 batch_size_rehearsal: 128
+batch_size: 128
 pretraining: false
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',

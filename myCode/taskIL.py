@@ -3,23 +3,23 @@ import torch.nn.functional as F
 import wandb
 
 
-def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehesrsal_loader=None, epoch=1,
+def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
                                  log_interval=1000):
     if tasks_test is None:
         tasks_test = tasks
 
-    for taskNo in range(len(tasks)):
-        if rehesrsal_loader:
-            rehearsal_iter = iter(rehesrsal_loader)
+    for taskNo in range(len(tasks.tasks)):
+        if rehearsal_loader:
+            rehearsal_iter = iter(rehearsal_loader)
         for e in range(epoch):
-            for batch_idx, (data, target) in enumerate(tasks[taskNo]):
+            for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
 
                 # training on task
                 output = model(taskNo, data.to(device))
                 loss = F.cross_entropy(output, target.to(device))
 
-                if rehesrsal_loader:
+                if rehearsal_loader:
                     # noise rehearsal
                     rehearsal_data = next(rehearsal_iter)
                     output = model(taskNo, rehearsal_data[0].to(device))
@@ -32,17 +32,17 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 if batch_idx % log_interval == 0:
                     acc_tasks = {}
                     acc_test_tasks = {}
-                    for i in range(len(tasks)):
-                        curr_task_acc = test(model, tasks[i], i, device, print_accuracy=False)
+                    for i in range(len(tasks.tasks)):
+                        curr_task_acc = test(model, tasks.tasks[i].dataloader, i, device, print_accuracy=False)
                         acc_tasks.update({f"acc_task_{i}": curr_task_acc})
 
-                        curr_test_task_acc = test(model, tasks_test[i], i, device, print_accuracy=False)
+                        curr_test_task_acc = test(model, tasks_test.tasks[i].dataloader, i, device, print_accuracy=False)
                         acc_test_tasks.update({f"acc_test_task_{i}": curr_test_task_acc})
 
                     wandb.log(acc_tasks)
                     wandb.log(acc_test_tasks)
                     print(
-                        f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks[taskNo].dataset)}]       loss: {loss.item()}")
+                        f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
                     print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
