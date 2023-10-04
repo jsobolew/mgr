@@ -56,7 +56,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=OmegaConf.to_container(cfg, resolve=True),
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['architecture']]

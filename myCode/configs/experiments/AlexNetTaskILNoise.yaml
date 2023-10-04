@@ -1,9 +1,13 @@
 project: rehersal Alexnet MNIST Task IL tr-t split v2
 setup: task IL
-learning_rate: 0.01
+learning_rate: 0.001
 architecture: SmallAlexNetTasklIL
 dataset: CIFAR10
-rehearsal_dataset: "dead_leaves-squares"
+rehearsal_dataset: stat-spectrum_color_wmm
 epochs: 5
-batch_size_rehearsal: 32
-pretraining: true
+batch_size_rehearsal: 128
+pretraining: false
+# 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
+    # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
+    # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
+    # 'stylegan-rando
