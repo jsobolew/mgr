@@ -1,7 +1,7 @@
 project: rehersal Alexnet MNIST Task IL tr-t split v2
-setup: task IL
+setup: taskIL
 learning_rate: 0.001
-architecture: SmallAlexNetTasklIL
+architecture: SmallAlexNet
 dataset: CIFAR10
 rehearsal_dataset: stat-spectrum_color_wmm
 epochs: 5

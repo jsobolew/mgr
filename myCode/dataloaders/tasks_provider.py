@@ -21,12 +21,12 @@ def prepare_classes_list(num_classes, classes_per_task) -> list:
 
 @dataclass
 class TaskList:
-    def __init__(self, classes_list, batch_size, dataset, train=True):
+    def __init__(self, classes_list, batch_size, dataset, train=True, setup='taskIL'):
         self.classes_list = classes_list
         self.dataset = dataset
         self.train = train
 
-        self.tasks = [Task(classes, batch_size, dataset, train) for classes in self.classes_list]
+        self.tasks = [Task(classes, batch_size, dataset, train, setup) for classes in self.classes_list]
 
 
 class RehearsalTask:
@@ -35,10 +35,11 @@ class RehearsalTask:
 
 
 class Task:
-    def __init__(self, global_classes, batch_size, dataset_ref, train):
+    def __init__(self, global_classes, batch_size, dataset_ref, train, setup='taskIL'):
         self.global_classes = global_classes
         self.batch_size_train = batch_size
         self.dataset_ref = dataset_ref
+        self.setup = setup
         self.dataset = self.dataset_for_classes_task(self.dataset_ref, train)
         self.dataloader = torch.utils.data.DataLoader(self.dataset, batch_size=batch_size, shuffle=True)
 
@@ -55,9 +56,10 @@ class Task:
             [np.array(dataset.targets)[np.array(dataset.targets) == i] for i in self.global_classes]
         )).to(torch.int64)
 
-        # translate global to local labels
-        for i in range(len(self.global_classes)):
-            dataset.targets[np.array(dataset.targets) == self.global_classes[i]] = i
+        if self.setup == 'taskIL':
+            # translate global to local labels
+            for i in range(len(self.global_classes)):
+                dataset.targets[np.array(dataset.targets) == self.global_classes[i]] = i
 
         return dataset
 

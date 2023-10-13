@@ -1,7 +1,7 @@
 project: no rehersal Alexnet MNIST Task IL
-setup: task IL
+setup: taskIL
 learning_rate: 0.01
-architecture: SmallAlexNetTaslIL
+architecture: SmallAlexNet
 dataset: CIFAR10
 rehearsal_dataset: "dead_leaves-squares"
 epochs: 5
