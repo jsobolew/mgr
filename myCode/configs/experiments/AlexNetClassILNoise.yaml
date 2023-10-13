@@ -1,9 +1,9 @@
-project: rehersal Alexnet MNIST Task IL tr-t split v2
+project: rehersal Alexnet MNIST Class IL
 setup: classIL
 learning_rate: 0.001
 architecture: SmallAlexNet
 dataset: CIFAR10
-rehearsal_dataset: stat-spectrum_color_wmm
+rehearsal_dataset: stat-wmm
 epochs: 5
 batch_size_rehearsal: 128
 batch_size: 128
