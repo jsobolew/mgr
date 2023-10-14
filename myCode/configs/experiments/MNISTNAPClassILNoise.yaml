@@ -1,0 +1,14 @@
+project: rehersal Alexnet MNIST Class IL
+setup: classIL
+learning_rate: 0.001
+architecture: MNIST_net
+dataset: MNIST
+rehearsal_dataset:
+epochs: 5
+batch_size_rehearsal: 128
+batch_size: 128
+pretraining: false
+# 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
+    # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
+    # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
+    # 'stylegan-rando

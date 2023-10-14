@@ -3,7 +3,7 @@ import numpy as np
 import torchvision
 from classification_models.models.resnet import ResNet18
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet
+from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net
 from myCode.dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
@@ -20,14 +20,21 @@ model_dict = {
         },
     "classIL":
         {
+            "MNIST_net": MNIST_net,
             "SmallAlexNet": SmallAlexNet,
             "ResNet18": ResNet18,
         }
 }
 
+dataset_dict = {
+    "CIFAR10": torchvision.datasets.CIFAR10,
+    "MNIST": torchvision.datasets.MNIST,
+}
+
 # config_name = "AlexNetTaskILNoise"
-config_name = "AlexNetClassILNoise"
+# config_name = "AlexNetClassILNoise"
 # config_name = "ResNetTaskILNoise"
+config_name = "MNISTNAPClassILNoise"
 
 
 @hydra.main(version_base=None, config_path="configs/experiments", config_name=config_name)
@@ -39,8 +46,8 @@ def main(cfg) -> None:
 
     num_classes, classes_per_task = 10, 2
     classes_list = prepare_classes_list(num_classes, classes_per_task)
-    tasks = TaskList(classes_list, cfg['batch_size'], torchvision.datasets.CIFAR10, setup=cfg['setup'])
-    tasks_test = TaskList(classes_list, cfg['batch_size'], torchvision.datasets.CIFAR10, train=False, setup=cfg['setup'])
+    tasks = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], setup=cfg['setup'])
+    tasks_test = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], train=False, setup=cfg['setup'])
 
     if cfg['rehearsal_dataset']:
         no_classes = classes_per_task if cfg['setup'] == 'taskIL' else num_classes
@@ -75,8 +82,7 @@ def main(cfg) -> None:
 
     # CL
     print("Running CL")
-    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test, rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10, setup=cfg['setup'])
-
+    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test, rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10, setup=cfg['setup'], nap=true)
 
 if __name__ == "__main__":
     main()

@@ -4,7 +4,7 @@ import wandb
 
 
 def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
-                                 log_interval=1000, setup='taskIL'):
+                                 log_interval=1000, setup='taskIL', end_epoch_callback=None):
     assert setup == 'taskIL' or setup == 'classIL', f"setup should be either taskIL or classIL but is {setup}"
     print(f"Starting training in {setup} setup")
 
@@ -55,6 +55,9 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
+        # if nap: # todo
+        #     for x, y in dataloader:
+        #         activations_sum, n_activation = extract_activations(x=x,model_feature_extractor=model_feature_extractor)
 
 
 def test(model, test_loader, task_no, device, print_accuracy=True, setup='taskIL'):

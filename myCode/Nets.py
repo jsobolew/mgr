@@ -60,6 +60,36 @@ class NetTaskIL(nn.Module):
         x = self.fc2[str(taskNo)](x)
         return x
 
+
+class MNIST_net(nn.Module):
+    def __init__(self, out_features):
+        super().__init__()
+        self.activation = F.relu
+
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=48, kernel_size=5)
+        self.c_bn1 = nn.BatchNorm2d(48)
+        self.conv2 = nn.Conv2d(in_channels=48, out_channels=96, kernel_size=5)
+        self.c_bn2 = nn.BatchNorm2d(96)
+
+        self.fc1 = nn.Linear(in_features=96*4*4, out_features=512)
+        self.bn1 = nn.BatchNorm1d(512)
+        self.fc2 = nn.Linear(in_features=512, out_features=out_features)
+
+    def forward(self, x):
+        # conv
+        out = self.activation(F.max_pool2d(self.conv1(x), kernel_size=2, stride=2))
+        out = self.c_bn1(out)
+        out = self.activation(F.max_pool2d(self.conv2(out), kernel_size=2, stride=2))
+        out = self.c_bn2(out)
+
+        # fc
+        out = out.reshape(-1, 96*4*4)
+        out = self.activation(self.fc1(out))
+        out = self.bn1(out)
+        out = self.fc2(out)
+
+        return out
+
 class NetNoise(nn.Module):
     def __init__(self, classes):
         super(NetNoise, self).__init__()
