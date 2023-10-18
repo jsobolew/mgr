@@ -32,9 +32,9 @@ dataset_dict = {
 }
 
 # config_name = "AlexNetTaskILNoise"
-# config_name = "AlexNetClassILNoise"
+config_name = "AlexNetClassILNoise"
 # config_name = "ResNetTaskILNoise"
-config_name = "MNISTNAPClassILNoise"
+# config_name = "MNISTNAPClassILNoise"
 
 
 @hydra.main(version_base=None, config_path="configs/experiments", config_name=config_name)
@@ -66,7 +66,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
@@ -82,7 +82,7 @@ def main(cfg) -> None:
 
     # CL
     print("Running CL")
-    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test, rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10, setup=cfg['setup'], nap=true)
+    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test, rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10, setup=cfg['setup'])
 
 if __name__ == "__main__":
     main()

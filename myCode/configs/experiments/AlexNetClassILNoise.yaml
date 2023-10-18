@@ -5,7 +5,7 @@ architecture: SmallAlexNet
 dataset: CIFAR10
 rehearsal_dataset: stat-wmm
 epochs: 5
-batch_size_rehearsal: 128
+batch_size_rehearsal: 256
 batch_size: 128
 pretraining: false
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
