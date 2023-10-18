@@ -33,7 +33,6 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     elif setup == 'classIL':
                         output = model(rehearsal_data[0].to(device))
                     loss += F.cross_entropy(output, rehearsal_data[1].to(device))
-                    print(rehearsal_data[1])
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -51,7 +50,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     wandb.log(acc_tasks)
                     wandb.log(acc_test_tasks)
                     print(
-                        f"Train epoch: {e} [{batch_idx * len(data)} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
+                        f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
                     print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
