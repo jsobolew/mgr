@@ -28,11 +28,15 @@ model_dict = {
 
 dataset_dict = {
     "CIFAR10": torchvision.datasets.CIFAR10,
+    "CIFAR100": torchvision.datasets.CIFAR100,
     "MNIST": torchvision.datasets.MNIST,
 }
 
 # config_name = "AlexNetTaskILNoise"
-config_name = "AlexNetClassILNoise"
+config_name = "AlexNetTaskILNoiseCIFAR100"
+# config_name = "AlexNetClassILNoise"
+
+
 # config_name = "ResNetTaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
@@ -44,22 +48,25 @@ def main(cfg) -> None:
     print("Running experiment with settings:\n")
     print(OmegaConf.to_yaml(cfg))
 
-    num_classes, classes_per_task = 10, 2
-    classes_list = prepare_classes_list(num_classes, classes_per_task)
+    classes_list = prepare_classes_list(cfg['num_classes'], cfg['classes_per_task'], cfg['dataset'])
     tasks = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], setup=cfg['setup'])
-    tasks_test = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], train=False, setup=cfg['setup'])
+    tasks_test = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], train=False,
+                          setup=cfg['setup'])
 
     if cfg['rehearsal_dataset']:
-        no_classes = classes_per_task if cfg['setup'] == 'taskIL' else num_classes
-        rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=no_classes, batch_size=cfg['batch_size_rehearsal'])
+        no_classes = cfg['classes_per_task'] if cfg['setup'] == 'taskIL' else cfg['num_classes']
+        rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=no_classes,
+                                                  batch_size=cfg['batch_size_rehearsal'])
         print(f"Rehearsal: samples: {len(rehearsal_loader.dataset)} classes: {np.arange(no_classes)}")
     else:
         rehearsal_loader = None
 
     # logging data parameters
     for i, (task, task_test) in enumerate(zip(tasks.tasks, tasks_test.tasks)):
-        print(f"Task     : {i} samples: {len(task.dataset)} global classes: {task.global_classes} local classes: {task.dataset.targets.unique()}")
-        print(f"Task test: {i} samples: {len(task_test.dataset)} global classes: {task_test.global_classes} local classes: {task_test.dataset.targets.unique()}")
+        print(
+            f"Task     : {i} samples: {len(task.dataset)} global classes: {task.global_classes} local classes: {task.dataset.targets.unique()}")
+        print(
+            f"Task test: {i} samples: {len(task_test.dataset)} global classes: {task_test.global_classes} local classes: {task_test.dataset.targets.unique()}")
 
     config = OmegaConf.to_container(cfg, resolve=True)
     config['classes_list'] = classes_list
@@ -70,7 +77,7 @@ def main(cfg) -> None:
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
-    model = model_reference(out_dim=num_classes).to(device)
+    model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
 
     optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
@@ -78,11 +85,14 @@ def main(cfg) -> None:
     if cfg['pretraining']:
         print("Running pretraining")
         train_validation_all_classes(model, optimizer, RehearsalTask(rehearsal_loader), device, tasks_test=tasks_test,
-                                    epoch=cfg['epochs'], log_interval=10)
+                                     epoch=cfg['epochs'], log_interval=10)
 
     # CL
     print("Running CL")
-    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test, rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10, setup=cfg['setup'])
+    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test,
+                                 rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10,
+                                 setup=cfg['setup'])
+
 
 if __name__ == "__main__":
     main()

@@ -7,7 +7,15 @@ import torchvision
 # from dataloaders.cifar10 import cifar10_for_classes_TaskIL
 
 
-def prepare_classes_list(num_classes, classes_per_task) -> list:
+dataset_to_num_classes = {
+    "CIFAR10": 10,
+    "CIFAR100": 100,
+    "MNIST": 10,
+}
+
+
+def prepare_classes_list(num_classes, classes_per_task, dataset) -> list:
+    num_total_classes = dataset_to_num_classes[dataset]
     classes_per_task = classes_per_task
     num_tasks = num_classes // classes_per_task
 
@@ -18,6 +26,7 @@ def prepare_classes_list(num_classes, classes_per_task) -> list:
 
     classes_list = [[classes.pop() for _ in range(classes_per_task)] for _ in range(num_tasks)]
     return classes_list
+
 
 @dataclass
 class TaskList:
@@ -67,10 +76,14 @@ class Task:
     def provide_normalization(dataset) -> torchvision.transforms.Normalize:
         if dataset is torchvision.datasets.CIFAR10:
             return torchvision.transforms.Normalize(
-                                  (0.4924, 0.4739, 0.4198),
-                                  (0.1891, 0.1865, 0.1885))
+                (0.4924, 0.4739, 0.4198),
+                (0.1891, 0.1865, 0.1885))
+        elif dataset is torchvision.datasets.CIFAR100:
+            return torchvision.transforms.Normalize(
+                (0.5071, 0.4865, 0.4409),
+                (0.2009, 0.1984, 0.2023))
         elif dataset is torchvision.datasets.MNIST:
             return torchvision.transforms.Normalize(
-                                        (0.1307,), (0.3081,))
+                (0.1307,), (0.3081,))
         else:
             raise ValueError("incorrect dataset")

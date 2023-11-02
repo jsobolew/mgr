@@ -19,14 +19,14 @@ class CLNet:
         return newModel
 
 class Net(nn.Module):
-    def __init__(self, classes):
+    def __init__(self, out_dim):
         super(Net, self).__init__()
-        self.classes = classes
+        self.out_dim = out_dim
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
         self.conv2_drop = nn.Dropout2d()
         self.fc1 = nn.Linear(320, 50)
-        self.fc2 = nn.Linear(50, self.classes)
+        self.fc2 = nn.Linear(50, self.out_dim)
 
     def forward(self, x):
         x = F.relu(F.max_pool2d(self.conv1(x), 2))
@@ -38,10 +38,10 @@ class Net(nn.Module):
         return x
 
 class NetTaskIL(nn.Module):
-    def __init__(self, classes):
+    def __init__(self, classes, classes_per_task):
         super(NetTaskIL, self).__init__()
         self.classes = classes
-        self.noTasks = int(classes//2)
+        self.noTasks = int(classes//classes_per_task)
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
         self.conv2_drop = nn.Dropout2d()
@@ -222,7 +222,7 @@ class SmallAlexNetTaslIL(SmallAlexNet):
         super(SmallAlexNetTaslIL, self).__init__()
 
         ModuleDict = nn.ModuleDict()
-        for task in range(out_dim//2):
+        for task in range(out_dim//classes_per_task):
             ModuleDict[str(task)] = nn.Linear(4096, classes_per_task)
 
         self.blocks[-1] = nn.Sequential(
@@ -272,10 +272,10 @@ class ResNet18(ResNet):
         return x
 
 class ResNet18IL(ResNet):
-    def __init__(self, out_dim):
+    def __init__(self, out_dim, classes_per_task):
         super(ResNet18IL, self).__init__(BasicBlock, [2, 2, 2, 2])
         module_dict = nn.ModuleDict()
-        for task in range(out_dim//2):
+        for task in range(out_dim//classes_per_task):
             module_dict[str(task)] = nn.Linear(512, 2)
         self.fc = module_dict
 
