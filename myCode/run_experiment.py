@@ -1,9 +1,8 @@
 import hydra
 import numpy as np
 import torchvision
-from classification_models.models.resnet import ResNet18
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net
+from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18
 from myCode.dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
@@ -33,11 +32,11 @@ dataset_dict = {
 }
 
 # config_name = "AlexNetTaskILNoise"
-config_name = "AlexNetTaskILNoiseCIFAR100"
+# config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
-# config_name = "ResNetTaskILNoise"
+config_name = "ResNetTaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
 
