@@ -5,10 +5,10 @@ params_extract="python3 extract_params_from_config.py ${config}"
 echo "$params_extract"
 out=$($params_extract)
 
-python_command="python3 ${out}"
+python_command="python run_experiment.py ${out}"
 echo "$python_command"
 
-sbatch << EOT
+sbatch << EOF
 #!/bin/bash
 
 #SBATCH --time=20:00:00   # walltime
@@ -26,4 +26,4 @@ conda activate myenv #first you need to create conda env with all requirements (
 
 $python_command
 
-EOT
+EOF

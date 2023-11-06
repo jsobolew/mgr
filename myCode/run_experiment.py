@@ -3,7 +3,7 @@ import numpy as np
 import torchvision
 from omegaconf import OmegaConf
 from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18
-from myCode.dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
+from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
 import torch.optim as optim
@@ -31,12 +31,12 @@ dataset_dict = {
     "MNIST": torchvision.datasets.MNIST,
 }
 
-# config_name = "AlexNetTaskILNoise"
+config_name = "AlexNetTaskILNoise"
 # config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
-config_name = "ResNetTaskILNoise"
+# config_name = "ResNetTaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
 
@@ -72,7 +72,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]

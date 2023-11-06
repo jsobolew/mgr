@@ -11,9 +11,13 @@ def main(config_name):
     for line in lines:
         if "#" not in line:
             line = line.strip()
-            line = line.replace(": ", "=")
+            line = line.replace(":", "=")
+            line = line.replace(" ", "")
             equals_sign = line.find("=") + 1
-            line = line[:equals_sign] + '"' + line[equals_sign:] + '"'
+            if line[equals_sign:] == "": # if there is no value pass " "
+                line = line[:equals_sign] + '"' + " " + '"'
+            else:
+                line = line[:equals_sign] + '"' + line[equals_sign:] + '"'
             params_lines.append(line)
 
     params = " ".join(params_lines)
@@ -27,5 +31,3 @@ if __name__ == "__main__":
 
     params = main(args.config_name)
     print(params)
-    # sys.stdout.write(params)
-    # sys.exit(0)
