@@ -1,16 +1,16 @@
-project: rehersal Alexnet MNIST Task IL tr-t split v2
-setup: taskIL
+project: rehersal Alexnet MNIST Class IL
+setup: classIL
 learning_rate: 0.001
 architecture: SmallAlexNet
 dataset: CIFAR10
-rehearsal_dataset: stat-spectrum_color_wmm
+rehearsal_dataset:
 epochs: 20
-batch_size_rehearsal: 128
+batch_size_rehearsal: 256
 batch_size: 128
-pretraining: true
+pretraining: false
 num_classes: 10
-classes_per_task: 2
-optimizer: # SGD Adam SGD_momentum
+classes_per_task: 10
+optimizer: Adam
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',

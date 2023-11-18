@@ -7,10 +7,10 @@ rehearsal_dataset: stat-wmm
 epochs: 5
 batch_size_rehearsal: 256
 batch_size: 128
-pretraining: false
+pretraining: true
 num_classes: 10
 classes_per_task: 10
-optimizer: # SGD Adam SGD_momentum
+optimizer: SGD
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',

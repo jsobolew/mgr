@@ -3,8 +3,8 @@ setup: taskIL
 learning_rate: 0.003
 architecture: ResNet18
 dataset: CIFAR10
-rehearsal_dataset: stat-wmm
-epochs: 5
+rehearsal_dataset: stat-spectrum_color_wmm
+epochs: 20
 batch_size_rehearsal: 128
 batch_size: 128
 pretraining: false
