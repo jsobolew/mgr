@@ -40,7 +40,12 @@ class TaskList:
 
 class RehearsalTask:
     def __init__(self, rehearsal_loader):
-        self.tasks = [rehearsal_loader]
+        self.tasks = [BasicTask(rehearsal_loader)]
+
+
+@dataclass()
+class BasicTask:
+    dataloader: torch.utils.data.DataLoader
 
 
 class Task:
