@@ -6,11 +6,12 @@ from matplotlib import pyplot as plt
 
 class Visualization:
     def __init__(self, project='rehersal Alexnet MNIST Task IL tr-t split v2',
-                 UID=['rehearsal_dataset', 'batch_size_rehearsal', 'pretraining', 'learning_rate']):
+                 UID=['rehearsal_dataset', 'batch_size_rehearsal', 'pretraining', 'learning_rate', 'epochs']):
         # todo reade this automatically somehow
         self.acc_col = ['acc_task_0', 'acc_task_1', 'acc_task_2', 'acc_task_3', 'acc_task_4']
         self.acc_test_col = ['acc_test_task_0', 'acc_test_task_1', 'acc_test_task_2', 'acc_test_task_3',
                              'acc_test_task_4']
+        self.additional_title_params = ['architecture', 'dataset']
 
         self.project = project
         self.UID = UID
@@ -32,7 +33,7 @@ class Visualization:
         self.unique_run_params = []
         unique_UID = self.df['UID'].unique()
         for uuid in unique_UID:
-            self.unique_run_params.append(uuid.split(';')[:4])
+            self.unique_run_params.append(uuid.split(';')[:len(UID)])
 
         # runs indexes for every unique run settings
         self.unique_run_settings_idxs = []
@@ -80,11 +81,14 @@ class Visualization:
             fig.set_figwidth(20)
 
             title = ""
+            for additional_param in self.additional_title_params:
+                value = self.df.iloc[unixe_idxs][additional_param].iloc[0]
+                title += f"{additional_param}: {value}\n"
             unique_params = self.df.iloc[unixe_idxs]['UID'].iloc[0].split(";")[:-1]
             for name, value in zip(self.UID, unique_params):
                 title += f"{name}: {value}\n"
 
-            fig.suptitle(title + f"runs: {len(unixe_idxs)}", fontsize=12, position=(0.5, 1.02))
+            fig.suptitle(title + f"runs: {len(unixe_idxs)}", fontsize=12, position=(0.5, 1.03))
 
             # train
             df_train.plot(ax=ax[0, 0], grid=True, ylim=[self.y_min, 100], title='Train')
