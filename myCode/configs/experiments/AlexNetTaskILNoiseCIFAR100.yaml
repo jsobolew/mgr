@@ -7,7 +7,7 @@ rehearsal_dataset: stat-spectrum_color_wmm
 epochs: 5
 batch_size_rehearsal: 128
 batch_size: 128
-pretraining: false
+pretraining: true
 num_classes: 100
 classes_per_task: 4
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',

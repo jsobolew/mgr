@@ -31,8 +31,8 @@ dataset_dict = {
     "MNIST": torchvision.datasets.MNIST,
 }
 
-config_name = "AlexNetTaskILNoise"
-# config_name = "AlexNetTaskILNoiseCIFAR100"
+# config_name = "AlexNetTaskILNoise"
+config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
@@ -72,18 +72,18 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
     model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
 
-    optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
+    optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
 
     # pretraining
     if cfg['pretraining']:
         print("Running pretraining")
-        train_validation_all_classes(model, optimizer, RehearsalTask(rehearsal_loader), device, tasks_test=tasks_test,
+        train_validation_all_classes(model=model, optimizer=optimizer, tasks=RehearsalTask(rehearsal_loader), device=device, tasks_test=tasks_test,
                                      epoch=cfg['epochs'], log_interval=10)
 
     # CL

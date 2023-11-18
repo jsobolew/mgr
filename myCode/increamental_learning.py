@@ -2,6 +2,8 @@ import torch
 import torch.nn.functional as F
 import wandb
 
+from utils import SafeIterator
+
 
 def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
                                  log_interval=1000, setup='taskIL'):
@@ -11,9 +13,10 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
     if tasks_test is None:
         tasks_test = tasks
 
+    if rehearsal_loader:
+        rehearsal_iter = SafeIterator(rehearsal_loader)
+
     for taskNo in range(len(tasks.tasks)):
-        if rehearsal_loader:
-            rehearsal_iter = iter(rehearsal_loader)
         for e in range(epoch):
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
@@ -27,7 +30,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
 
                 if rehearsal_loader:
                     # noise rehearsal
-                    rehearsal_data = next(rehearsal_iter)
+                    rehearsal_data = rehearsal_iter.next()
                     if setup == 'taskIL':
                         output = model(taskNo, rehearsal_data[0].to(device))
                     elif setup == 'classIL':

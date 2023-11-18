@@ -1,6 +1,21 @@
 import torch
 
 
+class SafeIterator:
+    def __init__(self, dataloader):
+        self.dataloader = dataloader
+        self.iterator = iter(self.dataloader)
+
+    def next(self):
+        try:
+            data = next(self.iterator)
+            return data
+
+        except StopIteration:
+            self.iterator = iter(self.dataloader)
+            return next(self.iterator)
+
+
 def extract_mean_and_std(dataloader) -> [torch.Tensor, torch.Tensor]:
     mu, var = torch.tensor([]), torch.tensor([])
 
