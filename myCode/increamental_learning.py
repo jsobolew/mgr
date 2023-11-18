@@ -10,9 +10,6 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
     assert setup == 'taskIL' or setup == 'classIL', f"setup should be either taskIL or classIL but is {setup}"
     print(f"Starting training in {setup} setup")
 
-    if tasks_test is None:
-        tasks_test = tasks
-
     if rehearsal_loader:
         rehearsal_iter = SafeIterator(rehearsal_loader)
 
@@ -42,19 +39,20 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 optimizer.step()
 
                 if batch_idx % log_interval == 0:
-                    acc_tasks, acc_test_tasks = {}, {}
-                    for i in range(len(tasks.tasks)):
-                        curr_task_acc = test(model, tasks.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
-                        acc_tasks.update({f"acc_task_{i}": float(curr_task_acc)})
+                    if tasks_test:
+                        acc_tasks, acc_test_tasks = {}, {}
+                        for i in range(len(tasks.tasks)):
+                            curr_task_acc = test(model, tasks.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
+                            acc_tasks.update({f"acc_task_{i}": float(curr_task_acc)})
 
-                        curr_test_task_acc = test(model, tasks_test.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
-                        acc_test_tasks.update({f"acc_test_task_{i}": float(curr_test_task_acc)})
+                            curr_test_task_acc = test(model, tasks_test.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
+                            acc_test_tasks.update({f"acc_test_task_{i}": float(curr_test_task_acc)})
 
-                    wandb.log(acc_tasks)
-                    wandb.log(acc_test_tasks)
-                    print(
-                        f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
-                    print(acc_tasks)
+                        wandb.log(acc_tasks)
+                        wandb.log(acc_test_tasks)
+                        print(
+                            f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
+                        print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
         # if nap: # todo
