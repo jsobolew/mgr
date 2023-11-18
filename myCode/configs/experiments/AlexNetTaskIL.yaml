@@ -1,4 +1,4 @@
-project: no rehersal Alexnet MNIST Task IL
+project: no rehersal Alexnet MNIST Task IL Adam
 setup: taskIL
 learning_rate: 0.01
 architecture: SmallAlexNet

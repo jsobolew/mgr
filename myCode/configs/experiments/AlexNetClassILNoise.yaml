@@ -1,4 +1,4 @@
-project: rehersal Alexnet MNIST Class IL
+project: rehersal Alexnet MNIST Class IL Adam
 setup: classIL
 learning_rate: 0.001
 architecture: SmallAlexNet

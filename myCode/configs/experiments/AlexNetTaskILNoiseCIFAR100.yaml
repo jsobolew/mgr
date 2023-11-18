@@ -1,4 +1,4 @@
-project: rehersal Alexnet CIFAR100 Task IL
+project: rehersal Alexnet CIFAR100 Task IL Adam
 setup: taskIL
 learning_rate: 0.001
 architecture: SmallAlexNet
