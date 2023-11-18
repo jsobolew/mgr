@@ -78,7 +78,12 @@ def main(cfg) -> None:
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
     model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
 
-    optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
+    if cfg['optimizer'] == 'Adam':
+        optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
+    elif cfg['optimizer'] == 'SGD_momentum':
+        optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'], momentum=0.9)
+    else: # SGD and any other value
+        optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
     # pretraining
     if cfg['pretraining']:

@@ -39,6 +39,8 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 optimizer.step()
 
                 if batch_idx % log_interval == 0:
+                    print(
+                        f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
                     if tasks_test:
                         acc_tasks, acc_test_tasks = {}, {}
                         for i in range(len(tasks.tasks)):
@@ -50,8 +52,6 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
 
                         wandb.log(acc_tasks)
                         wandb.log(acc_test_tasks)
-                        print(
-                            f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
                         print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})

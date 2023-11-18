@@ -1,4 +1,4 @@
-project: rehersal Alexnet CIFAR100 Task IL Adam
+project: rehersal Alexnet CIFAR100 Task IL
 setup: taskIL
 learning_rate: 0.001
 architecture: SmallAlexNet
@@ -10,6 +10,7 @@ batch_size: 128
 pretraining: true
 num_classes: 100
 classes_per_task: 4
+optimizer: # SGD Adam SGD_momentum
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
