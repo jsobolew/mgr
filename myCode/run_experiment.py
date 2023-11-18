@@ -84,7 +84,7 @@ def main(cfg) -> None:
     if cfg['pretraining']:
         print("Running pretraining")
         train_validation_all_classes(model=model, optimizer=optimizer, tasks=RehearsalTask(rehearsal_loader), device=device, tasks_test=None,
-                                     epoch=cfg['epochs'], log_interval=10)
+                                     epoch=1, log_interval=10)
 
     # CL
     print("Running CL")

@@ -271,11 +271,63 @@ class ResNet18(ResNet):
 
         return x
 
+
 class ResNet18IL(ResNet):
     def __init__(self, out_dim, classes_per_task):
         super(ResNet18IL, self).__init__(BasicBlock, [2, 2, 2, 2])
         module_dict = nn.ModuleDict()
         for task in range(out_dim//classes_per_task):
+            module_dict[str(task)] = nn.Linear(512, 2)
+        self.fc = module_dict
+
+    def forward(self, task_no, x):
+        # default forward, with change to fc
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
+        x = self.fc[str(task_no)](x)
+
+        return x
+
+
+class ResNet34(ResNet):
+    def __init__(self, out_dim):
+        super(ResNet34, self).__init__(BasicBlock, [3, 4, 6, 3])
+        self.fc = nn.Linear(512, out_dim)
+
+    def forward(self, task_no, x):
+        # default forward, with change to fc
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
+        x = self.fc(x)
+
+        return x
+
+
+class ResNet34IL(ResNet):
+    def __init__(self, out_dim, classes_per_task):
+        super(ResNet34IL, self).__init__(BasicBlock, [3, 4, 6, 3])
+        module_dict = nn.ModuleDict()
+        for task in range(out_dim // classes_per_task):
             module_dict[str(task)] = nn.Linear(512, 2)
         self.fc = module_dict
 
