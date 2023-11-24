@@ -31,8 +31,8 @@ dataset_dict = {
     "MNIST": torchvision.datasets.MNIST,
 }
 
-# config_name = "AlexNetTaskILNoise"
-config_name = "AlexNetTaskILNoiseCIFAR100"
+config_name = "AlexNetTaskILNoise"
+# config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
@@ -72,7 +72,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
