@@ -101,20 +101,33 @@ class Visualization:
             ax[1, 0].set_ylabel("accuracy [%]")
 
             # test std dev
-            cols = self.acc_test_col.copy()
-            cols.append('run_no')
-            df = self.all_test_runs_data[cols].dropna()
+            # cols = self.acc_test_col.copy()
+            # cols.append('run_no')
+            # df = self.all_test_runs_data[cols].dropna()
 
-            runs = len(self.all_test_runs_data[self.acc_test_col].dropna()) // len(df_test)
-            steps_per_run = len(self.all_test_runs_data[self.acc_test_col].dropna()) // runs
-            new_idx = np.concatenate([np.arange(steps_per_run) for _ in range(runs)])
-            df['step'] = new_idx
+            # runs = len(self.all_test_runs_data[self.acc_test_col].dropna()) // len(df_test)
+            # steps_per_run = len(self.all_test_runs_data[self.acc_test_col].dropna()) // runs
+            # new_idx = np.concatenate([np.arange(steps_per_run) for _ in range(runs)])
+            # df['step'] = new_idx
 
-            for col in self.acc_test_col:
-                df[[col, 'step', 'run_no']].pivot(index='step', columns='run_no'). \
-                    std(1).plot(ax=ax[1, 1], title='Standard Deviation of Test Accuracy')
-            ax[1, 1].set_xlabel("step")
-            ax[1, 1].set_ylabel("std dev of accuracy [%]")
+            # for col in self.acc_test_col:
+            #     df[[col, 'step', 'run_no']].pivot(index='step', columns='run_no'). \
+            #         std(1).plot(ax=ax[1, 1], title='Standard Deviation of Test Accuracy')
+            # ax[1, 1].set_xlabel("step")
+            # ax[1, 1].set_ylabel("std dev of accuracy [%]")
+
+            for acc_col in self.acc_test_col[:2]:
+                max = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").max().max(axis=1)
+                mean = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").mean().mean(axis=1)
+                min = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").min().min(axis=1)
+                x = np.arange(len(min))
+                ax[1, 1].plot(x, mean, '-')
+                ax[1, 1].fill_between(x, min, max, alpha=0.2)
+                ax[1, 1].set_xlabel("step")
+                ax[1, 1].set_ylabel("accuracy [%]")
+                plt.grid(True) 
+                plt.ylim([self.y_min, 100])
+                plt.title('Test')
 
             # accuracy metrics table
             num_tasks = len(self.acc_test_col)
