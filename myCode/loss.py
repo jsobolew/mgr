@@ -1,4 +1,5 @@
-
+import torch
+from torch import nn
 
 
 class SupervisedContrastiveLoss(nn.Module):

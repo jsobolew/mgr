@@ -1,15 +1,15 @@
-project: rehersal ResNet18 CIFAR100 Task IL
+project: rehersal SmallNett MNIST Task IL
 setup: taskIL
-learning_rate: 0.003
-architecture: ResNet18
-dataset: CIFAR100
-rehearsal_dataset: stat-wmm
-epochs: 20
+learning_rate: 0.01
+architecture: Net
+dataset: MNIST
+rehearsal_dataset:
+epochs: 5
 batch_size_rehearsal: 128
 batch_size: 128
 pretraining: true
-num_classes: 100
-classes_per_task: 4
+num_classes: 10
+classes_per_task: 2
 optimizer: SGD
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',

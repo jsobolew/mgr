@@ -6,7 +6,7 @@ from utils import SafeIterator
 
 
 def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
-                                 log_interval=1000, setup='taskIL'):
+                                 log_interval=1000, setup='taskIL', loss_func=F.cross_entropy):
     assert setup == 'taskIL' or setup == 'classIL', f"setup should be either taskIL or classIL but is {setup}"
     print(f"Starting training in {setup} setup")
 
@@ -23,7 +23,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     output = model(taskNo, data.to(device))
                 elif setup == 'classIL':
                     output = model(data.to(device))
-                loss = F.cross_entropy(output, target.to(device))
+                loss = loss_func(output, target.to(device))
 
                 if rehearsal_loader:
                     # noise rehearsal
@@ -32,7 +32,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                         output = model(taskNo, rehearsal_data[0].to(device))
                     elif setup == 'classIL':
                         output = model(rehearsal_data[0].to(device))
-                    loss += F.cross_entropy(output, rehearsal_data[1].to(device))
+                    loss += loss_func(output, rehearsal_data[1].to(device))
 
                 optimizer.zero_grad()
                 loss.backward()
@@ -44,10 +44,10 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     if tasks_test:
                         acc_tasks, acc_test_tasks = {}, {}
                         for i in range(len(tasks.tasks)):
-                            curr_task_acc = test(model, tasks.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
+                            curr_task_acc = test(model, tasks.tasks[i].dataloader, i, device, loss_func=loss_func, print_accuracy=False, setup=setup)
                             acc_tasks.update({f"acc_task_{i}": float(curr_task_acc)})
 
-                            curr_test_task_acc = test(model, tasks_test.tasks[i].dataloader, i, device, print_accuracy=False, setup=setup)
+                            curr_test_task_acc = test(model, tasks_test.tasks[i].dataloader, i, device, loss_func=loss_func, print_accuracy=False, setup=setup)
                             acc_test_tasks.update({f"acc_test_task_{i}": float(curr_test_task_acc)})
 
                         wandb.log(acc_tasks)
@@ -60,7 +60,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
         #         activations_sum, n_activation = extract_activations(x=x,model_feature_extractor=model_feature_extractor)
 
 
-def test(model, test_loader, task_no, device, print_accuracy=True, setup='taskIL'):
+def test(model, test_loader, task_no, device, loss_func, print_accuracy=True, setup='taskIL'):
     model.eval()
     test_loss = 0
     correct = 0
@@ -70,7 +70,7 @@ def test(model, test_loader, task_no, device, print_accuracy=True, setup='taskIL
                 output = model(task_no, data.to(device))
             elif setup == 'classIL':
                 output = model(data.to(device))
-            test_loss += F.cross_entropy(output, target.to(device), size_average=False).item()
+            test_loss += loss_func(output, target.to(device), size_average=False).item()
             pred = output.data.max(1, keepdim=True)[1].cpu()
             correct += pred.eq(target.data.view_as(pred)).sum()
     test_loss /= len(test_loader.dataset)

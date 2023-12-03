@@ -1,6 +1,7 @@
 import hydra
 import numpy as np
 import torchvision
+import torch.nn.functional as F
 from omegaconf import OmegaConf
 from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18
 from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
@@ -9,6 +10,7 @@ from dataloaders.noise import dataloader_pretraining
 import torch.optim as optim
 import wandb
 from utils import get_device
+from loss import SupervisedContrastiveLoss
 
 model_dict = {
 
@@ -29,6 +31,11 @@ dataset_dict = {
     "CIFAR10": torchvision.datasets.CIFAR10,
     "CIFAR100": torchvision.datasets.CIFAR100,
     "MNIST": torchvision.datasets.MNIST,
+}
+
+loss_dict = {
+    "SupCon": SupervisedContrastiveLoss,
+    "CE": F.cross_entropy,
 }
 
 config_name = "AlexNetTaskILNoise"
@@ -72,7 +79,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
@@ -85,17 +92,20 @@ def main(cfg) -> None:
     else: # SGD and any other value
         optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
 
+    # loss = F.cross_entropy
+    loss = loss_dict[cfg['loss']]
+
     # pretraining
     if cfg['pretraining']:
         print("Running pretraining")
         train_validation_all_classes(model=model, optimizer=optimizer, tasks=RehearsalTask(rehearsal_loader), device=device, tasks_test=None,
-                                     epoch=1, log_interval=10)
+                                     epoch=1, log_interval=10, loss_func=loss)
 
     # CL
     print("Running CL")
     train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test,
                                  rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10,
-                                 setup=cfg['setup'])
+                                 setup=cfg['setup'], loss_func=loss)
 
 
 if __name__ == "__main__":
