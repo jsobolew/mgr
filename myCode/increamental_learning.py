@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import wandb
 
-from myCode.loss import SupervisedContrastiveLoss
+from loss import SupervisedContrastiveLoss
 from utils import SafeIterator
 
 

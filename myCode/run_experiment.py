@@ -82,7 +82,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]

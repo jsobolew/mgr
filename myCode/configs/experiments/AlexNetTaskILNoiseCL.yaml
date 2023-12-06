@@ -1,7 +1,7 @@
 project: rehersal Alexnet MNIST Task IL CL
 setup: taskIL
 learning_rate: 0.001
-contrastive_learning_rate: 0.000001
+contrastive_learning_rate: 0.001
 architecture: SmallAlexNet
 dataset: CIFAR10
 rehearsal_dataset:
@@ -12,7 +12,7 @@ batch_size: 128
 pretraining: false
 num_classes: 10
 classes_per_task: 2
-optimizer: SGD
+optimizer: Adam
 loss: CE
     # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
