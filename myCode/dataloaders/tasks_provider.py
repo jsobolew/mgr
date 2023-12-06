@@ -24,7 +24,7 @@ def prepare_classes_list(num_classes, classes_per_task, dataset) -> list:
     classes = list(classes)
     classes = classes[:num_tasks * classes_per_task]
 
-    classes_list = [[classes.pop() for _ in range(classes_per_task)] for _ in range(num_tasks)]
+    classes_list = [sorted([classes.pop() for _ in range(classes_per_task)]) for _ in range(num_tasks)]
     return classes_list
 
 

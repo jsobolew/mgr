@@ -7,7 +7,7 @@ rehearsal_dataset: stylegan-random
 epochs: 5
 batch_size_rehearsal: 128
 batch_size: 128
-pretraining: falsesqu
+pretraining: false
 num_classes: 10
 classes_per_task: 2
 optimizer: # SGD Adam SGD_momentum

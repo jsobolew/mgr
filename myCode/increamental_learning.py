@@ -2,18 +2,56 @@ import torch
 import torch.nn.functional as F
 import wandb
 
+from myCode.loss import SupervisedContrastiveLoss
 from utils import SafeIterator
 
 
-def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
-                                 log_interval=1000, setup='taskIL', loss_func=F.cross_entropy):
+def train_validation_all_classes(model, optimizer, contrastive_optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
+                                 log_interval=1000, setup='taskIL', loss_func=F.cross_entropy, contrastive_epoch=0):
     assert setup == 'taskIL' or setup == 'classIL', f"setup should be either taskIL or classIL but is {setup}"
     print(f"Starting training in {setup} setup")
 
     if rehearsal_loader:
         rehearsal_iter = SafeIterator(rehearsal_loader)
 
+    if contrastive_epoch > 0:
+        con_loss = SupervisedContrastiveLoss(temperature=0.07)
+
     for taskNo in range(len(tasks.tasks)):
+        if contrastive_epoch > 0:
+            model.unfreeze_all()
+
+            local_class_to_global = {}
+            for i, gc in enumerate(tasks.tasks[taskNo].global_classes):
+                local_class_to_global[i] = gc
+
+        for ce in range(contrastive_epoch):
+            for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
+                model.train()
+                output = model.features(data.to(device))
+                # regardless of setup always uses global classes
+                for local_class, global_class in local_class_to_global.items():
+                    target[target == local_class] = global_class
+                loss = con_loss(output, target.to(device))
+
+                if rehearsal_loader:
+                    # noise rehearsal
+                    rehearsal_data = rehearsal_iter.next()
+                    output = model.features(rehearsal_data[0].to(device))
+                    loss += con_loss(output, rehearsal_data[1].to(device))
+
+                contrastive_optimizer.zero_grad()
+                loss.backward()
+                contrastive_optimizer.step()
+
+                wandb.log({"con_loss": loss.item()})
+
+                if batch_idx % log_interval == 0:
+                    print(
+                        f"Task: {taskNo} Contrastive train epoch: {ce} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
+
+        if contrastive_epoch > 0:
+            model.freeze_features()
         for e in range(epoch):
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
@@ -40,7 +78,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
 
                 if batch_idx % log_interval == 0:
                     print(
-                        f"Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
+                        f"Task: {taskNo} Train epoch: {e} [{batch_idx} / {len(tasks.tasks[taskNo].dataloader)}]       loss: {loss.item()}")
                     if tasks_test:
                         acc_tasks, acc_test_tasks = {}, {}
                         for i in range(len(tasks.tasks)):
@@ -55,9 +93,6 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                         print(acc_tasks)
 
                 wandb.log({"loss": loss.item()})
-        # if nap: # todo
-        #     for x, y in dataloader:
-        #         activations_sum, n_activation = extract_activations(x=x,model_feature_extractor=model_feature_extractor)
 
 
 def test(model, test_loader, task_no, device, loss_func, print_accuracy=True, setup='taskIL'):

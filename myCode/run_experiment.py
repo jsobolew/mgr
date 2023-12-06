@@ -3,7 +3,7 @@ import numpy as np
 import torchvision
 import torch.nn.functional as F
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18
+from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18, VGGIL
 from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
@@ -18,6 +18,7 @@ model_dict = {
         {
             "SmallAlexNet": SmallAlexNetTaslIL,
             "ResNet18": ResNet18IL,
+            "VGG": VGGIL,
         },
     "classIL":
         {
@@ -38,7 +39,9 @@ loss_dict = {
     "CE": F.cross_entropy,
 }
 
-config_name = "AlexNetTaskILNoise"
+config_name = "AlexNetTaskILNoiseCL"
+# config_name = "AlexNetTaskILNoise"
+# config_name = "VGGTaskILNoise"
 # config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
@@ -79,7 +82,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
@@ -87,10 +90,13 @@ def main(cfg) -> None:
 
     if cfg['optimizer'] == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
+        contrastive_optimizer = optim.Adam(model.parameters(), lr=cfg['contrastive_learning_rate'])
     elif cfg['optimizer'] == 'SGD_momentum':
         optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'], momentum=0.9)
+        contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'], momentum=0.9)
     else: # SGD and any other value
         optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
+        contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'])
 
     # loss = F.cross_entropy
     loss = loss_dict[cfg['loss']]
@@ -105,7 +111,8 @@ def main(cfg) -> None:
     print("Running CL")
     train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test,
                                  rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10,
-                                 setup=cfg['setup'], loss_func=loss)
+                                 setup=cfg['setup'], loss_func=loss, contrastive_epoch=cfg['contrastive_epochs'],
+                                 contrastive_optimizer=contrastive_optimizer)
 
 
 if __name__ == "__main__":

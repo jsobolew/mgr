@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -200,11 +202,16 @@ class SmallAlexNet(nn.Module):
 
         self.apply(init)
 
-    def forward(self, x, *, layer_index=-1, average=True):
+    def features(self, x, layer_index=-1):
         if layer_index < 0:
             layer_index += len(self.blocks)
-        for layer in self.blocks[:(layer_index + 1)]:
+        for layer in self.blocks[:(layer_index)]:
             x = layer(x)
+        return x
+
+    def forward(self, x, *, layer_index=-1, average=True):
+        x = self.features(x, layer_index)
+        x = self.blocks[-1](x)
 
         # NEW: spatial averaging
         if average:
@@ -230,12 +237,26 @@ class SmallAlexNetTaslIL(SmallAlexNet):
             L2Norm(),
         )
 
+    def freeze_features(self):
+        for param in self.parameters():
+            param.requires_grad = False
 
-    def forward(self, TaskNo, x, *, layer_index=-1, average=True):
+        for param in self.blocks[-1].parameters():
+            param.requires_grad = True
+
+    def unfreeze_all(self):
+        for param in self.parameters():
+            param.requires_grad = True
+
+    def features(self, x, layer_index=-1):
         if layer_index < 0:
             layer_index += len(self.blocks)
         for layer in self.blocks[:(layer_index)]:
             x = layer(x)
+        return x
+
+    def forward(self, TaskNo, x, *, layer_index=-1, average=True):
+        x = self.features(x, layer_index)
         x = self.blocks[-1][0][str(TaskNo)](x)
 
         # NEW: spatial averaging
@@ -347,4 +368,88 @@ class ResNet34IL(ResNet):
         x = torch.flatten(x, 1)
         x = self.fc[str(task_no)](x)
 
+        return x
+
+
+class VGGIL(nn.Module):
+    """
+    Standard PyTorch implementation of VGG. Pretrained imagenet model is used.
+    """
+
+    def __init__(self, out_dim, classes_per_task):
+        super().__init__()
+
+        self.features = nn.Sequential(
+            # conv1
+            nn.Conv2d(3, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, stride=2, return_indices=True),
+
+            # conv2
+            nn.Conv2d(64, 128, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(128, 128, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, stride=2, return_indices=True),
+
+            # conv3
+            nn.Conv2d(128, 256, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(256, 256, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(256, 256, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, stride=2, return_indices=True),
+
+            # conv4
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(512, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(512, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, stride=2, return_indices=True),
+
+            # conv5
+            nn.Conv2d(512, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(512, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(512, 512, 3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, stride=2, return_indices=True)
+        )
+
+        self.classifier = nn.Sequential(
+            nn.Linear(512, 4096),
+            nn.ReLU(),
+            nn.Dropout(),
+            nn.Linear(4096, 4096),
+            nn.ReLU(),
+            nn.Dropout(),
+        )
+
+        module_dict = nn.ModuleDict()
+        for task in range(out_dim // classes_per_task):
+            module_dict[str(task)] = nn.Linear(4096, 2)
+
+        self.fc = module_dict
+
+        # We need these for MaxUnpool operation
+        self.conv_layer_indices = [0, 2, 5, 7, 10, 12, 14, 17, 19, 21, 24, 26, 28]
+        self.feature_maps = OrderedDict()
+        self.pool_locs = OrderedDict()
+
+    def forward(self, task_no, x):
+        for layer in self.features:
+            if isinstance(layer, nn.MaxPool2d):
+                x, location = layer(x)
+            else:
+                x = layer(x)
+
+        x = x.view(x.size()[0], -1)
+        x = self.classifier(x)
+        x = self.fc[str(task_no)](x)
         return x
