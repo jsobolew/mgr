@@ -6,8 +6,8 @@ from loss import SupervisedContrastiveLoss
 from utils import SafeIterator
 
 
-def train_validation_all_classes(model, optimizer, contrastive_optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
-                                 log_interval=1000, setup='taskIL', loss_func=F.cross_entropy, contrastive_epoch=0):
+def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=None, rehearsal_loader=None, epoch=1,
+                                 log_interval=1000, setup='taskIL', loss_func=F.cross_entropy, contrastive_epoch=0, contrastive_optimizer=None):
     assert setup == 'taskIL' or setup == 'classIL', f"setup should be either taskIL or classIL but is {setup}"
     print(f"Starting training in {setup} setup")
 

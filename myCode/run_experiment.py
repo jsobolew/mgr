@@ -39,8 +39,8 @@ loss_dict = {
     "CE": F.cross_entropy,
 }
 
-config_name = "AlexNetTaskILNoiseCL"
-# config_name = "AlexNetTaskILNoise"
+# config_name = "AlexNetTaskILNoiseCL"
+config_name = "AlexNetTaskILNoise"
 # config_name = "VGGTaskILNoise"
 # config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
@@ -82,21 +82,25 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
     model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
 
+    contrastive_optimizer = None
     if cfg['optimizer'] == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
-        contrastive_optimizer = optim.Adam(model.parameters(), lr=cfg['contrastive_learning_rate'])
+        if cfg['contrastive_epochs'] > 0:
+            contrastive_optimizer = optim.Adam(model.parameters(), lr=cfg['contrastive_learning_rate'])
     elif cfg['optimizer'] == 'SGD_momentum':
         optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'], momentum=0.9)
-        contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'], momentum=0.9)
+        if cfg['contrastive_epochs'] > 0:
+            contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'], momentum=0.9)
     else: # SGD and any other value
         optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
-        contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'])
+        if cfg['contrastive_epochs'] > 0:
+            contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'])
 
     # loss = F.cross_entropy
     loss = loss_dict[cfg['loss']]
