@@ -54,13 +54,21 @@ config_name = "AlexNetTaskILNoise"
 def main(cfg) -> None:
     device = get_device()
 
-    print("Running experiment with settings:\n")
-    print(OmegaConf.to_yaml(cfg))
-
     classes_list = prepare_classes_list(cfg['num_classes'], cfg['classes_per_task'], cfg['dataset'])
     tasks = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], setup=cfg['setup'])
     tasks_test = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], train=False,
                           setup=cfg['setup'])
+    
+    config = OmegaConf.to_container(cfg, resolve=True)
+    config['classes_list'] = classes_list
+    wandb.init(
+        project=cfg['project'],
+        config=config,
+        mode="disabled"
+    )
+
+    print("Running experiment with settings:\n")
+    print(OmegaConf.to_yaml(cfg))
 
     if cfg['rehearsal_dataset']:
         no_classes = cfg['classes_per_task'] if cfg['setup'] == 'taskIL' else cfg['num_classes']
@@ -76,14 +84,6 @@ def main(cfg) -> None:
             f"Task     : {i} samples: {len(task.dataset)} global classes: {task.global_classes} local classes: {task.dataset.targets.unique()}")
         print(
             f"Task test: {i} samples: {len(task_test.dataset)} global classes: {task_test.global_classes} local classes: {task_test.dataset.targets.unique()}")
-
-    config = OmegaConf.to_container(cfg, resolve=True)
-    config['classes_list'] = classes_list
-    wandb.init(
-        project=cfg['project'],
-        config=config,
-        mode="disabled"
-    )
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
     model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
