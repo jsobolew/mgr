@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import wandb
 from matplotlib import pyplot as plt
+import json
 
 
 class Visualization:
@@ -24,6 +25,15 @@ class Visualization:
             runs_list.append(run.config)
         self.df = pd.DataFrame(runs_list).astype(str)
 
+        faulty_runs = []
+        for i in range(len(self.df)):
+            if self.df.iloc[i].classes_list != 'nan':
+                classes_list = json.loads(self.df.iloc[i].classes_list)
+                for task in classes_list:
+                    if 0 in task:
+                        if task[1] == 0:
+                            faulty_runs.append(i)
+
         # UID
         self.df['UID'] = ''
         for c in UID:
@@ -41,7 +51,10 @@ class Visualization:
             idx = pd.Series([True for _ in range(len(self.df))])
             for c, v in zip(UID, run_param):
                 idx = idx & (self.df[c] == v)
-            self.unique_run_settings_idxs.append(self.df[idx].index)
+
+            idxs = self.df[idx].index
+            idxs = [idx for idx in idxs if idx not in faulty_runs]
+            self.unique_run_settings_idxs.append(idxs)
 
         # accuracy axis range for plotting
         self.y_min = 45
@@ -56,7 +69,7 @@ class Visualization:
     def extract_data_from_runs(self, unixe_idxs):
 
         df_train, df_test, self.all_test_runs_data = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
-        for i, run_idx in enumerate(unixe_idxs.values):
+        for i, run_idx in enumerate(unixe_idxs):
             try:
                 curr_run = self.runs[run_idx].history(100000)
                 curr_run['run_no'] = i
