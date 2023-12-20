@@ -1,16 +1,5 @@
 #!/bin/bash
 
-config=$1
-params_extract="python3 extract_params_from_config.py ${config}"
-echo "$params_extract"
-out=$($params_extract)
-
-python_command="python run_experiment.py ${out}"
-echo "$python_command"
-
-sbatch << EOF
-#!/bin/bash
-
 #SBATCH --time=20:00:00   # walltime
 #SBATCH --exclude=titan2
 #SBATCH --gpus=1 # number of GPUs required for the job
@@ -24,6 +13,6 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 eval "$(conda shell.bash hook)"
 conda activate myenv #first you need to create conda env with all requirements (see: https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf)
 
-$python_command & $python_command
-
-EOF
+srun python run_experiment.py project="rehersal ResNet CIFAR10 Task IL" setup="taskIL" learning_rate="0.003" architecture="ResNet18" dataset="CIFAR10" rehearsal_dataset="stylegan-random" epochs="5" batch_size_rehearsal="128" batch_size="128" pretraining="True" num_classes="10" classes_per_task="2" optimizer="SGD" &
+srun python run_experiment.py project="rehersal ResNet CIFAR10 Task IL" setup="taskIL" learning_rate="0.003" architecture="ResNet18" dataset="CIFAR10" rehearsal_dataset="stylegan-random" epochs="5" batch_size_rehearsal="128" batch_size="128" pretraining="True" num_classes="10" classes_per_task="2" optimizer="SGD" 
+wait
