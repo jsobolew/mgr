@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from dotenv import load_dotenv
 import numpy as np
 import torch
 import torchvision
