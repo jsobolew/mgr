@@ -2,8 +2,12 @@ import torch
 import torchvision
 import numpy as np
 
+load_dotenv()
+
+DATA_PATH = os.getenv('DATA_PATH')
+
 def cifar10_for_classes_TaskIL(class_1, class_2, batch_size_train=128, train=True):
-    dataset = torchvision.datasets.CIFAR10('files/', train=train, download=True,
+    dataset = torchvision.datasets.CIFAR10(DATA_PATH, train=train, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     # torchvision.transforms.Normalize(

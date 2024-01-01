@@ -1,0 +1,7 @@
+ Miniconda3/4.9.2 loaded.
+Traceback (most recent call last):
+  File "/net/people/plgrid/plgjsobolewski/mgr/myCode/run_experiment.py", line 7, in <module>
+    from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
+  File "/net/people/plgrid/plgjsobolewski/mgr/myCode/dataloaders/tasks_provider.py", line 16, in <module>
+    load_dotenv()
+NameError: name 'load_dotenv' is not defined

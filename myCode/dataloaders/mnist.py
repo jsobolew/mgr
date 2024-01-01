@@ -2,22 +2,26 @@ import torch
 import torchvision
 import numpy as np
 
+load_dotenv()
+
+DATA_PATH = os.getenv('DATA_PATH')
+
 def MNIST(batch_size_train = 64, batch_size_test = 1000):
-    MNIST_train = torchvision.datasets.MNIST('files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST(DATA_PATH, train=True, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
                                     (0.1307,), (0.3081,))
                                 ]))
 
-    MNIST_val = torchvision.datasets.MNIST('files/', train=True, download=True,
+    MNIST_val = torchvision.datasets.MNIST(DATA_PATH, train=True, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
                                     (0.1307,), (0.3081,))
                                 ]))
 
-    MNIST_test = torchvision.datasets.MNIST('files/', train=False, download=True,
+    MNIST_test = torchvision.datasets.MNIST(DATA_PATH, train=False, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -45,7 +49,7 @@ def MNIST(batch_size_train = 64, batch_size_test = 1000):
 
 def MNIST_train_random_labels(batch_size_train = 64):
     label_mapping = torch.tensor(np.random.randint(10, size=60000)).type(torch.LongTensor)
-    MNIST_train = torchvision.datasets.MNIST('/files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST(DATA_PATH, train=True, download=True,
                                 transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -57,7 +61,7 @@ def MNIST_train_random_labels(batch_size_train = 64):
     return train_loader
 
 def MNIST_for_classes(class_1, class_2, batch_size_train=128):
-    MNIST_train = torchvision.datasets.MNIST('/files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST(DATA_PATH, train=True, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(
@@ -69,7 +73,7 @@ def MNIST_for_classes(class_1, class_2, batch_size_train=128):
     return train_loader
 
 def MNIST_for_classes_TaskIL(class_1, class_2, batch_size_train=128):
-    MNIST_train = torchvision.datasets.MNIST('files/', train=True, download=True,
+    MNIST_train = torchvision.datasets.MNIST(DATA_PATH, train=True, download=True,
                                     transform=torchvision.transforms.Compose([
                                     torchvision.transforms.ToTensor(),
                                     torchvision.transforms.Normalize(

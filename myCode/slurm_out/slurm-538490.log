@@ -1,0 +1,7 @@
+ Miniconda3/4.9.2 loaded.
+Traceback (most recent call last):
+  File "/net/people/plgrid/plgjsobolewski/mgr/myCode/run_experiment.py", line 9, in <module>
+    from dataloaders.noise import dataloader_pretraining
+  File "/net/people/plgrid/plgjsobolewski/mgr/myCode/dataloaders/noise.py", line 7, in <module>
+    from dotenv import load_dotenv
+ModuleNotFoundError: No module named 'dotenv'

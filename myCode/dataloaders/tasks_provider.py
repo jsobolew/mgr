@@ -13,6 +13,10 @@ dataset_to_num_classes = {
     "MNIST": 10,
 }
 
+load_dotenv()
+
+DATA_PATH = os.getenv('DATA_PATH')
+
 
 def prepare_classes_list(num_classes, classes_per_task, dataset) -> list:
     num_total_classes = dataset_to_num_classes[dataset]
@@ -58,7 +62,7 @@ class Task:
         self.dataloader = torch.utils.data.DataLoader(self.dataset, batch_size=batch_size, shuffle=True)
 
     def dataset_for_classes_task(self, dataset, train=True):
-        dataset = dataset('files/', train=train, download=True,
+        dataset = dataset(DATA_PATH, train=train, download=True,
                           transform=torchvision.transforms.Compose([
                               torchvision.transforms.ToTensor(),
                               self.provide_normalization(dataset)
