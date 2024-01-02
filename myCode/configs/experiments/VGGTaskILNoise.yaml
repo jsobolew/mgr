@@ -1,10 +1,11 @@
-project: rehersal VGG CIFAAR10 Task IL
+project: rehersal VGG CIFAR10 Task IL
 setup: taskIL
 learning_rate: 0.01
 architecture: VGG
 dataset: CIFAR10
 rehearsal_dataset:
 epochs: 5
+contrastive_epochs: 0
 batch_size_rehearsal: 128
 batch_size: 128
 pretraining: false
@@ -16,5 +17,3 @@ loss: CE
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
     # 'stylegan-random
-
-  # SGD Adam SGD_momentum
