@@ -298,7 +298,7 @@ class ResNet18IL(ResNet):
         super(ResNet18IL, self).__init__(BasicBlock, [2, 2, 2, 2])
         module_dict = nn.ModuleDict()
         for task in range(out_dim//classes_per_task):
-            module_dict[str(task)] = nn.Linear(512, 2)
+            module_dict[str(task)] = nn.Linear(512, classes_per_task)
         self.fc = module_dict
 
     def forward(self, task_no, x):
@@ -349,7 +349,7 @@ class ResNet34IL(ResNet):
         super(ResNet34IL, self).__init__(BasicBlock, [3, 4, 6, 3])
         module_dict = nn.ModuleDict()
         for task in range(out_dim // classes_per_task):
-            module_dict[str(task)] = nn.Linear(512, 2)
+            module_dict[str(task)] = nn.Linear(512, classes_per_task)
         self.fc = module_dict
 
     def forward(self, task_no, x):
@@ -433,7 +433,7 @@ class VGGIL(nn.Module):
 
         module_dict = nn.ModuleDict()
         for task in range(out_dim // classes_per_task):
-            module_dict[str(task)] = nn.Linear(4096, 2)
+            module_dict[str(task)] = nn.Linear(4096, classes_per_task)
 
         self.fc = module_dict
 

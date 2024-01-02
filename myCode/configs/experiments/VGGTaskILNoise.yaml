@@ -1,6 +1,6 @@
 project: rehersal VGG CIFAR10 Task IL
 setup: taskIL
-learning_rate: 0.01
+learning_rate: 0.00001
 architecture: VGG
 dataset: CIFAR10
 rehearsal_dataset:

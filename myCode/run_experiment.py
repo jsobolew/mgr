@@ -41,12 +41,12 @@ loss_dict = {
 
 # config_name = "AlexNetTaskILNoiseCL"
 # config_name = "AlexNetTaskILNoise"
-# config_name = "VGGTaskILNoise"
-# config_name = "AlexNetTaskILNoiseCIFAR100"
+config_name = "VGGTaskILNoise"
+# # config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
-config_name = "ResNetTaskILNoise"
+# config_name = "ResNetTaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
 
@@ -64,7 +64,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     print("Running experiment with settings:\n")
