@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import numpy as np
 import torch
 import torchvision
+import os
 
 # from dataloaders.cifar10 import cifar10_for_classes_TaskIL
 
