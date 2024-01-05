@@ -77,7 +77,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 loss.backward()
                 optimizer.step()
 
-                print(len(target[output.argmax(axis=1).cpu() == target]) / len(target))
+                # print(len(target[output.argmax(axis=1).cpu() == target]) / len(target))
 
                 if batch_idx % log_interval == 0:
                     print(

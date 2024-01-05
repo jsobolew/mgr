@@ -21,7 +21,7 @@ class TwoCropsTransform:
         k = self.base_transform(x)
         return [q, k]
 
-def dataset_prep(dataset_name, no_classes, im_size = 64):
+def dataset_prep(dataset_name, no_classes, im_size = 64, separate_noise_output_class=None):
     imagefolder = f"{DATA_PATH}{dataset_name}/"
     resize_image = True
 
@@ -52,11 +52,18 @@ def dataset_prep(dataset_name, no_classes, im_size = 64):
     # dataset = torchvision.datasets.ImageFolder(
     #     train_path,
     #     transform=transform)
-    
-    dataset = RandomLabelImageFolder(
-        train_path,
-        transform=transform,
-        no_classes=no_classes)
+
+    if separate_noise_output_class:
+        dataset = SeperateNoiseOutputLabelImageFolder(
+            train_path,
+            transform=transform,
+            separate_noise_output_class=separate_noise_output_class)
+        dataset.targets = separate_noise_output_class
+    else:
+        dataset = RandomLabelImageFolder(
+            train_path,
+            transform=transform,
+            no_classes=no_classes)
 
     return dataset
 
@@ -87,8 +94,8 @@ def dataset_prep_gray_scale(dataset_name):
         transform=transform)
     return dataset
 
-def dataloader_pretraining(dataset_name, no_classes, batch_size=128):
-    dataset = dataset_prep(dataset_name, no_classes, im_size=32)
+def dataloader_pretraining(dataset_name, no_classes, batch_size=128,separate_noise_output_class=None):
+    dataset = dataset_prep(dataset_name, no_classes, im_size=32,separate_noise_output_class=separate_noise_output_class)
     train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=2, shuffle=True, pin_memory=True)
     return train_loader
 
@@ -129,6 +136,16 @@ class RandomLabelImageFolder(torchvision.datasets.ImageFolder):
     def __getitem__(self, index):
         sample, target = super(torchvision.datasets.ImageFolder, self).__getitem__(index)
         target = torch.randint(self.no_classes, (1, ))[0]
+        return sample, target
+
+class SeperateNoiseOutputLabelImageFolder(torchvision.datasets.ImageFolder):
+    def __init__(self, root, transform, separate_noise_output_class):
+        super().__init__(root=root, transform=transform)
+        self.separate_noise_output_class = separate_noise_output_class
+
+    def __getitem__(self, index):
+        sample, target = super(torchvision.datasets.ImageFolder, self).__getitem__(index)
+        target = self.separate_noise_output_class
         return sample, target
 
 class NoiseDataloader(torch.utils.data.DataLoader):

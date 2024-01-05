@@ -39,14 +39,14 @@ loss_dict = {
     "CE": F.cross_entropy,
 }
 
-config_name = "AlexNetTaskILNoiseCL"
+# config_name = "AlexNetTaskILNoiseCL"
 # config_name = "AlexNetTaskILNoise"
 # config_name = "VGGTaskILNoise"
 # # config_name = "AlexNetTaskILNoiseCIFAR100"
 # config_name = "AlexNetClassILNoise"
 
 
-# config_name = "ResNetTaskILNoise"
+config_name = "ResNetTaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
 
@@ -61,10 +61,18 @@ def main(cfg) -> None:
     
     config = OmegaConf.to_container(cfg, resolve=True)
     config['classes_list'] = classes_list
+    model_out_dim = cfg['num_classes']
+
+    cfg['separate_noise_output'] = True
+    separate_noise_output_class = None
+    if cfg['separate_noise_output']:
+        separate_noise_output_class = cfg['classes_per_task']
+        model_out_dim = cfg['classes_per_task'] + 1
+
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     print("Running experiment with settings:\n")
@@ -73,8 +81,8 @@ def main(cfg) -> None:
     if cfg['rehearsal_dataset']:
         no_classes = cfg['classes_per_task'] if cfg['setup'] == 'taskIL' else cfg['num_classes']
         rehearsal_loader = dataloader_pretraining(cfg['rehearsal_dataset'], no_classes=no_classes,
-                                                  batch_size=cfg['batch_size_rehearsal'])
-        print(f"Rehearsal: samples: {len(rehearsal_loader.dataset)} classes: {np.arange(no_classes)}")
+                                                  batch_size=cfg['batch_size_rehearsal'], separate_noise_output_class=separate_noise_output_class)
+        print(f"Rehearsal: samples: {len(rehearsal_loader.dataset)} classes: {np.unique(rehearsal_loader.dataset.targets)}")
     else:
         rehearsal_loader = None
 
@@ -86,7 +94,7 @@ def main(cfg) -> None:
             f"Task test: {i} samples: {len(task_test.dataset)} global classes: {task_test.global_classes} local classes: {task_test.dataset.targets.unique()}")
 
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
-    model = model_reference(out_dim=cfg['num_classes'], classes_per_task=cfg['classes_per_task']).to(device)
+    model = model_reference(out_dim=model_out_dim, num_tasks=len(tasks.tasks)).to(device)
 
     contrastive_optimizer = None
     if cfg['optimizer'] == 'Adam':
@@ -102,7 +110,6 @@ def main(cfg) -> None:
         if cfg['contrastive_epochs'] > 0:
             contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'])
 
-    # loss = F.cross_entropy
     loss = loss_dict[cfg['loss']]
 
     # pretraining
