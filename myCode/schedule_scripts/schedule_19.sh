@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #SBATCH -A plgdyplomancipw-gpu-a100
 #SBATCH -p plgrid-gpu-a100
