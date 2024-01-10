@@ -1,4 +1,4 @@
-project: rehersal ResNet CIFAR10 Task IL
+project: rehersal ResNet34 CIFAR10 Task IL
 setup: taskIL
 learning_rate: 0.003
 architecture: ResNet34

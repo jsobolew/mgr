@@ -3,7 +3,7 @@ import numpy as np
 import torchvision
 import torch.nn.functional as F
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18, VGGIL
+from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18, VGGIL, ResNet34, ResNet34IL
 from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
@@ -18,6 +18,7 @@ model_dict = {
         {
             "SmallAlexNet": SmallAlexNetTaslIL,
             "ResNet18": ResNet18IL,
+            "ResNet34": ResNet34IL,
             "VGG": VGGIL,
         },
     "classIL":
@@ -25,6 +26,7 @@ model_dict = {
             "MNIST_net": MNIST_net,
             "SmallAlexNet": SmallAlexNet,
             "ResNet18": ResNet18,
+            "ResNet34": ResNet34,
         }
 }
 
@@ -46,7 +48,7 @@ loss_dict = {
 # config_name = "AlexNetClassILNoise"
 
 
-config_name = "ResNetTaskILNoise"
+config_name = "ResNet34TaskILNoise"
 # config_name = "MNISTNAPClassILNoise"
 
 
@@ -72,7 +74,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     print("Running experiment with settings:\n")
