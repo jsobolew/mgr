@@ -16,7 +16,7 @@ class Visualization:
 
         self.project = project
         self.UID = UID
-        api = wandb.Api(timeout=19)
+        api = wandb.Api(timeout=90)
         self.runs = api.runs(f"qba/{project}")
 
         # runs metadata
