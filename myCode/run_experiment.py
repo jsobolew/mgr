@@ -63,9 +63,8 @@ def main(cfg) -> None:
     
     config = OmegaConf.to_container(cfg, resolve=True)
     config['classes_list'] = classes_list
-    model_out_dim = cfg['num_classes']
+    model_out_dim = cfg['classes_per_task']
 
-    cfg['separate_noise_output'] = True
     separate_noise_output_class = None
     if cfg['separate_noise_output']:
         separate_noise_output_class = cfg['classes_per_task']
