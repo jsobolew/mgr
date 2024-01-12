@@ -1,4 +1,4 @@
-sbatch schedule_0.sh
+# sbatch schedule_0.sh
 sbatch schedule_1.sh
 sbatch schedule_2.sh
 sbatch schedule_3.sh

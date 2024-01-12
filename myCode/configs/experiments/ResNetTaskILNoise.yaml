@@ -13,7 +13,7 @@ num_classes: 10
 classes_per_task: 2
 optimizer: SGD
 loss: CE
-separate_noise_output: true
+separate_noise_output: false
 # SGD Adam SGD_momentum
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
