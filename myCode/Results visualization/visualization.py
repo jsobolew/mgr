@@ -7,7 +7,8 @@ import json
 
 class Visualization:
     def __init__(self, project='rehersal Alexnet MNIST Task IL tr-t split v2',
-                 UID=['rehearsal_dataset', 'batch_size_rehearsal', 'pretraining', 'learning_rate', 'epochs']):
+                 UID=['rehearsal_dataset', 'batch_size_rehearsal', 'pretraining', 'learning_rate', 'epochs'],
+                 y_min = 45):
         # todo reade this automatically somehow
         self.acc_col = ['acc_task_0', 'acc_task_1', 'acc_task_2', 'acc_task_3', 'acc_task_4']
         self.acc_test_col = ['acc_test_task_0', 'acc_test_task_1', 'acc_test_task_2', 'acc_test_task_3',
@@ -20,10 +21,12 @@ class Visualization:
         self.runs = api.runs(f"qba/{project}")
 
         # runs metadata
-        runs_list = []
+        runs_list, run_name = [], []
         for run in self.runs:
             runs_list.append(run.config)
+            run_name.append(run.name)
         self.df = pd.DataFrame(runs_list).astype(str)
+        self.df['run_name'] = run_name
 
         # find faulty runs
         self.faulty_runs = []
@@ -60,7 +63,7 @@ class Visualization:
         # accuracy axis range for plotting
         self.y_min = 45
         if self.df.setup[0] == 'classIL':
-            self.y_min = 0
+            self.y_min = y_min
 
         # run unique params - run idxs dict
         self.runs_params_settings_idxs_dict = {}
@@ -131,10 +134,21 @@ class Visualization:
             except:
                 print(f"Could not fetch metrics in run: {i} UID: {UID}")
 
+        # UID to columns woth params
         self.metrics_df = pd.DataFrame(self.runs_metrics)
-        for i, params in enumerate(self.metrics_df .UID.apply(lambda x: x.split(';'))):
+        for i, params in enumerate(self.metrics_df.UID.apply(lambda x: x.split(';'))):
             for c, param in zip(self.UID, params):
-                self.metrics_df .loc[i, c] = param
+                self.metrics_df.loc[i, c] = param
+
+        # mean of mean columns
+        acc_at_the_end_cols = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_at_the_end_task')]
+        self.metrics_df['mean_acc_at_the_end'] = self.metrics_df[acc_at_the_end_cols].mean(axis=1)
+
+        acc_mean_cols = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_mean')]
+        self.metrics_df['mean_acc_mean'] = self.metrics_df[acc_mean_cols].mean(axis=1)
+
+        acc_mean_decrease_per_task_cols = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_mean_decrease_per_task')]
+        self.metrics_df['mean_acc_mean_decrease_per_task'] = self.metrics_df[acc_mean_decrease_per_task_cols].mean(axis=1)
 
 
 
