@@ -2,12 +2,24 @@
 . .env
 
 config=$1
+n_times=${2:-1}
 params_extract="python3 extract_params_from_config.py ${config}"
 echo "$params_extract"
 out=$($params_extract)
 
 python_command="${PYTHON_INTERPRETER} run_experiment.py ${out}"
-echo "$python_command"
+echo -e "Scheduling $n_times times:\n"$python_command""
+
+python_commands=""
+for (( i=0; i<n_times; i++ ))
+do
+    if  [ $i -eq $((n_times-1)) ]
+    then
+        python_commands="${python_commands} ${python_command}\n"
+    else
+        python_commands="${python_commands} ${python_command} & \n"
+    fi
+done
 
 sbatch << EOF
 #!/bin/bash
@@ -27,6 +39,5 @@ module load Miniconda3/4.9.2
 
 #conda activate /net/tscratch/people/plgjsobolewski/conda_env
 
-$python_command
-
+$python_commands
 EOF

@@ -6,14 +6,14 @@ dataset: CIFAR10
 rehearsal_dataset: stat-wmm
 epochs: 5
 contrastive_epochs: 0
-batch_size_rehearsal: 128
+batch_size_rehearsal: 64
 batch_size: 128
-pretraining: false
+pretraining: true
 num_classes: 10
 classes_per_task: 2
 optimizer: SGD
 loss: CE
-separate_noise_output: false
+separate_noise_output: nan
 # SGD Adam SGD_momentum
 # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',

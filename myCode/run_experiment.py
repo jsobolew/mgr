@@ -67,14 +67,14 @@ def main(cfg) -> None:
     model_out_dim = cfg['classes_per_task']
 
     separate_noise_output_class = None
-    if cfg['separate_noise_output']:
+    if str(cfg['separate_noise_output']) == 'True':
         separate_noise_output_class = cfg['classes_per_task']
         model_out_dim = cfg['classes_per_task'] + 1
 
     wandb.init(
         project=cfg['project'],
         config=config,
-        mode="disabled"
+        # mode="disabled"
     )
 
     print("Running experiment with settings:\n")
@@ -95,6 +95,7 @@ def main(cfg) -> None:
         print(
             f"Task test: {i} samples: {len(task_test.dataset)} global classes: {task_test.global_classes} local classes: {task_test.dataset.targets.unique()}")
 
+    print(f"using model: {cfg['architecture']} in setup: {cfg['setup']} model out dim: {model_out_dim}")
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
     model = model_reference(out_dim=model_out_dim, num_tasks=len(tasks.tasks)).to(device)
 
