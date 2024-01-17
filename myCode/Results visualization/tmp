@@ -1,0 +1,15 @@
+for name, param in model.named_parameters():
+    if name == "fc.0.weight":
+        print(param)
+
+
+import torch.optim as optim
+import copy
+
+model_copy = copy.deepcopy(model)
+
+optimizer_copy = optim.SGD(model_copy.parameters(), lr=0.003)
+
+optimizer_copy.zero_grad()
+loss.backward()
+optimizer_copy.step()

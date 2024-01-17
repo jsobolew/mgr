@@ -62,7 +62,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     output = model(taskNo, data.to(device))
                 elif setup == 'classIL':
                     output = model(data.to(device))
-                loss = loss_func(output, target.to(device))
+                loss_data = loss_func(output, target.to(device))
 
                 if rehearsal_loader:
                     # noise rehearsal
@@ -71,8 +71,9 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                         output = model(taskNo, rehearsal_data[0].to(device))
                     elif setup == 'classIL':
                         output = model(rehearsal_data[0].to(device))
-                    loss += loss_func(output, rehearsal_data[1].to(device))
+                    loss_rehearsal = loss_func(output, rehearsal_data[1].to(device))
 
+                loss = loss_data + loss_rehearsal
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
