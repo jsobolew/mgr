@@ -71,7 +71,7 @@ class Visualization:
         for i, run_param in enumerate(self.unique_run_params):
             self.runs_params_settings_idxs_dict[";".join(run_param)] = self.unique_run_settings_idxs[i]
 
-    def box_plot(metric_name, df):
+    def box_plot(metric_name, df, filename=None):
         UIDS = df['UID'].unique()
 
         values = []
@@ -85,12 +85,18 @@ class Visualization:
         for i, uid in enumerate(UIDS):
             plt.boxplot(df[df['UID'] == uid][metric_name], positions=[i], widths=0.6)
 
-        # labels = [f"{uid.split(';')[0]} {uid.split(';')[2]} {uid.split(';')[4]}" for uid in UIDS]
         labels = UIDS
+        labels = [f"{uid.split(';')[0]} {uid.split(';')[2]}" for uid in UIDS]
 
         plt.xticks(np.arange(len(UIDS)), labels, rotation=90)
         plt.title(f"metic: {metric_name}       label convention: dataset pretraining? epochs")
+        plt.xlabel("unique identifier")
+        plt.ylabel("accuracy [%]")
         plt.show()
+
+        if filename:
+            plt.savefig("images/"+filename+".pdf", format='pdf')
+            plt.savefig("images/"+filename+".svg", format='svg')
 
     def extract_all_runs_metrics(self):
         for i in range(len(self.df)):
