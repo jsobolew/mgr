@@ -3,10 +3,10 @@ setup: taskIL
 learning_rate: 0.003
 architecture: ResNet18
 dataset: CIFAR10
-rehearsal_dataset: stat-wmm
+rehearsal_dataset: stylegan-oriented
 epochs: 5
 contrastive_epochs: 0
-batch_size_rehearsal: 64
+batch_size_rehearsal: 128
 batch_size: 128
 pretraining: true
 num_classes: 10
@@ -19,3 +19,4 @@ separate_noise_output: nan
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
     # 'stylegan-random'
+    # 'stylegan-oriented' 'feature_vis-dead_leaves' 'feature_vis-random'
