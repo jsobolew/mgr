@@ -21,7 +21,7 @@ do
     fi
 done
 
-sbatch << EOF
+aa=$(cat << EOF
 #!/bin/bash
 #SBATCH -A plgdyplomancipw-gpu-a100
 #SBATCH -p plgrid-gpu-a100
@@ -41,3 +41,6 @@ module load Miniconda3/4.9.2
 
 $python_commands
 EOF
+)
+
+echo -e $aa
