@@ -3,8 +3,8 @@ setup: taskIL
 learning_rate: 0.003
 architecture: ResNet18
 dataset: CIFAR100
-rehearsal_dataset: 
-epochs: 20
+rehearsal_dataset: stat-wmm
+epochs: 40
 contrastive_epochs: 0
 batch_size_rehearsal: 128
 batch_size: 128

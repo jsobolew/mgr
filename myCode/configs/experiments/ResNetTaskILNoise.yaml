@@ -3,10 +3,10 @@ setup: taskIL
 learning_rate: 0.003
 architecture: ResNet18
 dataset: CIFAR10
-rehearsal_dataset: stylegan-oriented
+rehearsal_dataset: stat-wmm
 epochs: 5
 contrastive_epochs: 0
-batch_size_rehearsal: 128
+batch_size_rehearsal: 512
 batch_size: 128
 pretraining: true
 num_classes: 10
