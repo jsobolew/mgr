@@ -62,9 +62,7 @@ class Visualization:
             self.unique_run_settings_idxs.append(idxs)
 
         # accuracy axis range for plotting
-        self.y_min = 45
-        if self.df.setup[0] == 'classIL':
-            self.y_min = y_min
+        self.y_min = y_min
 
         # run unique params - run idxs dict
         self.runs_params_settings_idxs_dict = {}
@@ -163,14 +161,83 @@ class Visualization:
         mean_acc_max = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_max')]
         self.metrics_df['mean_acc_max'] = self.metrics_df[mean_acc_max].mean(axis=1)
 
+    def extract_all_runs_metrics_after_task_3(self):
+        for i in range(len(self.df)):
+            if i in self.faulty_runs:
+                continue
+            try:
+                UID = self.df.iloc[i]['UID']
+                run = self.runs[i].history(100000)
+
+                num_tasks = int(self.runs[i].config['num_classes'])/int(self.runs[i].config['classes_per_task'])
+
+                # df_train = run[self.acc_col].dropna().reset_index().drop(columns='index')
+                df_test = run[self.acc_test_col].dropna().reset_index().drop(columns='index')
+                idx_start_task_3 = int(len(df_test)/num_tasks*3)
+                df_test = df_test.iloc[:idx_start_task_3]  # after task 3
+
+                # accuracy metrics table
+                num_tasks = len(self.acc_test_col)
+                steps_per_task = len(df_test) // num_tasks
+                acc_at_the_end = df_test.iloc[-1].values
+                acc_max = df_test.max().values
+                acc_min = df_test.min().values  # todo would be good to change to min accuracy after training
+                acc_mean = []
+                for i in range(num_tasks):
+                    acc_mean.append(df_test[self.acc_test_col[i]].dropna()[steps_per_task * (i):].mean())
+
+                acc_decrease = (df_test.max().values - acc_at_the_end)
+                forgeting_tasks = np.arange(num_tasks - 1, -1, -1)
+                forgeting_tasks[
+                    forgeting_tasks == 0] = 10e6  # during the last task there is no time to forget and no time to divide by 0
+                acc_mean_decrease_per_task = acc_decrease / forgeting_tasks
+
+                curr_dict = {"UID": UID}
+
+                for task in range(num_tasks):
+                    curr_dict[f"acc_at_the_end_task_{task}"] = acc_at_the_end[task]
+                    curr_dict[f"acc_mean_task_{task}"] = acc_mean[task]
+                    curr_dict[f"acc_mean_decrease_per_task_{task}"] = acc_mean_decrease_per_task[task]
+                    curr_dict[f"acc_max{task}"] = acc_max[task]
+                    curr_dict[f"acc_min{task}"] = acc_min[task]
+
+                curr_dict["split"] = "test"
+
+                self.runs_metrics.append(curr_dict)
+            except Exception as e:
+                print(f"Could not fetch metrics in run: {i} UID: {UID} exception: {e}")
+
+        # UID to columns woth params
+        self.metrics_df = pd.DataFrame(self.runs_metrics)
+        for i, params in enumerate(self.metrics_df.UID.apply(lambda x: x.split(';'))):
+            for c, param in zip(self.UID, params):
+                self.metrics_df.loc[i, c] = param
+
+        # mean of mean columns
+        acc_at_the_end_cols = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_at_the_end_task')][:3]
+        self.metrics_df['mean_acc_at_the_end'] = self.metrics_df[acc_at_the_end_cols].mean(axis=1)
+
+        self.metrics_df['median_acc_at_the_end'] = self.metrics_df[acc_at_the_end_cols].median(axis=1)
+
+        acc_mean_cols = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_mean')]
+        self.metrics_df['mean_acc_mean'] = self.metrics_df[acc_mean_cols].mean(axis=1)
+
+        acc_mean_decrease_per_task_cols = self.metrics_df.columns[
+            self.metrics_df.columns.str.contains('acc_mean_decrease_per_task')]
+        self.metrics_df['mean_acc_mean_decrease_per_task'] = self.metrics_df[acc_mean_decrease_per_task_cols].mean(
+            axis=1)
+
+        mean_acc_max = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_max')]
+        self.metrics_df['mean_acc_max'] = self.metrics_df[mean_acc_max].mean(axis=1)
+
     def print_settings(self):
         for i, run_param in enumerate(self.unique_run_params):
             print(f"Setting {i}: {run_param} num runs: {len(self.unique_run_settings_idxs[i])}")
 
-    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square'):
+    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square', plot_till=None):
         unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
         df_train, df_test = self.extract_data_from_runs(unixe_idxs)
-        self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout)
+        self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout, plot_till=plot_till)
 
     def plot_single_setting_all_runs(self, run_param):
         unixe_idxs = self.runs_params_settings_idxs_dict["-".join(run_param)]
@@ -231,13 +298,17 @@ class Visualization:
                 print(f"Error in run: {run_idx} Error: {e}")
         return df_train, df_test
 
-    def create_plot(self, df_train, df_test, unixe_idxs, fontsize=12, up_postion=1.03, filename=None, layout='square'):
+    def create_plot(self, df_train, df_test, unixe_idxs, fontsize=12, up_postion=1.03, filename=None, layout='square', plot_till=None):
 
-        assert layout in ['square', 'vertical'], f'layout must be square or vertical, and is: {layout}'
+        assert layout in ['square', 'vertical', 'vertical_short'], f'layout must be square or vertical, and is: {layout}'
 
         try:
             df_train /= len(unixe_idxs)
             df_test /= len(unixe_idxs)
+            if plot_till:
+                plot_till = int(len(df_test)*plot_till)
+                df_train = df_train.iloc[:plot_till]
+                df_test = df_test.iloc[:plot_till]
 
             if layout == 'square':
                 fig, ax = plt.subplots(2, 2, tight_layout=True)
@@ -248,6 +319,11 @@ class Visualization:
                 fig, ax = plt.subplots(3, 1, tight_layout=True)
                 axes_idx = [0, -1, 1, 2]
                 fig.set_figheight(20)
+                fig.set_figwidth(10)
+            elif layout == 'vertical_short':
+                fig, ax = plt.subplots(2, 1, tight_layout=True)
+                axes_idx = [0, -1, 1]
+                fig.set_figheight(15)
                 fig.set_figwidth(10)
 
 
@@ -275,18 +351,19 @@ class Visualization:
             ax[axes_idx[2]].set_title('Test', fontsize=fontsize)
             ax[axes_idx[2]].legend(['task 0', 'task 1', 'task 2', 'task 3', 'task 4'])
 
-            # test min max 3->2
-            for acc_col in self.acc_test_col[:2]:
-                max = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").max().max(axis=1)
-                mean = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").mean().mean(axis=1).reset_index().drop(columns='index')
-                min = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").min().min(axis=1)
-                x = np.arange(len(min))
-                mean.plot(ax=ax[axes_idx[3]], grid=True, ylim=[self.y_min, 100], fontsize=fontsize)
-                ax[axes_idx[3]].fill_between(x, min, max, alpha=0.2)
-                ax[axes_idx[3]].set_xlabel("step", fontsize=fontsize)
-                ax[axes_idx[3]].set_ylabel("accuracy [%]", fontsize=fontsize)
-                ax[axes_idx[3]].set_title('Test', fontsize=fontsize)
-                ax[axes_idx[3]].legend(['task 0', 'task 0 min max', 'task 1', 'task 1 min max'])
+            if layout is not 'vertical_short':
+                # test min max 3->2
+                for acc_col in self.acc_test_col[:2]:
+                    max = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").max().max(axis=1)
+                    mean = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").mean().mean(axis=1).reset_index().drop(columns='index')
+                    min = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").min().min(axis=1)
+                    x = np.arange(len(min))
+                    mean.plot(ax=ax[axes_idx[3]], grid=True, ylim=[self.y_min, 100], fontsize=fontsize)
+                    ax[axes_idx[3]].fill_between(x, min, max, alpha=0.2)
+                    ax[axes_idx[3]].set_xlabel("step", fontsize=fontsize)
+                    ax[axes_idx[3]].set_ylabel("accuracy [%]", fontsize=fontsize)
+                    ax[axes_idx[3]].set_title('Test', fontsize=fontsize)
+                    ax[axes_idx[3]].legend(['task 0', 'task 0 min max', 'task 1', 'task 1 min max'])
 
 
             # accuracy metrics table
@@ -310,7 +387,7 @@ class Visualization:
                 "acc loss per task": acc_mean_decrease_per_task,
                 "split": ["test" for _ in range(num_tasks)],
             }).round(2)
-            if layout is not 'vertical':
+            if layout is 'square':
                 ax[axes_idx[1]].axis('off')
                 ax[axes_idx[1]].axis('tight')
                 table = ax[axes_idx[1]].table(

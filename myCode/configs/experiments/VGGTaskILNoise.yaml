@@ -1,6 +1,6 @@
 project: rehersal VGG CIFAR10 Task IL
 setup: taskIL
-learning_rate: 0.00001
+learning_rate: 0.001
 architecture: VGG
 dataset: CIFAR10
 rehearsal_dataset:
@@ -13,6 +13,7 @@ num_classes: 10
 classes_per_task: 2
 optimizer: SGD
 loss: CE
+separate_noise_output: nan
     # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
     # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
     # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',

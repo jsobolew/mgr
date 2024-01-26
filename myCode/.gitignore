@@ -1,4 +1,7 @@
 *.pt
+*.pyc
+
+__pycache__/
 files/
 data/
 wandb/
