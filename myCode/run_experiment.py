@@ -57,6 +57,8 @@ config_name = "ResNetTaskILNoise"
 def main(cfg) -> None:
     device = get_device()
 
+    assert cfg['pretraining'] and len(cfg['rehearsal_dataset']) > 3 or not cfg['pretraining'], "pretraining can only be used together with rehearsal_dataset"
+
     classes_list = prepare_classes_list(cfg['num_classes'], cfg['classes_per_task'], cfg['dataset'])
     tasks = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], setup=cfg['setup'])
     tasks_test = TaskList(classes_list, cfg['batch_size'], dataset_dict[cfg['dataset']], train=False,
