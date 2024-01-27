@@ -351,7 +351,7 @@ class Visualization:
             ax[axes_idx[2]].set_title('Test', fontsize=fontsize)
             ax[axes_idx[2]].legend(['task 0', 'task 1', 'task 2', 'task 3', 'task 4'])
 
-            if layout is not 'vertical_short':
+            if layout != 'vertical_short':
                 # test min max 3->2
                 for acc_col in self.acc_test_col[:2]:
                     max = self.all_test_runs_data[acc_col].dropna().reset_index().groupby("index").max().max(axis=1)
@@ -387,7 +387,7 @@ class Visualization:
                 "acc loss per task": acc_mean_decrease_per_task,
                 "split": ["test" for _ in range(num_tasks)],
             }).round(2)
-            if layout is 'square':
+            if layout == 'square':
                 ax[axes_idx[1]].axis('off')
                 ax[axes_idx[1]].axis('tight')
                 table = ax[axes_idx[1]].table(
