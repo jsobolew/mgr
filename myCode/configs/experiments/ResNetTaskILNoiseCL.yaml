@@ -7,7 +7,7 @@ dataset: CIFAR10
 rehearsal_dataset: stat-wmm
 epochs: 5
 contrastive_epochs: 1
-batch_size_rehearsal: 512
+batch_size_rehearsal: 128
 batch_size: 128
 pretraining: true
 num_classes: 10

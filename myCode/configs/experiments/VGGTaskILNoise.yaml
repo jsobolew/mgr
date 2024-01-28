@@ -11,7 +11,7 @@ batch_size: 128
 pretraining: false
 num_classes: 10
 classes_per_task: 2
-optimizer: SGD
+optimizer: Adam
 loss: CE
 separate_noise_output: nan
     # 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',

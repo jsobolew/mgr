@@ -52,8 +52,8 @@ loss_dict = {
 # config_name = "ResNetTaskILNoise"
 # config_name = "ResNetTaskILNoiseCIFAR100"
 # config_name = "VGGTaskILNoise"
-# config_name = "ResNetTaskILNoiseCL"
-config_name = "ResNetTaskILNoiseAdam"
+config_name = "ResNetTaskILNoiseCL"
+# config_name = "ResNetTaskILNoiseAdam"
 
 @hydra.main(version_base=None, config_path="configs/experiments", config_name=config_name)
 def main(cfg) -> None:
