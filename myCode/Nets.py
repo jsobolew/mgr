@@ -306,7 +306,7 @@ class ResNet18IL(ResNet):
         for param in self.parameters():
             param.requires_grad = False
 
-        for param in self.blocks[-1].parameters(): # todo
+        for param in self.fc.parameters():
             param.requires_grad = True
 
     def unfreeze_all(self):

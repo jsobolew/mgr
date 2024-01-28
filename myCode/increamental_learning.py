@@ -26,8 +26,8 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                 local_class_to_global[i] = gc
 
         for ce in range(contrastive_epoch):
+            print(sum(p.numel() for p in model.parameters() if p.requires_grad))
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
-                print(batch_idx)
                 model.train()
                 output = model.features(data.to(device))
                 # regardless of setup always uses global classes
@@ -54,6 +54,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
         if contrastive_epoch > 0:
             model.freeze_features()
         for e in range(epoch):
+            print(sum(p.numel() for p in model.parameters() if p.requires_grad))
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
 
