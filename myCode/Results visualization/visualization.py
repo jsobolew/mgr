@@ -234,8 +234,9 @@ class Visualization:
         for i, run_param in enumerate(self.unique_run_params):
             print(f"Setting {i}: {run_param} num runs: {len(self.unique_run_settings_idxs[i])}")
 
-    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square', plot_till=None):
-        unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
+    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square', plot_till=None, unixe_idxs=None):
+        if not unixe_idxs:
+            unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
         df_train, df_test = self.extract_data_from_runs(unixe_idxs)
         self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout, plot_till=plot_till)
 
