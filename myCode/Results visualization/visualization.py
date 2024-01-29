@@ -277,10 +277,10 @@ class Visualization:
             ax[1].set_ylabel("accuracy [%]")
             plt.show()
 
-    def plot_everything(self):
+    def plot_everything(self, layout='square'):
         for unixe_idxs in self.unique_run_settings_idxs:
             df_train, df_test = self.extract_data_from_runs(unixe_idxs)
-            self.create_plot(df_train, df_test, unixe_idxs)
+            self.create_plot(df_train, df_test, unixe_idxs, layout=layout)
 
     def extract_data_from_runs(self, unixe_idxs):
         df_train, df_test, self.all_test_runs_data = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()

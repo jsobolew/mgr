@@ -65,7 +65,7 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     output = model(data.to(device))
                 loss = loss_func(output, target.to(device))
 
-                if rehearsal_loader:
+                if rehearsal_loader and contrastive_epoch == 0:
                     # noise rehearsal
                     rehearsal_data = rehearsal_iter.next()
                     if setup == 'taskIL':
