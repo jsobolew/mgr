@@ -15,13 +15,13 @@ for (( i=0; i<n_times; i++ ))
 do
     if  [ $i -eq $((n_times-1)) ]
     then
-        python_commands="${python_commands} ${python_command}\n"
+        python_commands="${python_commands} ${python_command}"
     else
-        python_commands="${python_commands} ${python_command} & \n"
+        python_commands="${python_commands} ${python_command} & "
     fi
 done
 
-aa=$(cat << EOF
+cat << EOT > tmp.sh
 #!/bin/bash
 #SBATCH -A plgdyplomancipw-gpu-a100
 #SBATCH -p plgrid-gpu-a100
@@ -40,7 +40,6 @@ module load Miniconda3/4.9.2
 #conda activate /net/tscratch/people/plgjsobolewski/conda_env
 
 $python_commands
-EOF
-)
+EOT
 
-echo -e $aa
+sbatch tmp.sh

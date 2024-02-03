@@ -15,9 +15,3 @@ classes_per_task: 2
 optimizer: SGD
 loss: CE
 separate_noise_output: nan
-# SGD Adam SGD_momentum
-# 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
-    # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
-    # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
-    # 'stylegan-random'
-    # 'stylegan-oriented' 'feature_vis-dead_leaves' 'feature_vis-random'

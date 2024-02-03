@@ -54,7 +54,8 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
         if contrastive_epoch > 0:
             model.freeze_features()
         for e in range(epoch):
-            print(sum(p.numel() for p in model.parameters() if p.requires_grad))
+            if e > 2: # WARNING
+                break
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
 
@@ -65,14 +66,14 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
                     output = model(data.to(device))
                 loss = loss_func(output, target.to(device))
 
-                if rehearsal_loader and contrastive_epoch == 0:
-                    # noise rehearsal
-                    rehearsal_data = rehearsal_iter.next()
-                    if setup == 'taskIL':
-                        output = model(taskNo, rehearsal_data[0].to(device))
-                    elif setup == 'classIL':
-                        output = model(rehearsal_data[0].to(device))
-                    loss += loss_func(output, rehearsal_data[1].to(device))
+                # if rehearsal_loader and contrastive_epoch == 0:
+                # noise rehearsal
+                rehearsal_data = rehearsal_iter.next()
+                if setup == 'taskIL':
+                    output = model(taskNo, rehearsal_data[0].to(device))
+                elif setup == 'classIL':
+                    output = model(rehearsal_data[0].to(device))
+                loss += loss_func(output, rehearsal_data[1].to(device))
 
                 optimizer.zero_grad()
                 loss.backward()

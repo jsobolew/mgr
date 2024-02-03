@@ -36,5 +36,5 @@ if __name__ == "__main__":
             f.write(slurm_file_content(rehearsal_dataset))
             f.close()
 
-            cmd = 'sbatch tmp_slurm_file.sh'
-            os.system(cmd)
+            # cmd = 'sbatch tmp_slurm_file.sh'
+            # os.system(cmd)

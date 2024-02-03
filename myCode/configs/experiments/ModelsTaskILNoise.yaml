@@ -1,0 +1,16 @@
+project: rehersal Models CIFAR10 Task IL
+setup: taskIL
+learning_rate: 0.001
+architecture: VGG
+dataset: CIFAR10
+rehearsal_dataset: stat-wmm
+epochs: 5
+contrastive_epochs: 0
+batch_size_rehearsal: 256
+batch_size: 128
+pretraining: true
+num_classes: 10
+classes_per_task: 2
+optimizer: SGD
+loss: CE
+separate_noise_output: nan

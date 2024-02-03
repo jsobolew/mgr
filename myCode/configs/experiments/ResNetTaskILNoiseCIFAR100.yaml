@@ -1,20 +1,16 @@
-project: rehersal ResNet CIFAR100 Task IL
+project: rehersal ResNet CIFAR100 Task IL param
 setup: taskIL
 learning_rate: 0.003
 architecture: ResNet18
 dataset: CIFAR100
-rehearsal_dataset: stat-wmm
-epochs: 40
+rehearsal_dataset: 
+epochs: 2
 contrastive_epochs: 0
-batch_size_rehearsal: 128
+batch_size_rehearsal: 256
 batch_size: 128
-pretraining: true
+pretraining: false
 num_classes: 100
-classes_per_task: 5
+classes_per_task: 20
 optimizer: SGD
 loss: CE
-separate_noise_output: true
-# 'dead_leaves-mixed', 'dead_leaves-oriented', 'dead_leaves-squares',
-    # 'dead_leaves-textures', 'stat-spectrum', 'stat-spectrum_color',
-    # 'stat-spectrum_color_wmm', 'stat-wmm', 'stylegan-highfreq',
-    # 'stylegan-rando
+separate_noise_output: false
