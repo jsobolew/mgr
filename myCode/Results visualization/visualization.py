@@ -161,7 +161,7 @@ class Visualization:
         mean_acc_max = self.metrics_df.columns[self.metrics_df.columns.str.contains('acc_max')]
         self.metrics_df['mean_acc_max'] = self.metrics_df[mean_acc_max].mean(axis=1)
 
-    def extract_all_runs_metrics_after_task_3(self):
+    def extract_all_runs_metrics_after_task_3(self, task=3):
         for i in range(len(self.df)):
             if i in self.faulty_runs:
                 continue
@@ -173,7 +173,7 @@ class Visualization:
 
                 # df_train = run[self.acc_col].dropna().reset_index().drop(columns='index')
                 df_test = run[self.acc_test_col].dropna().reset_index().drop(columns='index')
-                idx_start_task_3 = int(len(df_test)/num_tasks*3)
+                idx_start_task_3 = int(len(df_test)/num_tasks*task)
                 df_test = df_test.iloc[:idx_start_task_3]  # after task 3
 
                 # accuracy metrics table
