@@ -1,12 +1,12 @@
-project: rehersal ResNet CIFAR10 Task IL Contrastive Losss
+project: rehersal ResNet CIFAR10 Task IL Contrastive Losss v2
 setup: taskIL
 learning_rate: 0.003
 contrastive_learning_rate: 0.0001
 architecture: ResNet18
 dataset: CIFAR10
-rehearsal_dataset: stat-wmm
+rehearsal_dataset: 
 epochs: 5
-contrastive_epochs: 1
+contrastive_epochs: 10
 batch_size_rehearsal: 128
 batch_size: 128
 pretraining: false

@@ -54,8 +54,6 @@ def train_validation_all_classes(model, optimizer, tasks, device, tasks_test=Non
         if contrastive_epoch > 0:
             model.freeze_features()
         for e in range(epoch):
-            if e > 2: # WARNING
-                break
             for batch_idx, (data, target) in enumerate(tasks.tasks[taskNo].dataloader):
                 model.train()
 
