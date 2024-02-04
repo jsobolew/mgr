@@ -241,7 +241,7 @@ class Visualization:
         self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout, plot_till=plot_till)
 
     def plot_single_setting_all_runs(self, run_param):
-        unixe_idxs = self.runs_params_settings_idxs_dict["-".join(run_param)]
+        unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
 
         for i, run_idx in enumerate(unixe_idxs):
             if i in self.faulty_runs:
