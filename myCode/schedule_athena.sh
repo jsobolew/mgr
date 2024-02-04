@@ -40,6 +40,8 @@ module load Miniconda3/4.9.2
 #conda activate /net/tscratch/people/plgjsobolewski/conda_env
 
 $python_commands
+
+wait
 EOT
 
 sbatch tmp.sh
