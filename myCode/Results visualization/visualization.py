@@ -234,11 +234,11 @@ class Visualization:
         for i, run_param in enumerate(self.unique_run_params):
             print(f"Setting {i}: {run_param} num runs: {len(self.unique_run_settings_idxs[i])}")
 
-    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square', plot_till=None, unixe_idxs=None, title=False):
+    def plot_single_setting_aggregated(self, run_param, fontsize=12, up_postion=1.00, filename=None, layout='square', plot_till=None, unixe_idxs=None, show_title=False):
         if not unixe_idxs:
             unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
         df_train, df_test = self.extract_data_from_runs(unixe_idxs)
-        self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout, plot_till=plot_till, title=title)
+        self.create_plot(df_train, df_test, unixe_idxs, fontsize=fontsize, up_postion=up_postion, filename=filename, layout=layout, plot_till=plot_till, show_title=show_title)
 
     def plot_single_setting_all_runs(self, run_param):
         unixe_idxs = self.runs_params_settings_idxs_dict[run_param]
@@ -277,10 +277,10 @@ class Visualization:
             ax[1].set_ylabel("accuracy [%]")
             plt.show()
 
-    def plot_everything(self, layout='square', title=False):
+    def plot_everything(self, layout='square', show_title=False):
         for unixe_idxs in self.unique_run_settings_idxs:
             df_train, df_test = self.extract_data_from_runs(unixe_idxs)
-            self.create_plot(df_train, df_test, unixe_idxs, layout=layout, title=title)
+            self.create_plot(df_train, df_test, unixe_idxs, layout=layout, show_title=show_title)
 
     def extract_data_from_runs(self, unixe_idxs):
         df_train, df_test, self.all_test_runs_data = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
@@ -299,7 +299,7 @@ class Visualization:
                 print(f"Error in run: {run_idx} Error: {e}")
         return df_train, df_test
 
-    def create_plot(self, df_train, df_test, unixe_idxs, fontsize=12, up_postion=1.03, filename=None, layout='square', plot_till=None, title=False):
+    def create_plot(self, df_train, df_test, unixe_idxs, fontsize=12, up_postion=1.03, filename=None, layout='square', plot_till=None, show_title=False):
 
         assert layout in ['square', 'vertical', 'vertical_short'], f'layout must be square or vertical, and is: {layout}'
 
@@ -336,7 +336,7 @@ class Visualization:
             for name, value in zip(self.UID, unique_params):
                 title += f"{name}: {value}\n"
 
-            if title:
+            if show_title:
                 fig.suptitle(title + f"runs: {len(unixe_idxs)}", fontsize=fontsize, position=(0.5, up_postion))
 
             # train
