@@ -3,7 +3,8 @@ import numpy as np
 import torchvision
 import torch.nn.functional as F
 from omegaconf import OmegaConf
-from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18, VGGIL, ResNet34, ResNet34IL
+from Nets import SmallAlexNetTaslIL, ResNet18IL, SmallAlexNet, MNIST_net, ResNet18, VGGIL, ResNet34, ResNet34IL, \
+    HogXGBoost
 from dataloaders.tasks_provider import TaskList, prepare_classes_list, RehearsalTask
 from increamental_learning import train_validation_all_classes
 from dataloaders.noise import dataloader_pretraining
@@ -20,6 +21,7 @@ model_dict = {
             "ResNet18": ResNet18IL,
             "ResNet34": ResNet34IL,
             "VGG": VGGIL,
+            "HogXgb": HogXGBoost,
         },
     "classIL":
         {
@@ -27,6 +29,7 @@ model_dict = {
             "SmallAlexNet": SmallAlexNet,
             "ResNet18": ResNet18,
             "ResNet34": ResNet34,
+            "HogXgb": HogXGBoost,
         }
 }
 
@@ -52,8 +55,9 @@ loss_dict = {
 # config_name = "ResNetTaskILNoise"
 # config_name = "ResNetTaskILNoiseCIFAR100"
 # config_name = "VGGTaskILNoise"
-config_name = "ResNetTaskILNoiseCL"
+# config_name = "ResNetTaskILNoiseCL"
 # config_name = "ResNetTaskILNoiseAdam"
+config_name = "HogXGB"
 
 @hydra.main(version_base=None, config_path="configs/experiments", config_name=config_name)
 def main(cfg) -> None:
@@ -78,7 +82,7 @@ def main(cfg) -> None:
     wandb.init(
         project=cfg['project'],
         config=config,
-        # mode="disabled"
+        mode="disabled"
     )
 
     print("Running experiment with settings:\n")
@@ -101,36 +105,20 @@ def main(cfg) -> None:
 
     print(f"using model: {cfg['architecture']} in setup: {cfg['setup']} model out dim: {model_out_dim}")
     model_reference = model_dict[cfg['setup']][cfg['architecture']]
-    model = model_reference(out_dim=model_out_dim, num_tasks=len(tasks.tasks)).to(device)
-
-    contrastive_optimizer = None
-    if cfg['optimizer'] == 'Adam':
-        optimizer = optim.Adam(model.parameters(), lr=cfg['learning_rate'])
-        if cfg['contrastive_epochs'] > 0:
-            contrastive_optimizer = optim.Adam(model.parameters(), lr=cfg['contrastive_learning_rate'])
-    elif cfg['optimizer'] == 'SGD_momentum':
-        optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'], momentum=0.9)
-        if cfg['contrastive_epochs'] > 0:
-            contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'], momentum=0.9)
-    else: # SGD and any other value
-        optimizer = optim.SGD(model.parameters(), lr=cfg['learning_rate'])
-        if cfg['contrastive_epochs'] > 0:
-            contrastive_optimizer = optim.SGD(model.parameters(), lr=cfg['contrastive_learning_rate'])
-
-    loss = loss_dict[cfg['loss']]
+    model = model_reference()
 
     # pretraining
     if cfg['pretraining']:
         print("Running pretraining")
-        train_validation_all_classes(model=model, optimizer=optimizer, tasks=RehearsalTask(rehearsal_loader), device=device, tasks_test=None,
-                                     epoch=1, log_interval=10, loss_func=loss)
+        train_validation_all_classes(model=model, tasks=RehearsalTask(rehearsal_loader), device=device, tasks_test=None,
+                                     epoch=1, log_interval=10)
 
     # CL
     print("Running CL")
-    train_validation_all_classes(model=model, optimizer=optimizer, tasks=tasks, device=device, tasks_test=tasks_test,
+    train_validation_all_classes(model=model, tasks=tasks, device=device, tasks_test=tasks_test,
                                  rehearsal_loader=rehearsal_loader, epoch=cfg['epochs'], log_interval=10,
-                                 setup=cfg['setup'], loss_func=loss, contrastive_epoch=cfg['contrastive_epochs'],
-                                 contrastive_optimizer=contrastive_optimizer)
+                                 setup=cfg['setup'], contrastive_epoch=cfg['contrastive_epochs'],
+                                 )
 
 
 if __name__ == "__main__":

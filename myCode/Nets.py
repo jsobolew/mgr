@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from typing import List, Union, cast, Dict
 
+import cv2
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -476,3 +477,31 @@ cfgs: Dict[str, List[Union[str, int]]] = {
     "D": [64, 64, "M", 128, 128, "M", 256, 256, 256, "M", 512, 512, 512, "M", 512, 512, 512, "M"],
     "E": [64, 64, "M", 128, 128, "M", 256, 256, 256, 256, "M", 512, 512, 512, 512, "M", 512, 512, 512, 512, "M"],
 }
+
+
+from skimage.feature import hog
+import xgboost as xgb
+from skimage.feature import hog
+
+class HogXGBoost:
+    def __init__(self):
+        # params = {
+        #     'objective': 'reg:squarederror',
+        #     'eval_metric': 'rmse',
+        #     'eta': 0.1,
+        # }
+        self.params = {
+            'update': 'refresh',
+            'process_type': 'update',
+            'refresh_leaf': True,
+            'silent': False,
+        }
+
+    def forward(self, task_no, x, y):
+        x = cv2.cvtColor(x, cv2.COLOR_RGB2GRAY)
+        x = hog(x, orientations=9, pixels_per_cell=(8, 8), cells_per_block=(2, 2))
+
+        if self.xgb:
+            self.xgb = xgb.train(self.params, dtrain=xgb.DMatrix(x, y), xgb_model=self.xgb)
+        else:
+            self.xgb = xgb.train(self.params, dtrain=xgb.DMatrix(x, y))
